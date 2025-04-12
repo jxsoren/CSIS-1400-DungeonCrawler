@@ -3,18 +3,34 @@ import java.util.Objects;
 public class WeaponTest {
 
     public static void main(String[] args) {
-
+        // Run tests
+        checkForValidAttributes();
+        testUse();
     }
 
-    public void checkForValidAttributes() {
+    public static void checkForValidAttributes() {
         String name = "Sword";
         int effectPoints = 75;
         int weight = 25;
 
-        Item item = new Item(name, effectPoints, weight);
+        Weapon weapon = new Weapon(name, effectPoints, weight);
 
-        assert Objects.equals(item.getName(), name) : "Item's name should be " + name;
-        assert item.getEffectPoints() == effectPoints : "Item's effect points should be " + effectPoints;
-        assert item.getWeight() == weight : "Item's weight should be " + weight;
+        // Test attributes
+        assert Objects.equals(weapon.getName(), name) : "weapon's name should be " + name;
+        assert weapon.getWeight() == weight : "weapon's weight should be " + weight;
     }
+
+    public static void testUse() {
+        String name = "Sword";
+        int effectPoints = 75;
+        int weight = 25;
+
+        int negativeEffectPoints = -effectPoints;
+
+        Weapon weapon = new Weapon(name, effectPoints, weight);
+
+        assert weapon.use() == effectPoints : "use should be " + negativeEffectPoints;
+    }
+
+
 }

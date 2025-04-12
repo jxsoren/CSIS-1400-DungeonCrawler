@@ -10,7 +10,7 @@ public class Item {
     }
 
     public int use() {
-        return this.effectPoints;
+        return effectPoints;
     }
 
     // Getters
@@ -19,12 +19,12 @@ public class Item {
         return name;
     }
 
-    public int getEffectPoints() {
-        return effectPoints;
-    }
-
     public int getWeight() {
         return weight;
+    }
+
+    public int getEffectPoints() {
+        return effectPoints;
     }
 
     // Setters

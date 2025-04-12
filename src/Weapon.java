@@ -5,4 +5,10 @@ public class Weapon extends Item {
         super(name, effectPoints, weight);
     }
 
+    @Override
+    public int use() {
+        // Negative number to be used to subtract against health
+        return -this.getEffectPoints();
+    }
+
 }
