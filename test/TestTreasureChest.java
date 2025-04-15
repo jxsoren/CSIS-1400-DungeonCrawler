@@ -11,17 +11,10 @@ public class TestTreasureChest {
         }
 
         try {
-            testTakingWeapon();
+            testTakingThings();
             System.out.println("testTakingWeapon() test +PASSED+ !!!");
         } catch (AssertionError e) {
             System.err.printf("testTakingWeapon() test -FAILED-. Error Message: %s", e.getMessage());
-        }
-
-        try {
-            testTakingItem();
-            System.out.println("testTakingItem() test +PASSED+ !!!");
-        } catch (AssertionError e) {
-            System.err.printf("testTakingItem() test -FAILED-. Error Message: %s", e.getMessage());
         }
 
     }
@@ -39,7 +32,7 @@ public class TestTreasureChest {
         assert itemsCount >= 1 && itemsCount <= 3 : TestHelpers.assertionMessage("Treasure Chest items", ">= 1 && <= 3", itemsCount);
     }
 
-    public static void testTakingWeapon() {
+    public static void testTakingThings() {
         // Initialize Items
         Item item1 = new Item("Potion 1", 10, 10);
         Item item2 = new Item("Potion 2", 10, 10);
