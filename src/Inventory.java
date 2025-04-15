@@ -16,6 +16,12 @@ public class Inventory {
 
     // Adding Items & Weapons
 
+    // Todo:
+    // Edge Case - player tries to pick up weapon from chest, but their
+    // inventory is already full. This causes the weapon to still be returned
+    // from taking the item from the chest, but inventory can't store weapon,
+    // so the weapon is essentially voided
+
     public void addWeapon(Weapon weapon) {
         if (canAdd(weapon)) {
             weapons.add(weapon);
