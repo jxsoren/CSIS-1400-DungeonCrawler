@@ -26,6 +26,7 @@ public class TreasureChest {
         // and remove the weapon at the given index
         // from the weapons ArrayList
 
+        return null;
     }
 
     public Item takeItem(int itemIndex) {
@@ -34,6 +35,7 @@ public class TreasureChest {
         // and remove the item at the given index
         // from the items ArrayList
 
+        return null;
     }
 
     public void display() {
