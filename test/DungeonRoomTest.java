@@ -9,6 +9,11 @@ public class DungeonRoomTest {
             System.err.printf("exampleMethod() test -FAILED-. Error Message: %s", e.getMessage());
 
         }
+
+        DungeonRoom test = new DungeonRoom("cheese");
+        System.out.println("test");
+        System.out.println(test.getName());
+
     }
 
 }
