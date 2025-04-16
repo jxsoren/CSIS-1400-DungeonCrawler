@@ -1,5 +1,10 @@
 public class Weapon extends Item {
 
+    // Default weapon
+    public Weapon() {
+        super("Wooden Sword", "A small wooden sword", 10, 0);
+    }
+
     public Weapon(String name, String description, int effectPoints, int weight) {
         // Use constructor for parent class Item
         super(name, description, effectPoints, weight);
