@@ -2,13 +2,19 @@ public class Item {
     private final String name;
     private int weight;
     private final int effectPoints;
-    private final String description;
+    private String description = "Default description";
     private boolean consumed;
 
     public Item(String name, String description, int effectPoints, int weight) {
         this.name = name;
         this.effectPoints = effectPoints;
         this.description = description;
+        setWeight(weight);
+    }
+
+    public Item(String name, int effectPoints, int weight) {
+        this.name = name;
+        this.effectPoints = effectPoints;
         setWeight(weight);
     }
 
