@@ -2,14 +2,23 @@ public class Item {
     private final String name;
     private int weight;
     private final int effectPoints;
+    private final String description;
+    private boolean consumed;
 
-    public Item(String name, int effectPoints, int weight) {
+    public Item(String name, String description, int effectPoints, int weight) {
         this.name = name;
         this.effectPoints = effectPoints;
+        this.description = description;
         setWeight(weight);
     }
 
     public int use() {
+        // Don't return any effect if it's already been consumed
+        if (isConsumed()) {
+            return 0;
+        }
+
+        this.consumed = true;
         return effectPoints;
     }
 
@@ -27,6 +36,14 @@ public class Item {
         return effectPoints;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isConsumed() {
+        return consumed;
+    }
+
     // Setters
 
     private void setWeight(int weight) {
@@ -37,8 +54,13 @@ public class Item {
         if (weight <= maxWeight && weight >= minWeight) {
             this.weight = weight;
         } else {
-            this.weight = 0;
+            this.weight = minWeight;
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s [Effect: %d]", getName(), getEffectPoints());
     }
 
 }
