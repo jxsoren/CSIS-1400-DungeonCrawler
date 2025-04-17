@@ -1,18 +1,21 @@
 public class Enemy {
-    private String name;
-    private int maxHealth;
+    private final String name;
+    private final int maxHealth;
+    private final Weapon weapon;
     private int currentHealth;
     private boolean isAlive;
 
-    public Enemy(String name, int maxHealth) {
+    public Enemy(String name, int maxHealth, Weapon weapon) {
         this.name = name;
         this.maxHealth = maxHealth;
-        this.currentHealth = maxHealth; // Initialize current health to the max health (full health)
-        this.isAlive = true;
+        this.weapon = weapon;
+
+        currentHealth = maxHealth; // Initialize current health to the max health (full health)
+        isAlive = true;
     }
 
     public void takeDamage(int incomingDamageAmount) {
-        this.currentHealth -= incomingDamageAmount;
+        currentHealth -= incomingDamageAmount;
 
         // Check if damage caused puts currentHealth less than 0
         if (currentHealth <= 0) {
@@ -20,24 +23,37 @@ public class Enemy {
         }
     }
 
+    public int attack() {
+        return weapon.use();
+    }
+
     // Getters
 
-    public int getMaxHealth() {
-        return this.maxHealth;
+    public String getName() {
+        return name;
     }
 
     public int getCurrentHealth() {
-        return this.currentHealth;
+        return currentHealth;
     }
 
     public boolean isAlive() {
-        return this.isAlive;
+        return isAlive;
+    }
+
+    @Override
+    public String toString() {
+        String enemyName = String.format("Name: %s ", name);
+        String enemyHealth = String.format("HP: %d / %d", currentHealth, maxHealth);
+        String enemyWeapon = String.format("Weapon: %s", weapon.toString());
+
+        return String.format("%s%n%s%n%s", enemyName, enemyWeapon, enemyHealth);
     }
 
     // Helper methods
 
     private void killEnemy() {
-        this.currentHealth = 0;
-        this.isAlive = false;
+        currentHealth = 0;
+        isAlive = false;
     }
 }
