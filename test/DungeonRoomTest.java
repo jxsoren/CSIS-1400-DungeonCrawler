@@ -14,9 +14,6 @@ public class DungeonRoomTest {
         System.out.println("test");
         System.out.println(test.getName());
 
-        // Another test
-        System.out.println(test.getName());
-
     }
 
 }

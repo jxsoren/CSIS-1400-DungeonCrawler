@@ -8,13 +8,8 @@ public class TestHelpers {
         return String.format("%s is expected to be %s, but is actually %s", subject, expectedValue, actualValue);
     }
 
-    public static String assertionMessage(String subject, boolean expectedValue, boolean actualValue) {
-        return String.format("%s is expected to be %s, but is actually %s", subject, expectedValue, actualValue);
-    }
-
     public static String assertionMessage(String expectedSubject, String expression, int actualValue) {
         return String.format("%s is expected to be %s, but is actually %s", expectedSubject, actualValue);
     }
-
 
 }
