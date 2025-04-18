@@ -5,7 +5,7 @@ public class DungeonRoom {
     private TreasureChest chest;
     private boolean hasEnemy;
     private boolean hasChest;
-
+    private boolean completed;
 
     public DungeonRoom(String name) {
         this.name = name;
