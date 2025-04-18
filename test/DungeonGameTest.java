@@ -1,31 +1,50 @@
 public class DungeonGameTest {
 
     public static void main(String[] args) {
-        try {
-            initRoom();
-            System.out.println("initRoom() test +PASSED+ !!!");
-        } catch (AssertionError e) {
-            System.err.printf("initRoom() test -FAILED-. Error Message: %s", e.getMessage());
 
+        try {
+            testInit();
+            System.out.println("testInit() test +PASSED+ !!!");
+        } catch (AssertionError e) {
+            System.err.printf("testInit() test -FAILED-. Error Message: %s", e.getMessage());
+        }
+
+        try {
+            testMovement();
+            System.out.println("testMovement() test +PASSED+ !!!");
+        } catch (AssertionError e) {
+            System.err.printf("testMovement() test -FAILED-. Error Message: %s", e.getMessage());
         }
     }
 
-    private static void initRoom() {
-        DungeonRoom room = basicRoom();
+    public static void testInit() {
+        Player player = basicPlayer();
+        DungeonGame game = new DungeonGame(player);
 
-        System.out.println();
-        System.out.println(room.toString());
-        System.out.println();
+        System.out.println(game.getPlayer());
+
+        // Ensure that game rooms aren't empty
+        assert !game.getDungeonRooms().isEmpty() : TestHelpers.assertionMessage("Amount of rooms", "is not empty", "is empty");
     }
 
-    private static DungeonRoom basicRoom() {
-        int index = 0;
-        String levelName = "First Level";
-        Weapon weapon = new Weapon();
-        Enemy enemy = new Enemy("Goblin", 10, weapon);
-        TreasureChest treasureChest = new TreasureChest();
+    public static void testMovement() {
+        Player player = basicPlayer();
+        DungeonGame game = new DungeonGame(player);
 
-        return new DungeonRoom(index, levelName, enemy, treasureChest);
+        // Validate that index was set correctly
+        assert game.getCurrentRoomIndex() == 0 : TestHelpers.assertionMessage("Current room index", 0, game.getCurrentRoomIndex());
+
+        // Move player up a room
+        game.movePlayer(1);
+
+        // Ensure that the currentRoom Index increments by 1
+        assert game.getCurrentRoomIndex() == 1 : TestHelpers.assertionMessage("Current room index", 1, game.getCurrentRoomIndex());
+    }
+
+    // Test Helpers
+
+    private static Player basicPlayer() {
+        return new Player("Player 1");
     }
 
 }

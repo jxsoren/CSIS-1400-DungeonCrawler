@@ -16,11 +16,11 @@ public class DungeonGame {
         initRooms();
     }
 
-    public void movePlayer(int currentRoomIndex, int requestedDirection) {
+    public void movePlayer(int requestedDirection) {
         try {
             switch (requestedDirection) {
-                case 0 -> nextRoom(currentRoomIndex);
-                case 1 -> previousRoom(currentRoomIndex);
+                case 0 -> previousRoom(currentRoomIndex);
+                case 1 -> nextRoom(currentRoomIndex);
                 default -> throw new Exception("Cannot move that direction");
             }
         } catch (Exception e) {
@@ -34,8 +34,8 @@ public class DungeonGame {
         return player;
     }
 
-    private void initRooms() {
-        dungeonRooms = GameInitializer.dungeonRooms(10);
+    public ArrayList<DungeonRoom> getDungeonRooms() {
+        return dungeonRooms;
     }
 
     public int getCurrentRoomIndex() {
@@ -43,6 +43,10 @@ public class DungeonGame {
     }
 
     // Setters
+
+    private void initRooms() {
+        dungeonRooms = GameInitializer.dungeonRooms(10);
+    }
 
     public void setCurrentRoomIndex(int currentRoomIndex) {
         this.currentRoomIndex = currentRoomIndex;
