@@ -11,7 +11,7 @@ public class DungeonGameTest {
     }
 
     private static void initRoom() {
-        DungeonRoom room = new DungeonRoom("First Level");
+        //        DungeonRoom room = new DungeonRoom("First Level");
 
 
     }
