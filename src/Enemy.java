@@ -20,6 +20,15 @@ public class Enemy {
         isAlive = true;
     }
 
+    public Enemy(String name, int maxHealth) {
+        this.name = name;
+        this.maxHealth = maxHealth;
+        this.weapon = new Weapon("Wooden Club", "A weak wooden club", 25, 10);
+
+        currentHealth = maxHealth; // Initialize current health to the max health (full health)
+        isAlive = true;
+    }
+
     public void takeDamage(int incomingDamageAmount) {
         currentHealth -= incomingDamageAmount;
 
