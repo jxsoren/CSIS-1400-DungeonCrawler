@@ -8,31 +8,34 @@ public class DungeonRoom {
     private int index;
     private final String name;
     private Enemy enemy;
-    private TreasureChest chest;
+    private TreasureChest treasureChest;
     private boolean hasEnemy;
     private boolean hasChest;
     private boolean completed;
 
-    public DungeonRoom(String name) {
+    public DungeonRoom(int index, String name, Enemy enemy, TreasureChest treasureChest) {
+        this.index = index;
         this.name = name;
+        this.enemy = enemy;
+        this.treasureChest = treasureChest;
     }
 
     // Getters
 
     public int getIndex() {
-        return this.index;
+        return index;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public Enemy getEnemy() {
-        return this.enemy;
+        return enemy;
     }
 
     public TreasureChest getChest() {
-        return this.chest;
+        return treasureChest;
     }
 
     // Setters
@@ -46,7 +49,16 @@ public class DungeonRoom {
     }
 
     public void setChest(TreasureChest chest) {
-        this.chest = chest;
+        this.treasureChest = chest;
+    }
+
+    @Override
+    public String toString() {
+        String roomName = String.format("Room Name: %s", getName());
+        String roomEnemy = String.format("%s", getEnemy());
+        String roomChest = String.format("%s", getChest());
+
+        return String.format("%s%n%s%n%s%n", roomName, roomEnemy, roomChest);
     }
 
 }
