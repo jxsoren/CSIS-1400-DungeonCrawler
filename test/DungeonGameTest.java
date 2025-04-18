@@ -39,6 +39,23 @@ public class DungeonGameTest {
 
         // Ensure that the currentRoom Index increments by 1
         assert game.getCurrentRoomIndex() == 1 : TestHelpers.assertionMessage("Current room index", 1, game.getCurrentRoomIndex());
+
+        // Move player back a room
+        game.movePlayer(0);
+
+        // Ensure that the currentRoom Index is back to room1
+        assert game.getCurrentRoomIndex() == 0 : TestHelpers.assertionMessage("Current room index", 0, game.getCurrentRoomIndex());
+
+        // move player up 4 rooms and back 2
+        game.movePlayer(1);
+        game.movePlayer(1);
+        game.movePlayer(1);
+        game.movePlayer(1);
+        game.movePlayer(0);
+        game.movePlayer(0);
+
+        // Ensure player is in room3 (room index2)
+        assert game.getCurrentRoomIndex() == 2 : TestHelpers.assertionMessage("Current room index", 0, game.getCurrentRoomIndex());
     }
 
     // Test Helpers
