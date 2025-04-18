@@ -8,11 +8,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class TreasureChest {
-    private ArrayList<Item> items;
-    private ArrayList<Weapon> weapons;
-
-    // Todo:
-    // Add Quest Item to Items
+    private ArrayList<Weapon> weapons = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
 
     // Constants
     private final int weaponCapacity = 1;
@@ -30,59 +27,65 @@ public class TreasureChest {
     }
 
     public Weapon takeWeapon(int weaponIndex) {
-        // Todo:
-        // return the weapon at the given weaponIndex
-        // and remove the weapon at the given index
-        // from the weapons ArrayList
+        if (weaponIndex >= weapons.size()) {
+            return null;
+        }
 
-        return null;
+        Weapon chosenWeapon = weapons.get(weaponIndex);
+        weapons.remove(weaponIndex);
+
+        return chosenWeapon;
     }
 
     public Item takeItem(int itemIndex) {
-        // Todo:
-        // return the item at the given itemIndex
-        // and remove the item at the given index
-        // from the items ArrayList
+        if (itemIndex >= items.size()) {
+            return null;
+        }
 
-        return null;
+        Item chosenItem = items.get(itemIndex);
+        items.remove(itemIndex);
+
+        return chosenItem;
     }
 
-    public void display() {
-        // Todo:
-        // print out the chest's weapons and items
-        // to the console (call toString() on the
-        // weapons and items)
-
-        // And maybe above this, print out ASCII art of a chest
-        // Ex: could be something like this:
-        /*
-            ⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-            ⣿⣿⣿⣿⣿⣏⣀⣀⣀⡀⠀⠈⠉⠉⠉⠙⠛⠛⠛⠛⠿⠿⠿⠿⣿⣿⣿⣿⣿⣿
-            ⣿⣿⣿⣿⣿⡏⠉⠙⣿⠉⠛⠛⠛⠛⠲⠶⠶⠶⢦⣤⣤⣤⣤⣰⠏⠀⢹⣿⣿⣿
-            ⣿⣿⣿⣿⣿⣿⡀⢀⡟⠀⠀⠀⠀⠀⠀⠀⠀⣄⠀⠀⠀⠀⠀⠹⣇⠀⢸⣿⣿⣿
-            ⣿⣿⣿⣿⣿⣿⣧⢸⡇⠀⠀⠀⠀⠀⠀⠀⢰⣿⣆⣠⣦⠀⠀⠀⣻⡄⢸⣿⣿⣿
-            ⣿⣿⣿⣿⣿⣿⣿⣿⣵⠶⢶⡴⠖⢶⣄⣤⣾⠁⠿⠋⢿⡤⢶⡟⠈⣷⣸⣿⣿⣿
-            ⣿⣿⣿⣿⣿⣿⣿⠟⠃⠀⠀⠀⠀⠀⠈⠀⣿⡀⠀⠀⠀⢀⡾⣥⣤⣼⣿⣿⣿⣿
-            ⣿⣿⣿⣿⣿⣛⣁⣀⠀⢀⣤⠀⠀⠀⠀⠀⠈⠙⠳⠶⠶⠟⠁⢈⣽⠟⣿⣿⣿⣿
-            ⣿⣿⣿⠀⡏⠉⠉⠉⠙⣿⣿⠛⠳⠶⣶⠶⢦⣤⣤⣤⣄⣠⡾⠋⠁⠀⣿⣿⣿⣿
-            ⣿⣿⣿⠀⠹⣄⠀⠀⡸⠇⣿⠐⡶⠀⣿⠀⠀⠀⠀⠀⠈⣿⠀⠀⠀⠀⣿⣿⣿⣿
-            ⣿⣿⣿⠀⠀⠈⢫⣯⠁⠀⣿⣤⣥⣀⣿⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⣿⣿⣿⣿
-            ⣿⣿⣿⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠉⠉⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⣿⣿⣿⣿
-            ⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⣀⣴⣿⣿⣿⣿
-            ⣿⣿⣏⠙⢻⣿⣿⣷⣶⣶⣶⣶⣤⣤⣤⣤⣄⣀⣀⣀⣀⣿⣤⡾⠿⢿⣍⣩⣿⣿
-            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣿⣿⣿⣿⣿
-         */
-
-    }
+    // Helper Methods
 
     private void randomizeChest() {
-        // Todo:
-        // Add logic to add a random amount of weapons between 0 and 1 (weaponCapacity)
-        // add the random weapons to the ArrayList weapons
+        ArrayList<Weapon> randomWeapons = randomWeapons(1);
+        weapons.addAll(randomWeapons);
 
-        // Todo:
-        // Add logic to add a random amount of items between 1 and 3 (itemCapacity)
-        // add the random items to the ArrayList items
+        ArrayList<Item> randomItems = randomItems(3);
+        items.addAll(randomItems);
+    }
+
+    private ArrayList<Weapon> randomWeapons(int numOfWeapons) {
+        if (numOfWeapons > weaponCapacity) {
+            numOfWeapons = weaponCapacity;
+        }
+
+        ArrayList<Weapon> randomWeaponList = new ArrayList<>();
+
+        for (int i = 0; i < numOfWeapons; i++) {
+            Weapon weapon = new Weapon();
+            randomWeaponList.add(weapon);
+        }
+
+        return randomWeaponList;
+    }
+
+    private ArrayList<Item> randomItems(int numOfItems) {
+        if (numOfItems > itemCapacity) {
+            numOfItems = itemCapacity;
+        }
+
+        ArrayList<Item> randomItemList = new ArrayList<>();
+
+        for (int i = 0; i < numOfItems; i++) {
+            Item item = new Item("Potion", 50, 10);
+            randomItemList.add(item);
+        }
+
+        return randomItemList;
     }
 
     // Getters
@@ -93,6 +96,15 @@ public class TreasureChest {
 
     public ArrayList<Weapon> getWeapons() {
         return this.weapons;
+    }
+
+
+    @Override
+    public String toString() {
+        String chestWeapons = String.format("Weapons: %s", getWeapons());
+        String chestItems = String.format("Items: %s", getItems());
+
+        return String.format("%s%n%s%n", chestWeapons, chestItems);
     }
 
 }
