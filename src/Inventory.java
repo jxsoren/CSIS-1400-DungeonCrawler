@@ -14,14 +14,6 @@ public class Inventory {
         items = new ArrayList<>();
     }
 
-    // Adding Items & Weapons
-
-    // Todo:
-    // Edge Case - player tries to pick up weapon from chest, but their
-    // inventory is already full. This causes the weapon to still be returned
-    // from taking the item from the chest, but inventory can't store weapon,
-    // so the weapon is essentially voided
-
     public void addWeapon(Weapon weapon) {
         if (canAdd(weapon)) {
             weapons.add(weapon);
@@ -109,11 +101,18 @@ public class Inventory {
         return withinCapacity && canStoreAdditionalWeight(itemWeight);
     }
 
-
     private boolean canStoreAdditionalWeight(int weightToAdd) {
         int pendingTotalWeight = weightToAdd + currentWeight();
         return pendingTotalWeight <= this.maxInventoryWeight;
     }
 
+    @Override
+    public String toString() {
+        String inventoryStats = String.format("\t[%dlbs/%dlbs]", currentWeight(), maxInventoryWeight);
+        String weapons = String.format("\tWeapons (%s/%s): %s", getWeapons().size(), maxWeaponSize, getWeapons());
+        String items = String.format("\tItems: (%s/%s): %s", getWeapons().size(), maxItemsSize, getItems());
+
+        return String.format("%s%n%s%n%s%n", inventoryStats, weapons, items);
+    }
 
 }
