@@ -1,3 +1,9 @@
+/**********************************************
+ * Author(s): Josh Sorensen & Bowen Berthelson
+ *
+ * Assignment: CSIS 1400 Final Project
+ ***********************************************/
+
 //will need to interact with the enemy class. we will have to create an enemy object. one of the methods of this object should include a printf statement.
 //this will print out the enemy/object/chest
 //we may need to make an AsciiLibrary class that has a list of these different artworks

@@ -1,3 +1,9 @@
+/**********************************************
+ * Author(s): Josh Sorensen & Bowen Berthelson
+ *
+ * Assignment: CSIS 1400 Final Project
+ ***********************************************/
+
 public class DungeonRoom {
     private int index;
     private final String name;
