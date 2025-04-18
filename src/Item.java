@@ -6,31 +6,26 @@
 
 public class Item {
     private final String name;
-    private int weight;
+    private final int weight;
     private final int effectPoints;
-    private String description = "Default description";
-    private boolean consumed;
+    private final String description;
 
-    public Item(String name, String description, int effectPoints, int weight) {
+    // Default Constructor
+    public Item() {
+        this.name = "Default Name";
+        this.effectPoints = 0;
+        this.description = "Default Description";
+        this.weight = 0;
+    }
+
+    public Item(String name, int effectPoints, int weight, String description) {
         this.name = name;
         this.effectPoints = effectPoints;
         this.description = description;
-        setWeight(weight);
-    }
-
-    public Item(String name, int effectPoints, int weight) {
-        this.name = name;
-        this.effectPoints = effectPoints;
-        setWeight(weight);
+        this.weight = weight;
     }
 
     public int use() {
-        // Don't return any effect if it's already been consumed
-        if (isConsumed()) {
-            return 0;
-        }
-
-        this.consumed = true;
         return effectPoints;
     }
 
@@ -50,24 +45,6 @@ public class Item {
 
     public String getDescription() {
         return description;
-    }
-
-    public boolean isConsumed() {
-        return consumed;
-    }
-
-    // Setters
-
-    private void setWeight(int weight) {
-        int minWeight = 1;
-        int maxWeight = 100;
-
-        // Ensure item's weight is between 1-100
-        if (weight <= maxWeight && weight >= minWeight) {
-            this.weight = weight;
-        } else {
-            this.weight = minWeight;
-        }
     }
 
     @Override
