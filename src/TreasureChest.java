@@ -5,6 +5,9 @@ public class TreasureChest {
     private ArrayList<Item> items;
     private ArrayList<Weapon> weapons;
 
+    // Todo:
+    // Add Quest Item to Items
+
     // Constants
     private final int weaponCapacity = 1;
     private final int itemCapacity = 3;
