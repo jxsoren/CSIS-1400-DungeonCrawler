@@ -37,7 +37,7 @@ public class Player {
     public String toString() {
         String playerName = String.format("Name: %s ", name);
         String playerHealth = String.format("HP: %d / %d", currentHealth, maxHealth);
-        String playerWeapon = String.format("Weapon: %s", weapon.toString());
+        String playerWeapon = String.format("Equipped Weapon: %s", weapon.toString());
         String playerInventory = String.format("Inventory: %s", inventory.toString());
 
         return String.format("%s%n%s%n%s%n%s", playerName, playerWeapon, playerHealth, playerInventory);

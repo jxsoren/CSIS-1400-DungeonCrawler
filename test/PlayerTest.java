@@ -34,8 +34,8 @@ public class PlayerTest {
         Inventory playerInventory = player.getInventory();
 
         playerInventory.addWeapon(weapon);
-        System.out.println(playerInventory.getWeapons());
 
+        System.out.println();
         System.out.println(player.toString());
     }
 
