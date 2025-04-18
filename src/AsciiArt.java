@@ -4,7 +4,7 @@
 //
 public class AsciiArt {
     public static void main(String[] args) {
-        Enemy enemy = new Enemy();
+        EnemyArt enemy = new EnemyArt();
         displayThing(enemy.displayEnemy());
     }
 
@@ -19,9 +19,9 @@ public class AsciiArt {
     }
 }
 
-class Enemy {
+class EnemyArt {
     public String displayEnemy() {
-        return  "   __________\n" +
+        return "   __________\n" +
                 "  /\\____;;___\\\n" +
                 " | /         /\n" +
                 "  .__________.\n" +
