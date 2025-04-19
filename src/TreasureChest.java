@@ -81,7 +81,7 @@ public class TreasureChest {
         ArrayList<Item> randomItemList = new ArrayList<>();
 
         for (int i = 0; i < numOfItems; i++) {
-            Item item = new Item("Potion", 50, 10);
+            Item item = new Item();
             randomItemList.add(item);
         }
 

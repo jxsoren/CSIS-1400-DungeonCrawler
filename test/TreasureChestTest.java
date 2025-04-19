@@ -34,15 +34,15 @@ public class TreasureChestTest {
 
     public static void testTakingThings() {
         // Initialize Items
-        Item item1 = new Item("Potion 1", 10, 10);
-        Item item2 = new Item("Potion 2", 10, 10);
+        Item item1 = new Item();
+        Item item2 = new Item();
 
         ArrayList<Item> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
 
         // Initialize Weapons
-        Weapon sword1 = new Weapon("Sword 1", 25, 25);
+        Weapon sword1 = new Weapon();
 
         ArrayList<Weapon> weapons = new ArrayList<>();
         weapons.add(sword1);

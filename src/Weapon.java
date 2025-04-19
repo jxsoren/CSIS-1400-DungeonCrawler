@@ -32,7 +32,7 @@ public class Weapon extends Item {
         super(name, description, effectPoints, weight);
         this.type = type;
     }
-
+    
     @Override
     public String toString() {
         return String.format("%s [ATK: %d]", super.getName(), super.getEffectPoints());

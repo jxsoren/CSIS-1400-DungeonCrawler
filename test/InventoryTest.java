@@ -64,21 +64,22 @@ public class InventoryTest {
             System.err.println("inventoryFlow() test -FAILED- | " + e.getMessage());
         }
 
+
     }
 
     public static void initInventory() {
         Inventory inventory = new Inventory();
 
         // Weapons
-        Weapon sword1 = new Weapon("Sword 1", 10, 10);
-        Weapon sword2 = new Weapon("Sword 2", 10, 10);
+        Weapon sword1 = new Weapon();
+        Weapon sword2 = new Weapon();
 
         // Items
-        Item item1 = new Item("Potion 1", 10, 10);
-        Item item2 = new Item("Potion 2", 10, 10);
-        Item item3 = new Item("Potion 3", 10, 10);
-        Item item4 = new Item("Potion 4", 10, 10);
-        Item item5 = new Item("Potion 5", 10, 10);
+        Item item1 = new Item();
+        Item item2 = new Item();
+        Item item3 = new Item();
+        Item item4 = new Item();
+        Item item5 = new Item();
 
         // Add Weapons and Items to Inventory
         inventory.addWeapon(sword1);
@@ -89,6 +90,8 @@ public class InventoryTest {
         inventory.addItem(item3);
         inventory.addItem(item4);
         inventory.addItem(item5);
+
+        System.out.println(inventory.toString());
 
         // Assert correct Weapon and Item sizes
         assert inventory.getWeapons().size() == 2 : "Inventory should only have 2 weapons";
@@ -113,9 +116,9 @@ public class InventoryTest {
         inventory.setMaxWeaponSize(maxWeaponSize);
 
         // Valid amount of Weapons
-        Weapon sword1 = new Weapon("Sword 1", 10, 10);
-        Weapon sword2 = new Weapon("Sword 2", 10, 10);
-        Weapon sword3 = new Weapon("Sword 3", 10, 10);
+        Weapon sword1 = new Weapon();
+        Weapon sword2 = new Weapon();
+        Weapon sword3 = new Weapon();
 
         // Add valid amount of Weapons to Inventory
         inventory.addWeapon(sword1);
@@ -126,7 +129,7 @@ public class InventoryTest {
         assert inventory.getWeapons().size() == maxWeaponSize : "Inventory should have " + maxWeaponSize + " weapons";
 
         // Try to add Weapon that's over Weapons capacity
-        Weapon sword4 = new Weapon("Sword 4", 10, 10);
+        Weapon sword4 = new Weapon();
         inventory.addWeapon(sword4);
 
         // Assert that the Weapon over Weapons capacity wasn't added
@@ -141,13 +144,13 @@ public class InventoryTest {
         inventory.setMaxWeaponSize(3);
 
         // Add weapons within weight limit
-        Weapon sword1 = new Weapon("Sword 1", 10, 40);
-        Weapon sword2 = new Weapon("Sword 2", 10, 40);
+        Weapon sword1 = new Weapon();
+        Weapon sword2 = new Weapon();
         inventory.addWeapon(sword1);
         inventory.addWeapon(sword2);
 
         // Add weapon that will surpass weight limit
-        Weapon sword3 = new Weapon("Sword 3", 10, 21);
+        Weapon sword3 = new Weapon();
         inventory.addWeapon(sword3);
 
         // Assert that the Weapon over Weapons capacity wasn't added
@@ -162,11 +165,11 @@ public class InventoryTest {
         inventory.setMaxInventoryWeight(100);
 
         // Add valid number of items
-        Item item1 = new Item("Potion 1", 10, 10);
-        Item item2 = new Item("Potion 2", 10, 10);
-        Item item3 = new Item("Potion 3", 10, 10);
-        Item item4 = new Item("Potion 4", 10, 10);
-        Item item5 = new Item("Potion 5", 10, 10);
+        Item item1 = new Item();
+        Item item2 = new Item();
+        Item item3 = new Item();
+        Item item4 = new Item();
+        Item item5 = new Item();
 
         inventory.addItem(item1);
         inventory.addItem(item2);
@@ -178,7 +181,7 @@ public class InventoryTest {
         assert inventory.getItems().size() == maxItemsSize : "Inventory should have " + maxItemsSize + " items";
 
         // Try to add Weapon that's over Weapons capacity
-        Item item6 = new Item("Potion 6", 10, 10);
+        Item item6 = new Item();
         inventory.addItem(item6);
 
         // Assert that the Weapon over Weapons capacity wasn't added
@@ -193,11 +196,11 @@ public class InventoryTest {
         inventory.setMaxInventoryWeight(maxInventoryWeight);
 
         // Add items w/ valid weight
-        Item item1 = new Item("Potion 1", 10, 20);
-        Item item2 = new Item("Potion 2", 10, 20);
-        Item item3 = new Item("Potion 3", 10, 20);
-        Item item4 = new Item("Potion 4", 10, 20);
-        Item item5 = new Item("Potion 5", 10, 20);
+        Item item1 = new Item();
+        Item item2 = new Item();
+        Item item3 = new Item();
+        Item item4 = new Item();
+        Item item5 = new Item();
 
         inventory.addItem(item1);
         inventory.addItem(item2);
@@ -210,7 +213,7 @@ public class InventoryTest {
         assert inventory.currentWeight() <= maxInventoryWeight : "Inventory weight should be less than than or equal to the max inventory weight of " + maxInventoryWeight + " but the current inventory weight is " + inventory.currentWeight();
 
         // Try to add Weapon that's over Weapons capacity
-        Item item6 = new Item("Potion 6", 10, 10);
+        Item item6 = new Item();
         inventory.addItem(item6);
 
         // Ensure item that would overflow weight limit isn't added
@@ -221,8 +224,8 @@ public class InventoryTest {
         Inventory inventory = new Inventory();
 
         // Add weapons
-        Weapon weapon1 = new Weapon("Sword 1", 10, 25);
-        Weapon weapon2 = new Weapon("Sword 2", 10, 25);
+        Weapon weapon1 = new Weapon();
+        Weapon weapon2 = new Weapon();
         inventory.addWeapon(weapon1);
         inventory.addWeapon(weapon2);
 
@@ -236,8 +239,8 @@ public class InventoryTest {
         Inventory inventory = new Inventory();
 
         // Add Items
-        Item item1 = new Item("Potion 1", 10, 10);
-        Item item2 = new Item("Potion 2", 10, 10);
+        Item item1 = new Item();
+        Item item2 = new Item();
         inventory.addItem(item1);
         inventory.addItem(item2);
 
@@ -254,15 +257,15 @@ public class InventoryTest {
         inventory.setMaxInventoryWeight(100);
 
         // Add Weapons and Items that are within the max inventory weight and size
-        Weapon sword1 = new Weapon("Sword 1", 25, 10);
-        Weapon sword2 = new Weapon("Sword 2", 25, 10);
+        Weapon sword1 = new Weapon();
+        Weapon sword2 = new Weapon();
 
         inventory.addWeapon(sword1);
         inventory.addWeapon(sword2);
 
-        Item item1 = new Item("Potion 1", 10, 5);
-        Item item2 = new Item("Potion 2", 10, 5);
-        Item item3 = new Item("Potion 3", 10, 5);
+        Item item1 = new Item();
+        Item item2 = new Item();
+        Item item3 = new Item();
 
         inventory.addItem(item1);
         inventory.addItem(item2);
@@ -273,15 +276,15 @@ public class InventoryTest {
         assert inventory.getItems().size() == 3 : "Inventory should have 3 items";
 
         // Add valid weapon
-        Weapon sword3 = new Weapon("Sword 3", 25, 10);
+        Weapon sword3 = new Weapon();
         inventory.addWeapon(sword3);
 
         // Ensure 3rd weapon was added
         assert inventory.getWeapons().size() == 3 : "Inventory should be 3 after adding a weapon";
 
         // Total weight should be 45
-        Item item4 = new Item("Potion 3", 10, 5);
-        Item item5 = new Item("Really Heavy Potion", 10, 99);
+        Item item4 = new Item();
+        Item item5 = new Item();
 
         inventory.addItem(item4);
         inventory.addItem(item5);
@@ -292,7 +295,7 @@ public class InventoryTest {
 
         // Inventory should have 3/3 weapons, drop one weapon, so that you can add another
         inventory.dropWeapon(0);
-        Weapon sword4 = new Weapon("Sword 4", 25, 10);
+        Weapon sword4 = new Weapon();
         inventory.addWeapon(sword4);
 
         assert inventory.getWeapons().contains(sword4) : "Inventory should contain sword4, but doesn't";

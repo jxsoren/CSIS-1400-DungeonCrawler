@@ -25,7 +25,7 @@ public class EnemyTest {
     }
 
     public static void takeDamage() {
-        Weapon weapon = new Weapon("Sword", "A cool sword", 25, 10);
+        Weapon weapon = new Weapon();
         Enemy enemy = new Enemy("Goblin 1", 50, weapon);
 
         System.out.println("Before enemy takes damage:");
@@ -52,7 +52,7 @@ public class EnemyTest {
 
     public static void attack() {
         int weaponEffectPoints = 25;
-        Weapon weapon = new Weapon("Sword", "A cool sword", weaponEffectPoints, 10);
+        Weapon weapon = new Weapon();
         Enemy enemy = new Enemy("Goblin 1", 50, weapon);
 
         // Enemy attack value should return weapon's damage number
@@ -60,7 +60,7 @@ public class EnemyTest {
     }
 
     public static void testToString() {
-        Weapon weapon = new Weapon("Sword", "A cool sword", 10, 10);
+        Weapon weapon = new Weapon();
         Enemy enemy = new Enemy("Goblin 1", 50, weapon);
 
         System.out.println();
