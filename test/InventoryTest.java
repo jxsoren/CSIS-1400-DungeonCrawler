@@ -75,11 +75,11 @@ public class InventoryTest {
         Weapon sword2 = new Weapon();
 
         // Items
-        Item item1 = new Item();
-        Item item2 = new Item();
-        Item item3 = new Item();
-        Item item4 = new Item();
-        Item item5 = new Item();
+        Consumable item1 = new Consumable();
+        Consumable item2 = new Consumable();
+        Consumable item3 = new Consumable();
+        Consumable item4 = new Consumable();
+        Consumable item5 = new Consumable();
 
         // Add Weapons and Items to Inventory
         inventory.addWeapon(sword1);
@@ -93,7 +93,7 @@ public class InventoryTest {
 
         System.out.println(inventory.toString());
 
-        // Assert correct Weapon and Item sizes
+        // Assert correct Weapon and Consumable sizes
         assert inventory.getWeapons().size() == 2 : "Inventory should only have 2 weapons";
         assert inventory.getItems().size() == 5 : "Inventory should only have 5 weapons";
 
@@ -165,11 +165,11 @@ public class InventoryTest {
         inventory.setMaxInventoryWeight(100);
 
         // Add valid number of items
-        Item item1 = new Item();
-        Item item2 = new Item();
-        Item item3 = new Item();
-        Item item4 = new Item();
-        Item item5 = new Item();
+        Consumable item1 = new Consumable();
+        Consumable item2 = new Consumable();
+        Consumable item3 = new Consumable();
+        Consumable item4 = new Consumable();
+        Consumable item5 = new Consumable();
 
         inventory.addItem(item1);
         inventory.addItem(item2);
@@ -181,7 +181,7 @@ public class InventoryTest {
         assert inventory.getItems().size() == maxItemsSize : "Inventory should have " + maxItemsSize + " items";
 
         // Try to add Weapon that's over Weapons capacity
-        Item item6 = new Item();
+        Consumable item6 = new Consumable();
         inventory.addItem(item6);
 
         // Assert that the Weapon over Weapons capacity wasn't added
@@ -196,11 +196,11 @@ public class InventoryTest {
         inventory.setMaxInventoryWeight(maxInventoryWeight);
 
         // Add items w/ valid weight
-        Item item1 = new Item();
-        Item item2 = new Item();
-        Item item3 = new Item();
-        Item item4 = new Item();
-        Item item5 = new Item();
+        Consumable item1 = new Consumable();
+        Consumable item2 = new Consumable();
+        Consumable item3 = new Consumable();
+        Consumable item4 = new Consumable();
+        Consumable item5 = new Consumable();
 
         inventory.addItem(item1);
         inventory.addItem(item2);
@@ -213,7 +213,7 @@ public class InventoryTest {
         assert inventory.currentWeight() <= maxInventoryWeight : "Inventory weight should be less than than or equal to the max inventory weight of " + maxInventoryWeight + " but the current inventory weight is " + inventory.currentWeight();
 
         // Try to add Weapon that's over Weapons capacity
-        Item item6 = new Item();
+        Consumable item6 = new Consumable();
         inventory.addItem(item6);
 
         // Ensure item that would overflow weight limit isn't added
@@ -239,15 +239,15 @@ public class InventoryTest {
         Inventory inventory = new Inventory();
 
         // Add Items
-        Item item1 = new Item();
-        Item item2 = new Item();
+        Consumable item1 = new Consumable();
+        Consumable item2 = new Consumable();
         inventory.addItem(item1);
         inventory.addItem(item2);
 
         // Drop a single item
         inventory.dropItem(0);
 
-        assert inventory.getItems().size() == 1 : "After dropping an item, Item count should be 1, but is " + inventory.getItems().size();
+        assert inventory.getItems().size() == 1 : "After dropping an item, Consumable count should be 1, but is " + inventory.getItems().size();
     }
 
     public static void inventoryFlow() {
@@ -263,9 +263,9 @@ public class InventoryTest {
         inventory.addWeapon(sword1);
         inventory.addWeapon(sword2);
 
-        Item item1 = new Item();
-        Item item2 = new Item();
-        Item item3 = new Item();
+        Consumable item1 = new Consumable();
+        Consumable item2 = new Consumable();
+        Consumable item3 = new Consumable();
 
         inventory.addItem(item1);
         inventory.addItem(item2);
@@ -283,15 +283,15 @@ public class InventoryTest {
         assert inventory.getWeapons().size() == 3 : "Inventory should be 3 after adding a weapon";
 
         // Total weight should be 45
-        Item item4 = new Item();
-        Item item5 = new Item();
+        Consumable item4 = new Consumable();
+        Consumable item5 = new Consumable();
 
         inventory.addItem(item4);
         inventory.addItem(item5);
 
         // item4 should get added, but not item5 due to weight overage
         assert inventory.getItems().size() == 4 : "Inventory should only have 4 items";
-        assert !inventory.getItems().contains(item5) : "Item that was over the weight limit shouldn't have been added";
+        assert !inventory.getItems().contains(item5) : "Consumable that was over the weight limit shouldn't have been added";
 
         // Inventory should have 3/3 weapons, drop one weapon, so that you can add another
         inventory.dropWeapon(0);
