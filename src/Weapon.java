@@ -12,18 +12,16 @@ public class Weapon extends Item {
 
     // Default weapon
     public Weapon() {
-        super("Wooden Sword", "A small wooden sword", 10, 0);
+        createWoodenSword();
     }
 
     public Weapon(WeaponType type) {
-
         switch (type) {
             case WOODEN_SWORD -> createWoodenSword();
             case STEEL_SWORD -> createSteelSword();
-            case IRON_AXE -> createSteelSword();
-            case EXCALIBUR -> createSteelSword();
+            case IRON_AXE -> createIronAxe();
+            case EXCALIBUR -> createExcalibur();
         }
-
     }
 
     public Weapon(String name, String description, int effectPoints, int weight) {
@@ -31,17 +29,20 @@ public class Weapon extends Item {
         super(name, description, effectPoints, weight);
     }
 
-    public Weapon(String name, int effectPoints, int weight) {
-        // Use constructor for parent class Item
-        super(name, effectPoints, weight);
+    private static void createWoodenSword() {
+        new Weapon("Wooden Sword", "A small wooden sword", 25, 10);
     }
 
-    private static Weapon createWoodenSword() {
-        return new Weapon("Wooden Sword", "A small wooden sword", 25, 10);
+    private static void createSteelSword() {
+        new Weapon("Steel Sword", "A sturdy steel sword", 40, 20);
     }
 
-    private static Weapon createSteelSword() {
-        return new Weapon("Steel Sword", "A sturdy steel sword", 40, 30);
+    private static void createIronAxe() {
+        new Weapon("Iron Axe", "A strong iron axe", 60, 30);
+    }
+
+    private static void createExcalibur() {
+        new Weapon("Excalibur", "It's excalibur...", 100, 50);
     }
 
     @Override

@@ -13,8 +13,8 @@ public class Consumable extends Item {
     }
 
     // Parameterized Constructor
-    public Consumable(String name, int effectPoints, int weight, String description) {
-        super(name, effectPoints, weight, description);
+    public Consumable(String name, String description, int effectPoint, int weight) {
+        super(name, description, effectPoint, weight);
     }
 
     @Override

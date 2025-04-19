@@ -18,7 +18,7 @@ public class Item {
         this.weight = 0;
     }
 
-    public Item(String name, int effectPoints, int weight, String description) {
+    public Item(String name, String description, int effectPoints, int weight) {
         this.name = name;
         this.effectPoints = effectPoints;
         this.description = description;
