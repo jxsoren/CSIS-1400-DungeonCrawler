@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class WeaponTest {
 
     public static void main(String[] args) {
@@ -12,7 +10,6 @@ public class WeaponTest {
         }
 
         testToString();
-
         testConstantWeapons();
     }
 
@@ -32,14 +29,30 @@ public class WeaponTest {
     }
 
     public static void testConstantWeapons() {
-        WeaponType excalibur = WeaponType.EXCALIBUR;
-
-        Weapon weapon = Weapon.createWeapon(excalibur);
-
-        System.out.println();
-        System.out.println(weapon.toString());
-        System.out.println();
+        System.out.println(weapon1().toString());
+        System.out.println(weapon2().toString());
+        System.out.println(weapon3().toString());
+        System.out.println(weapon4().toString());
     }
 
+    private static Weapon weapon1() {
+        WeaponType weapon = WeaponType.WOODEN_SWORD;
+        return Weapon.createWeapon(weapon);
+    }
+
+    private static Weapon weapon2() {
+        WeaponType weapon = WeaponType.STEEL_SWORD;
+        return Weapon.createWeapon(weapon);
+    }
+
+    private static Weapon weapon3() {
+        WeaponType weapon = WeaponType.IRON_AXE;
+        return Weapon.createWeapon(weapon);
+    }
+
+    private static Weapon weapon4() {
+        WeaponType weapon = WeaponType.EXCALIBUR;
+        return Weapon.createWeapon(weapon);
+    }
 
 }
