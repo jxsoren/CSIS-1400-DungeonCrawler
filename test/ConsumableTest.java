@@ -24,6 +24,13 @@ public class ConsumableTest {
             System.err.println("testMultipleUses() test -FAILED- | " + e.getMessage());
         }
 
+        try {
+            testConsumables();
+            System.out.println("testConsumables() test +PASSED+ !!!");
+        } catch (AssertionError e) {
+            System.err.println("testConsumables() test -FAILED- | " + e.getMessage());
+        }
+
     }
 
     public static void checkForValidAttributes() {
@@ -61,6 +68,12 @@ public class ConsumableTest {
         assert consumable.use() == 0 : TestHelpers.assertionMessage("Consumable", "marked as consumed", "not marked as consumed");
     }
 
+    public static void testConsumables() {
+        System.out.println(healingPotion().toString());
+        System.out.println(bread().toString());
+        System.out.println(apple().toString());
+    }
+
     // Test Variables
 
     public static Consumable defaultPotion() {
@@ -70,6 +83,21 @@ public class ConsumableTest {
         int weight = 10;
 
         return new Consumable(name, description, effectPoints, weight);
+    }
+
+    public static Consumable healingPotion() {
+        ConsumableType type = ConsumableType.HEALING_POTION;
+        return Consumable.createConsumable(type);
+    }
+
+    public static Consumable bread() {
+        ConsumableType type = ConsumableType.BREAD;
+        return Consumable.createConsumable(type);
+    }
+
+    public static Consumable apple() {
+        ConsumableType type = ConsumableType.APPLE;
+        return Consumable.createConsumable(type);
     }
 
 }

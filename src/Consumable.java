@@ -4,12 +4,25 @@
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
+enum ConsumableType {
+    HEALING_POTION, BREAD, APPLE
+}
+
 public class Consumable extends Item {
     private boolean consumed;
 
+    public static Consumable createConsumable(ConsumableType type) {
+        return switch (type) {
+            case HEALING_POTION -> new Consumable("Healing Potion", "A healing potion", 50, 10);
+            case BREAD -> new Consumable("Bread", "A piece of break", 15, 5);
+            case APPLE -> new Consumable("Apple", "A single apple", 10, 2);
+            default -> new Consumable();
+        };
+    }
+
     // Default Constructor
     public Consumable() {
-        super();
+        super("Default Potion", "A healing potion", 20, 10);
     }
 
     // Parameterized Constructor
