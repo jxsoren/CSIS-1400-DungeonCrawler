@@ -4,50 +4,33 @@
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
-public class Weapon extends Item {
+enum WeaponType {
+    WOODEN_SWORD, STEEL_SWORD, IRON_AXE, EXCALIBUR
+}
 
-    public enum WeaponType {
-        WOODEN_SWORD, STEEL_SWORD, IRON_AXE, EXCALIBUR
+public class Weapon extends Item {
+    private final WeaponType type;
+
+    // Factory for creating weapons
+    public static Weapon createWeapon(WeaponType type) {
+        return switch (type) {
+            case WOODEN_SWORD -> new Weapon("Wooden Sword", "A small wooden sword", 25, 10, type);
+            case STEEL_SWORD -> new Weapon("Steel Sword", "A sturdy steel sword", 40, 20, type);
+            case IRON_AXE -> new Weapon("Iron Axe", "A strong iron axe", 60, 30, type);
+            case EXCALIBUR -> new Weapon("Excalibur", "It's excalibur...", 100, 50, type);
+            default -> new Weapon();
+        };
     }
 
     // Default weapon
     public Weapon() {
-        createWoodenSword();
+        super("Wooden Sword", "A small wooden sword", 25, 10);
+        this.type = WeaponType.WOODEN_SWORD;
     }
 
-    public Weapon(WeaponType type) {
-        switch (type) {
-            case WOODEN_SWORD -> createWoodenSword();
-            case STEEL_SWORD -> createSteelSword();
-            case IRON_AXE -> createIronAxe();
-            case EXCALIBUR -> createExcalibur();
-        }
-    }
-
-    public Weapon(String name, String description, int effectPoints, int weight) {
-        // Use constructor for parent class Item
+    public Weapon(String name, String description, int effectPoints, int weight, WeaponType type) {
         super(name, description, effectPoints, weight);
-    }
-
-    private static void createWoodenSword() {
-        new Weapon("Wooden Sword", "A small wooden sword", 25, 10);
-    }
-
-    private static void createSteelSword() {
-        new Weapon("Steel Sword", "A sturdy steel sword", 40, 20);
-    }
-
-    private static void createIronAxe() {
-        new Weapon("Iron Axe", "A strong iron axe", 60, 30);
-    }
-
-    private static void createExcalibur() {
-        new Weapon("Excalibur", "It's excalibur...", 100, 50);
-    }
-
-    @Override
-    public int use() {
-        return this.getEffectPoints();
+        this.type = type;
     }
 
     @Override

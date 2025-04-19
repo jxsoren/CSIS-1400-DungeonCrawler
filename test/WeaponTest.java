@@ -12,30 +12,29 @@ public class WeaponTest {
         }
 
         testToString();
+
+        testConstantWeapons();
     }
 
     public static void testUse() {
-        String name = "Sword";
-        String description = "A cool sword!";
-        int effectPoints = 75;
-        int weight = 25;
+        Weapon weapon = new Weapon();
+        int attackValue = weapon.getEffectPoints();
 
-        int negativeEffectPoints = -effectPoints;
-
-        Weapon weapon = new Weapon(name, description, effectPoints, weight);
-
-        assert weapon.use() == effectPoints : "use should be " + negativeEffectPoints;
+        assert weapon.use() == 25 : "use should be " + attackValue;
     }
 
     public static void testToString() {
-        String name = "Sword";
-        String description = "A cool sword!";
-        int effectPoints = 75;
-        int weight = 25;
+        Weapon weapon = new Weapon();
 
-        int negativeEffectPoints = -effectPoints;
+        System.out.println();
+        System.out.println(weapon.toString());
+        System.out.println();
+    }
 
-        Weapon weapon = new Weapon(name, description, effectPoints, weight);
+    public static void testConstantWeapons() {
+        WeaponType excalibur = WeaponType.EXCALIBUR;
+
+        Weapon weapon = Weapon.createWeapon(excalibur);
 
         System.out.println();
         System.out.println(weapon.toString());
