@@ -56,7 +56,7 @@ public class Enemy {
 
     @Override
     public String toString() {
-        String enemyName = String.format("Name: %s ", name);
+        String enemyName = String.format("Enemy Name: %s ", name);
         String enemyHealth = String.format("HP: %d / %d", currentHealth, maxHealth);
         String enemyWeapon = String.format("Weapon: %s", weapon.toString());
 
