@@ -27,7 +27,7 @@ public class TreasureChest {
     }
 
     public Weapon takeWeapon(int weaponIndex) {
-        if (weaponIndex >= weapons.size()) {
+        if (weaponIndex >= weapons.size() || weaponIndex < 0) {
             return null;
         }
 
@@ -38,7 +38,7 @@ public class TreasureChest {
     }
 
     public Consumable takeItem(int itemIndex) {
-        if (itemIndex >= items.size()) {
+        if (itemIndex >= items.size() || itemIndex < 0) {
             return null;
         }
 
@@ -115,19 +115,32 @@ public class TreasureChest {
     public void lootOptions() {
         // Weapons Options
         System.out.println("Chest Weapons");
-        for (int i = 0; i < getWeapons().size(); i++) {
-            int normalizedIndex = i + 1;
-            System.out.printf("(%d) %s%n", normalizedIndex, getWeapons().get(i));
+
+        if (getWeapons().isEmpty()) {
+            System.out.println("No Weapons left");
+        } else {
+            for (int i = 0; i < getWeapons().size(); i++) {
+                int normalizedIndex = i + 1;
+                System.out.printf("(%d) %s%n", normalizedIndex, getWeapons().get(i));
+            }
+
         }
 
         System.out.println("---------");
 
         // Consumable Options
         System.out.println("Chest Items");
-        for (int i = 0; i < getItems().size(); i++) {
-            int normalizedIndex = i + 1;
-            System.out.printf("(%d) %s%n", normalizedIndex, getItems().get(i));
+
+        if (items.isEmpty()) {
+            System.out.println("No Items left");
+        } else {
+            for (int i = 0; i < getItems().size(); i++) {
+                int normalizedIndex = i + 1;
+                System.out.printf("(%d) %s%n", normalizedIndex, getItems().get(i));
+            }
         }
+
+
     }
 
     @Override

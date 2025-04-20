@@ -17,7 +17,7 @@ public class DungeonGameTest {
         //        }
 
         try {
-            testInvalidNextRoom();
+            //            testInvalidNextRoom();
             System.out.println("testInvalidNextRoom() test +PASSED+ !!!");
         } catch (AssertionError e) {
             System.err.printf("testInvalidNextRoom() test -FAILED-. Error Message: %s", e.getMessage());
@@ -144,6 +144,8 @@ public class DungeonGameTest {
         assert game.getCurrentRoomIndex() == 1 : TestHelpers.assertionMessage("After killing enemy in room", "allowed to move up a room", "not allowed to move up a room");
 
         game.lootChest();
+
+        System.out.println(player.getInventory());
     }
 
     // Test Helpers

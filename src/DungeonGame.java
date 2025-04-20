@@ -46,18 +46,58 @@ public class DungeonGame {
 
     public void lootChest() {
         TreasureChest chest = currentTreasureChest();
+        
+        int weaponChoice = 0;
+        int itemChoice = 0;
 
-        // Todo: Add loop to keep looping to
-        //  allow the player to select all possible items
-        chest.lootOptions();
+        int continueLooting = 1;
 
-        System.out.println("What weapon option would you like to grab from the chest? ");
-        int weaponChoice = input.nextInt();
-        chest.takeWeapon(weaponChoice);
+        do {
+            chest.lootOptions();
 
-        System.out.println("What item options would you like to grab from the chest?");
-        int itemChoice = input.nextInt();
-        chest.takeItem(itemChoice);
+            String promptInstructions = "(-1 to skip. -2 to exit)";
+
+            if (!chest.getWeapons().isEmpty()) {
+                System.out.println("\n" + promptInstructions);
+                System.out.print("What weapon option would you like to grab from the chest? ");
+                weaponChoice = input.nextInt();
+
+                if (weaponChoice == -1) {
+                    continue;
+                }
+
+                if (weaponChoice == -2) {
+                    break;
+                }
+
+                int weaponChoiceIndex = weaponChoice - 1;
+                Weapon chosenWeapon = chest.takeWeapon(weaponChoiceIndex);
+
+                playerInventory().addWeapon(chosenWeapon);
+            }
+
+            if (!chest.getItems().isEmpty()) {
+                System.out.println("\n" + promptInstructions);
+                System.out.print("What item options would you like to grab from the chest? ");
+                itemChoice = input.nextInt();
+
+                if (itemChoice == -1) {
+                    continue;
+                }
+
+                if (itemChoice == -2) {
+                    break;
+                }
+
+                int itemChoiceIndex = itemChoice - 1;
+                Item chosenItem = chest.takeItem(itemChoiceIndex);
+
+                playerInventory().addItem(chosenItem);
+            }
+
+            System.out.print("Continue Looting? 1 for Yes - 0 for No: ");
+            continueLooting = input.nextInt();
+        } while (continueLooting != 0);
 
     }
 
@@ -95,6 +135,10 @@ public class DungeonGame {
         return dungeonRooms.get(currentRoomIndex).getEnemy();
     }
 
+    private Inventory playerInventory() {
+        return getPlayer().getInventory();
+    }
+
     private TreasureChest currentTreasureChest() {
         return dungeonRooms.get(currentRoomIndex).getChest();
     }
@@ -102,11 +146,11 @@ public class DungeonGame {
     private void nextRoom(int currentRoomIndex) throws Exception {
         int finalRoomIndex = dungeonRooms.size() - 1;
         if (currentRoomIndex == finalRoomIndex) {
-            throw new Exception("Cannot advance to next Room. You're already at the final room.");
+            throw new Exception("Cannot advance to next Room. You're already at the final room.\n");
         }
 
         if (!currentRoom.isCompleted()) {
-            throw new Exception("Cannot advanced to next room. Defeat enemy before you can move on.");
+            throw new Exception("Cannot advanced to next room. Defeat enemy before you can move on.\n");
         }
 
         this.currentRoomIndex++;
@@ -116,7 +160,7 @@ public class DungeonGame {
     private void previousRoom(int currentRoomIndex) throws Exception {
         // If player tries to go back when they're in the first room
         if (currentRoomIndex == 0) {
-            throw new Exception("Cannot move to the previous room. You're at the first room.");
+            throw new Exception("Cannot move to the previous room. You're at the first room.\n");
         }
 
         this.currentRoomIndex--;

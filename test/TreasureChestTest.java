@@ -57,6 +57,7 @@ public class TreasureChestTest {
         // -- Start of tests --
 
         // Take weapon from chest
+
         Weapon chosenWeapon = treasureChest.takeWeapon(0);
 
         // Ensure the correct weapon was returned

@@ -21,15 +21,19 @@ public class Inventory {
     }
 
     public void addWeapon(Weapon weapon) {
-        if (canAdd(weapon)) {
-            weapons.add(weapon);
+        if (!canAdd(weapon)) {
+            return;
         }
+
+        weapons.add(weapon);
     }
 
     public void addItem(Item item) {
-        if (canAdd(item)) {
-            items.add(item);
+        if (!canAdd(item)) {
+            return;
         }
+
+        items.add(item);
     }
 
     public int currentWeight() {
