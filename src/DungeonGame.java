@@ -4,6 +4,7 @@
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,6 +34,22 @@ public class DungeonGame {
         }
     }
 
+    private void enterRoom(DungeonRoom room) {
+        System.out.printf("%nYou've entered %s%n", room.getName());
+        System.out.printf(room.toString());
+
+        // Prompt the player for their action of choice
+        if (room.isCompleted()) {
+            System.out.println("1. Go to Next Room");
+            System.out.println("2. Go to Previous Room");
+            System.out.println("3. Loot Chest");
+        } else {
+            System.out.println("1. Fight Enemy");
+            System.out.println("2. Go to Previous Room");
+        }
+
+    }
+
     public void startAttackPhase() {
         Enemy enemy = currentEnemy();
 
@@ -46,7 +63,7 @@ public class DungeonGame {
 
     public void lootChest() {
         TreasureChest chest = currentTreasureChest();
-        
+
         int weaponChoice = 0;
         int itemChoice = 0;
 
@@ -55,18 +72,23 @@ public class DungeonGame {
         do {
             chest.lootOptions();
 
-            String promptInstructions = "(-1 to skip. -2 to exit)";
+            // Instructions
+            System.out.println("\n" + "-".repeat(50));
+            System.out.println("Commands:");
+            System.out.println("  Enter number to take an item");
+            System.out.println("  Enter -1 to exit chest");
+            System.out.println("  Enter 0 to skip current choice");
+            System.out.println("-".repeat(50));
 
             if (!chest.getWeapons().isEmpty()) {
-                System.out.println("\n" + promptInstructions);
-                System.out.print("What weapon option would you like to grab from the chest? ");
+                System.out.print("\nWeapon choice: ");
                 weaponChoice = input.nextInt();
 
-                if (weaponChoice == -1) {
+                if (weaponChoice == 0) {
                     continue;
                 }
 
-                if (weaponChoice == -2) {
+                if (weaponChoice == -1) {
                     break;
                 }
 
@@ -74,18 +96,18 @@ public class DungeonGame {
                 Weapon chosenWeapon = chest.takeWeapon(weaponChoiceIndex);
 
                 playerInventory().addWeapon(chosenWeapon);
+                System.out.printf("You added %s to your inventory!\n", chosenWeapon.getName());
             }
 
             if (!chest.getItems().isEmpty()) {
-                System.out.println("\n" + promptInstructions);
-                System.out.print("What item options would you like to grab from the chest? ");
+                System.out.print("\nItem choice: ");
                 itemChoice = input.nextInt();
 
-                if (itemChoice == -1) {
+                if (itemChoice == 0) {
                     continue;
                 }
 
-                if (itemChoice == -2) {
+                if (itemChoice == -1) {
                     break;
                 }
 
@@ -93,9 +115,10 @@ public class DungeonGame {
                 Item chosenItem = chest.takeItem(itemChoiceIndex);
 
                 playerInventory().addItem(chosenItem);
+                System.out.printf("You added %s to your inventory!\n", chosenItem.getName());
             }
 
-            System.out.print("Continue Looting? 1 for Yes - 0 for No: ");
+            System.out.print("\nContinue Looting? (1 for Yes, 0 for No): ");
             continueLooting = input.nextInt();
         } while (continueLooting != 0);
 
@@ -153,8 +176,12 @@ public class DungeonGame {
             throw new Exception("Cannot advanced to next room. Defeat enemy before you can move on.\n");
         }
 
+        // Set attributes to point to next room
         this.currentRoomIndex++;
         setCurrentRoom(currentRoomIndex);
+
+        // Enter the next room
+        enterRoom(currentRoom);
     }
 
     private void previousRoom(int currentRoomIndex) throws Exception {
@@ -163,8 +190,12 @@ public class DungeonGame {
             throw new Exception("Cannot move to the previous room. You're at the first room.\n");
         }
 
+        // Set attributes to point to previous room
         this.currentRoomIndex--;
         setCurrentRoom(currentRoomIndex);
+
+        // Enter the previous room
+        enterRoom(currentRoom);
     }
 
 }

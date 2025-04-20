@@ -143,9 +143,15 @@ public class DungeonGameTest {
         game.movePlayer("forwards");
         assert game.getCurrentRoomIndex() == 1 : TestHelpers.assertionMessage("After killing enemy in room", "allowed to move up a room", "not allowed to move up a room");
 
+        // Loot chest
         game.lootChest();
 
         System.out.println(player.getInventory());
+
+        // Advance to next room
+        game.movePlayer("forwards");
+
+        assert game.getCurrentRoomIndex() == 2 : TestHelpers.assertionMessage("After looting chest and moving up a room", "move up a room", "did not move up up a room");
     }
 
     // Test Helpers
