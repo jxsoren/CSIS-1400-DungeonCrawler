@@ -120,7 +120,7 @@ public class Inventory {
     public String toString() {
         String inventoryStats = String.format("\t[%dlbs/%dlbs]", currentWeight(), maxInventoryWeight);
         String weapons = String.format("\tWeapons (%s/%s): %s", getWeapons().size(), maxWeaponSize, getWeapons());
-        String items = String.format("\tItems: (%s/%s): %s", getWeapons().size(), maxItemsSize, getItems());
+        String items = String.format("\tItems: (%s/%s): %s", getItems().size(), maxItemsSize, getItems());
 
         return String.format("%s%n%s%n%s%n", inventoryStats, weapons, items);
     }
