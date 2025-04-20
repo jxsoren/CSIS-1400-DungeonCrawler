@@ -43,7 +43,7 @@ public class EnemyTest {
         assert enemy.getCurrentHealth() == 0 : TestHelpers.assertionMessage("Enemy's current health", 0, enemy.getCurrentHealth());
 
         // Enemy should be dead
-        assert !enemy.isAlive() : TestHelpers.assertionMessage("Enemy's alive status", false, true);
+        assert !enemy.isDead() : TestHelpers.assertionMessage("Enemy's alive status", false, true);
 
         System.out.println();
         System.out.println(enemy.toString());

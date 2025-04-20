@@ -5,12 +5,10 @@
  ***********************************************/
 
 public class DungeonRoom {
-    private int index;
+    private final int index;
     private final String name;
-    private Enemy enemy;
-    private TreasureChest treasureChest;
-    private boolean hasEnemy;
-    private boolean hasChest;
+    private final Enemy enemy;
+    private final TreasureChest treasureChest;
     private boolean completed;
 
     public DungeonRoom(int index, String name, Enemy enemy, TreasureChest treasureChest) {
@@ -21,6 +19,10 @@ public class DungeonRoom {
     }
 
     // Getters
+
+    public boolean isCompleted() {
+        return completed;
+    }
 
     public int getIndex() {
         return index;
@@ -40,16 +42,11 @@ public class DungeonRoom {
 
     // Setters
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public void setEnemy(Enemy enemy) {
-        this.enemy = enemy;
-    }
-
-    public void setChest(TreasureChest chest) {
-        this.treasureChest = chest;
+    public void completeRoom() {
+        // Only complete room if enemy is dead
+        if (getEnemy().isDead()) {
+            completed = true;
+        }
     }
 
     @Override

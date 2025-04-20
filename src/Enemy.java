@@ -9,7 +9,7 @@ public class Enemy {
     private final int maxHealth;
     private final Weapon weapon;
     private int currentHealth;
-    private boolean isAlive;
+    private boolean isDead;
 
     public Enemy(String name, int maxHealth, Weapon weapon) {
         this.name = name;
@@ -17,7 +17,6 @@ public class Enemy {
         this.weapon = weapon;
 
         currentHealth = maxHealth; // Initialize current health to the max health (full health)
-        isAlive = true;
     }
 
     public Enemy(String name, int maxHealth) {
@@ -26,7 +25,6 @@ public class Enemy {
         this.weapon = new Weapon();
 
         currentHealth = maxHealth; // Initialize current health to the max health (full health)
-        isAlive = true;
     }
 
     public void takeDamage(int incomingDamageAmount) {
@@ -52,8 +50,8 @@ public class Enemy {
         return currentHealth;
     }
 
-    public boolean isAlive() {
-        return isAlive;
+    public boolean isDead() {
+        return isDead;
     }
 
     @Override
@@ -69,6 +67,6 @@ public class Enemy {
 
     private void killEnemy() {
         currentHealth = 0;
-        isAlive = false;
+        isDead = true;
     }
 }

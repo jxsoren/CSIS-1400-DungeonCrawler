@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class TreasureChest {
     private ArrayList<Weapon> weapons = new ArrayList<>();
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Consumable> items = new ArrayList<>();
 
     // Constants
     private final int weaponCapacity = 1;
@@ -21,7 +21,7 @@ public class TreasureChest {
     }
 
     // Parameterized constructor
-    public TreasureChest(ArrayList<Weapon> weapons, ArrayList<Item> items) {
+    public TreasureChest(ArrayList<Weapon> weapons, ArrayList<Consumable> items) {
         this.weapons = weapons;
         this.items = items;
     }
@@ -37,12 +37,12 @@ public class TreasureChest {
         return chosenWeapon;
     }
 
-    public Item takeItem(int itemIndex) {
+    public Consumable takeItem(int itemIndex) {
         if (itemIndex >= items.size()) {
             return null;
         }
 
-        Item chosenItem = items.get(itemIndex);
+        Consumable chosenItem = items.get(itemIndex);
         items.remove(itemIndex);
 
         return chosenItem;
@@ -54,7 +54,7 @@ public class TreasureChest {
         ArrayList<Weapon> randomWeapons = randomWeapons(1);
         weapons.addAll(randomWeapons);
 
-        ArrayList<Item> randomItems = randomItems(3);
+        ArrayList<Consumable> randomItems = randomItems(3);
         items.addAll(randomItems);
     }
 
@@ -63,26 +63,38 @@ public class TreasureChest {
             numOfWeapons = weaponCapacity;
         }
 
+        Random random = new Random();
+
         ArrayList<Weapon> randomWeaponList = new ArrayList<>();
 
         for (int i = 0; i < numOfWeapons; i++) {
-            Weapon weapon = new Weapon();
+            // Generate a random weapon type
+            WeaponType[] weaponTypes = WeaponType.values();
+            int randomIndex = random.nextInt(0, weaponTypes.length);
+
+            Weapon weapon = Weapon.createWeapon(weaponTypes[randomIndex]);
             randomWeaponList.add(weapon);
         }
 
         return randomWeaponList;
     }
 
-    private ArrayList<Item> randomItems(int numOfItems) {
+    private ArrayList<Consumable> randomItems(int numOfItems) {
         if (numOfItems > itemCapacity) {
             numOfItems = itemCapacity;
         }
 
-        ArrayList<Item> randomItemList = new ArrayList<>();
+        Random random = new Random();
+
+        ArrayList<Consumable> randomItemList = new ArrayList<>();
 
         for (int i = 0; i < numOfItems; i++) {
-            Item item = new Item();
-            randomItemList.add(item);
+            // Generate a random weapon type
+            ConsumableType[] consumableTypes = ConsumableType.values();
+            int randomIndex = random.nextInt(0, consumableTypes.length);
+
+            Consumable consumable = Consumable.createConsumable(consumableTypes[randomIndex]);
+            randomItemList.add(consumable);
         }
 
         return randomItemList;
@@ -90,7 +102,7 @@ public class TreasureChest {
 
     // Getters
 
-    public ArrayList<Item> getItems() {
+    public ArrayList<Consumable> getItems() {
         return this.items;
     }
 
@@ -98,6 +110,25 @@ public class TreasureChest {
         return this.weapons;
     }
 
+    // Helpers
+
+    public void lootOptions() {
+        // Weapons Options
+        System.out.println("Chest Weapons");
+        for (int i = 0; i < getWeapons().size(); i++) {
+            int normalizedIndex = i + 1;
+            System.out.printf("(%d) %s%n", normalizedIndex, getWeapons().get(i));
+        }
+
+        System.out.println("---------");
+
+        // Consumable Options
+        System.out.println("Chest Items");
+        for (int i = 0; i < getItems().size(); i++) {
+            int normalizedIndex = i + 1;
+            System.out.printf("(%d) %s%n", normalizedIndex, getItems().get(i));
+        }
+    }
 
     @Override
     public String toString() {

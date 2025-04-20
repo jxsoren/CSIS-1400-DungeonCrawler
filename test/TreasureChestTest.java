@@ -34,10 +34,10 @@ public class TreasureChestTest {
 
     public static void testTakingThings() {
         // Initialize Items
-        Item item1 = new Item();
-        Item item2 = new Item();
+        Consumable item1 = new Consumable();
+        Consumable item2 = new Consumable();
 
-        ArrayList<Item> items = new ArrayList<>();
+        ArrayList<Consumable> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
 
@@ -70,14 +70,14 @@ public class TreasureChestTest {
         assert weapons.isEmpty() : TestHelpers.assertionMessage("Treasure Chest Weapons", "empty", "not empty");
 
         // Take item from chest
-        Item chosenItem = treasureChest.takeItem(0);
+        Consumable chosenItem = treasureChest.takeItem(0);
 
         System.out.println();
         System.out.println(treasureChest.toString());
         System.out.println();
 
         // Ensure that the item was removed from the chest
-        assert chosenItem == item1 : TestHelpers.assertionMessage("Taken Treasure Chest Item", item1.toString(), chosenItem.toString());
+        assert chosenItem == item1 : TestHelpers.assertionMessage("Taken Treasure Chest Consumable", item1.toString(), chosenItem.toString());
 
         // Ensure that the weapon was removed from the chest
         int itemsCount = treasureChest.getItems().size();

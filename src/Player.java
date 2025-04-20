@@ -12,7 +12,7 @@ public class Player {
     private final int maxHealth;
     private int currentHealth;
 
-    private boolean isAlive;
+    private boolean isDead;
 
     public Player(String name) {
         this.name = name;
@@ -25,6 +25,15 @@ public class Player {
 
     public void takeDamage(int incomingDamage) {
         currentHealth -= incomingDamage;
+
+        // Check if damage caused puts currentHealth less than 0
+        if (currentHealth <= 0) {
+            killPlayer();
+        }
+    }
+
+    public int attack() {
+        return weapon.use();
     }
 
     // Getters
@@ -37,6 +46,10 @@ public class Player {
         return inventory;
     }
 
+    public boolean isDead() {
+        return isDead;
+    }
+
     @Override
     public String toString() {
         String playerName = String.format("Name: %s ", name);
@@ -47,4 +60,8 @@ public class Player {
         return String.format("%s%n%s%n%s%n%s", playerName, playerWeapon, playerHealth, playerInventory);
     }
 
+    private void killPlayer() {
+        currentHealth = 0;
+        isDead = true;
+    }
 }
