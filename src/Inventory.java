@@ -80,6 +80,10 @@ public class Inventory {
 
     // Getters
 
+    public int getMaxInventoryWeight() {
+        return maxInventoryWeight;
+    }
+
     public Weapon getWeapon(int weaponIndex) {
         return weapons.get(weaponIndex);
     }
@@ -131,6 +135,70 @@ public class Inventory {
     private boolean canStoreAdditionalWeight(int weightToAdd) {
         int pendingTotalWeight = weightToAdd + currentWeight();
         return pendingTotalWeight <= this.maxInventoryWeight;
+    }
+
+    // Display
+
+    public void displayInventory() {
+        // Inventory Top
+
+        int lineWidth = 42;
+
+        System.out.println();
+
+        System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        System.out.println("┃                 INVENTORY                  ┃");
+        System.out.println("┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃");
+        System.out.println("┃                                            ┃");
+        System.out.println("┃                                            ┃");
+        System.out.println("┃                                            ┃");
+        System.out.println("┃                                            ┃");
+        System.out.println("┃                                            ┃");
+        System.out.println("┃                                            ┃");
+        System.out.println("┃                                            ┃");
+        System.out.println("┃                                            ┃");
+        System.out.println("┃                                            ┃");
+        System.out.println("┃                                            ┃");
+        System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+        System.out.println(getWeapons());
+
+        GameWindow.printInventory(this);
+
+        // Inventory Body
+
+        // Inventory Bottom
+
+    }
+
+    public String inventoryStats() {
+        return String.format("[%dlbs/%dlbs]", currentWeight(), maxInventoryWeight);
+    }
+
+    public StringBuilder weaponsString() {
+        StringBuilder line = new StringBuilder();
+
+        for (int i = 0; i < getWeapons().size(); i++) {
+            String weapon = String.format("(%d) %s%n", i + 1, getWeapon(i));
+            line.append(weapon);
+        }
+
+        return line;
+    }
+
+    public StringBuilder itemsString() {
+        StringBuilder line = new StringBuilder();
+
+        for (int i = 0; i < getItems().size(); i++) {
+            String item = String.format("(%d) %s%n", i + 1, getItem(i));
+            line.append(item);
+        }
+
+        return line;
+    }
+
+    public void printFormattedInventory() {
+        GameWindow.printInventory(this);
     }
 
     @Override

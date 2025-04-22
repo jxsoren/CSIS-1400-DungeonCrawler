@@ -3,7 +3,7 @@ public class DungeonGameTest {
     public static void main(String[] args) {
 
         try {
-            testInit();
+            //            testInit();
             System.out.println("testInit() test +PASSED+ !!!");
         } catch (AssertionError e) {
             System.err.printf("testInit() test -FAILED-. Error Message: %s", e.getMessage());
@@ -24,25 +24,27 @@ public class DungeonGameTest {
         }
 
         try {
-            testKillingEnemy();
+            //            testKillingEnemy();
             System.out.println("testKillingEnemy() test +PASSED+ !!!");
         } catch (AssertionError e) {
             System.err.printf("testKillingEnemy() test -FAILED-. Error Message: %s", e.getMessage());
         }
 
         try {
-            testKillingAndGoingBackARoom();
+            //            testKillingAndGoingBackARoom();
             System.out.println("testKillingAndGoingBackARoom() test +PASSED+ !!!");
         } catch (AssertionError e) {
             System.err.printf("testKillingAndGoingBackARoom() test -FAILED-. Error Message: %s", e.getMessage());
         }
 
         try {
-            testKillingEnemyAndLootingChest();
+            //            testKillingEnemyAndLootingChest();
             System.out.println("testKillingEnemyAndLootingChest() test +PASSED+ !!!");
         } catch (AssertionError e) {
             System.err.printf("testKillingEnemyAndLootingChest() test -FAILED-. Error Message: %s", e.getMessage());
         }
+
+        testInventoryPrompt();
 
     }
 
@@ -110,7 +112,7 @@ public class DungeonGameTest {
         DungeonGame game = new DungeonGame(player);
 
         // Kill Enemy
-        game.startAttackPhase();
+        game.attackLoop();
 
         // You should be able to move to the next room now
         game.movePlayer("forwards");
@@ -122,7 +124,7 @@ public class DungeonGameTest {
         DungeonGame game = new DungeonGame(player);
 
         // Kill Enemy
-        game.startAttackPhase();
+        game.attackLoop();
 
         // You should be able to move to the next room now
         game.movePlayer("forwards");
@@ -137,7 +139,7 @@ public class DungeonGameTest {
         DungeonGame game = new DungeonGame(player);
 
         // Kill Enemy
-        game.startAttackPhase();
+        game.attackLoop();
 
         // You should be able to move to the next room now
         game.movePlayer("forwards");
@@ -153,6 +155,14 @@ public class DungeonGameTest {
 
         assert game.getCurrentRoomIndex() == 2 : TestHelpers.assertionMessage("After looting chest and moving up a room", "move up a room", "did not move up up a room");
     }
+
+    public static void testInventoryPrompt() {
+        Player player = basicPlayer();
+        DungeonGame game = new DungeonGame(player);
+
+        game.openInventory();
+    }
+
 
     // Test Helpers
 

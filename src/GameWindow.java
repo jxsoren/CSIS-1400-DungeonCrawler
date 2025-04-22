@@ -5,10 +5,6 @@
  ***********************************************/
 
 public class GameWindow {
-    // Dimensions
-    public static final int width = 80;
-    public static final int height = 60;
-
     // Corners
     private static final String topLeftCorner = "┏";
     private static final String topRightCorner = "┓";
@@ -20,43 +16,132 @@ public class GameWindow {
     private static final String verticalLine = "┃";
 
     public static void printWindow() {
-        int topPadding = 5;
-        int bottomPadding = 5;
-        int leftPadding = 40;
+        // Dimensions
+        final int width = 120;
+        final int height = 20;
 
+        int topPadding = 2;
+        int bottomPadding = 2;
+        int leftPadding = 40;
 
         // Print Top
         printPadding(topPadding);
+        System.out.printf("%n%40s%s%s", topLeftCorner, horizontalLine.repeat(width), topRightCorner);
 
-        System.out.print(" ".repeat(leftPadding));
-        System.out.print(topLeftCorner);
-        System.out.print(horizontalLine.repeat(width));
-        System.out.print(topRightCorner);
-
-
-        // Print Left
-
+        // Print Left and Right sides
         for (int i = 0; i < height; i++) {
-            System.out.printf("%n%s%s%s%s", " ".repeat(leftPadding), verticalLine, " ".repeat(width), verticalLine);
+            System.out.printf("%n%40s%121s", verticalLine, verticalLine);
         }
 
-
-        // Print Right
-
-        System.out.println();
-
         // Print Bottom
-        System.out.print(" ".repeat(leftPadding));
-        System.out.print("-".repeat(width));
+        System.out.printf("%n%40s%s%s", bottomLeftCorner, horizontalLine.repeat(width), bottomRightCorner);
         printPadding(bottomPadding);
+    }
 
+    public static void printInventory(Inventory inventory) {
+        // Dimensions
+        final int width = 42;
+        final int height = 16;
+
+        // Print Header
+        String header = "INVENTORY";
+        StringBuilder line = buildBody(header, width);
+        StringBuilder inventoryStats = buildBody(inventory.inventoryStats(), width);
+        StringBuilder top = buildTop(width);
+        StringBuilder divider = buildDivider(width);
+        StringBuilder bottom = buildBottom(width);
+
+        System.out.println(top);
+        System.out.println(line);
+        System.out.println(inventoryStats);
+        System.out.println(divider);
+
+        System.out.println(buildBody("", width));
+
+        // Print Weapons
+        String weaponsString = inventory.weaponsString().toString();
+        String[] splitWeapons = weaponsString.split("\n");
+
+        System.out.println(buildBody("WEAPONS", width));
+
+        for (String itemString : splitWeapons) {
+            System.out.println(buildBody(itemString, width));
+        }
+
+        System.out.println(buildBody("", width));
+
+        // Print Items
+        String itemsString = inventory.itemsString().toString();
+        String[] splitItems = itemsString.split("\n");
+
+        System.out.println(buildBody("ITEMS", width));
+
+        for (String itemString : splitItems) {
+            System.out.println(buildBody(itemString, width));
+        }
+
+        System.out.println(buildBody("", width));
+
+        System.out.println(bottom);
+    }
+
+    private static StringBuilder buildTop(int width) {
+        width += 2; // += 2 for each start and end character
+
+        StringBuilder line = new StringBuilder();
+
+        line.append("┏");
+        line.append("━".repeat(width));
+        line.append("┓");
+
+        return line;
+    }
+
+    private static StringBuilder buildBottom(int width) {
+        width += 2; // += 2 for each start and end character
+
+        StringBuilder line = new StringBuilder();
+
+        line.append("┗");
+        line.append("━".repeat(width));
+        line.append("┛");
+
+        return line;
+    }
+
+    private static StringBuilder buildDivider(int width) {
+        width += 2; // += 2 for each start and end character
+
+        StringBuilder line = new StringBuilder();
+
+        line.append("┃");
+        line.append("━".repeat(width));
+        line.append("┃");
+
+        return line;
+    }
+
+    private static StringBuilder buildBody(String content, int totalLineWidth) {
+        StringBuilder line = new StringBuilder();
+        int paddingAmount = calculatePadding(totalLineWidth, content.length());
+
+        line.append("┃");
+        line.append(" ".repeat(paddingAmount));
+        // correct spacing if content is odd num of characters
+        if (content.length() % 2 != 0) line.append(" ");
+        line.append(content);
+        line.append(" ".repeat(paddingAmount));
+        line.append("┃");
+
+        return line;
+    }
+
+    private static int calculatePadding(int width, int contentLength) {
+        return ((width - contentLength) / 2) + 1;
     }
 
     private static void printPadding(int paddingAmount) {
-        for (int i = 0; i < paddingAmount; i++) {
-            System.out.println();
-        }
+        System.out.println("\n".repeat(paddingAmount));
     }
-
 
 }

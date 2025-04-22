@@ -177,6 +177,8 @@ public class DungeonGame {
         int playerInput;
 
         do {
+            playerInventory().printFormattedInventory();
+
             System.out.println();
             System.out.println("What would you like to do with your inventory?\n");
 

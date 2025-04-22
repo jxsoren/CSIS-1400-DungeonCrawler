@@ -8,5 +8,3 @@ public class GameWindowTest {
         GameWindow.printWindow();
     }
 }
-
-
