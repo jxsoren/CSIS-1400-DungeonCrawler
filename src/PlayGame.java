@@ -10,6 +10,8 @@ public class PlayGame {
     public static void main(String[] args) {
         Player player = initPlayer();
         DungeonGame game = new DungeonGame(player);
+
+        game.start();
     }
 
     private static Player initPlayer() {

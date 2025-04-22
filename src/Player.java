@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.util.function.Consumer;
+
 /**********************************************
  * Author(s): Josh Sorensen & Bowen Berthelson
  *
@@ -6,8 +9,8 @@
 
 public class Player {
     private final String name;
-    private final Weapon weapon;
     private final Inventory inventory;
+    private Weapon weapon;
 
     private final int maxHealth;
     private int currentHealth;
@@ -16,8 +19,8 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.weapon = new Weapon();
         this.inventory = new Inventory();
+        equipWeapon(0);
 
         this.maxHealth = 200;
         this.currentHealth = 200;
@@ -36,6 +39,16 @@ public class Player {
         return weapon.use();
     }
 
+
+    public void equipWeapon(int weaponIndex) {
+        this.weapon = inventory.getWeapon(weaponIndex);
+    }
+
+    public void consumeItem(int itemIndex) {
+        Consumable chosenItem = inventory.getItem(itemIndex);
+        currentHealth += chosenItem.use();
+    }
+
     // Getters
 
     public int getCurrentHealth() {
@@ -48,6 +61,10 @@ public class Player {
 
     public boolean isDead() {
         return isDead;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     @Override

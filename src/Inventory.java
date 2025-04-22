@@ -12,12 +12,29 @@ public class Inventory {
     private int maxInventoryWeight = 200;
 
     private final ArrayList<Weapon> weapons;
-    private final ArrayList<Item> items;
+    private final ArrayList<Consumable> items;
 
     public Inventory() {
         // Initialize Items and Weapons
         weapons = new ArrayList<>();
+        weapons.add(new Weapon());
         items = new ArrayList<>();
+    }
+
+    public void listWeapons() {
+        System.out.println("Weapons: ");
+        for (int i = 0; i < getWeapons().size(); i++) {
+            System.out.printf("%d - %s%n", i + 1, getWeapon(i));
+        }
+        System.out.println();
+    }
+
+    public void listItems() {
+        System.out.println("Items: ");
+        for (int i = 0; i < getItems().size(); i++) {
+            System.out.printf("(%d) - %s%n", i + 1, getItem(i));
+        }
+        System.out.println();
     }
 
     public void addWeapon(Weapon weapon) {
@@ -28,7 +45,7 @@ public class Inventory {
         weapons.add(weapon);
     }
 
-    public void addItem(Item item) {
+    public void addItem(Consumable item) {
         if (!canAdd(item)) {
             return;
         }
@@ -67,7 +84,7 @@ public class Inventory {
         return weapons.get(weaponIndex);
     }
 
-    public Item getItem(int itemIndex) {
+    public Consumable getItem(int itemIndex) {
         return items.get(itemIndex);
     }
 
@@ -75,7 +92,7 @@ public class Inventory {
         return weapons;
     }
 
-    public ArrayList<Item> getItems() {
+    public ArrayList<Consumable> getItems() {
         return items;
     }
 
@@ -118,11 +135,11 @@ public class Inventory {
 
     @Override
     public String toString() {
-        String inventoryStats = String.format("\t[%dlbs/%dlbs]", currentWeight(), maxInventoryWeight);
+        String inventoryStats = String.format("Inventory [%dlbs/%dlbs]:", currentWeight(), maxInventoryWeight);
         String weapons = String.format("\tWeapons (%s/%s): %s", getWeapons().size(), maxWeaponSize, getWeapons());
         String items = String.format("\tItems: (%s/%s): %s", getItems().size(), maxItemsSize, getItems());
 
-        return String.format("%s%n%s%n%s%n", inventoryStats, weapons, items);
+        return String.format("%n%s%n%s%n%s%n", inventoryStats, weapons, items);
     }
 
 }
