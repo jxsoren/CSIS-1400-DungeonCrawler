@@ -62,6 +62,8 @@ public class GameWindow {
         }
         System.out.println(buildBody("", width));
 
+        AsciiArt.goblin();
+
         // Print Chest
         System.out.println(buildBody("CHEST", width));
         String[] attributesArr = room.getChest().attributesArr();
@@ -70,6 +72,35 @@ public class GameWindow {
         }
         System.out.println(buildBody("", width));
 
+        System.out.println(bottom);
+    }
+
+    public static void printPlayer(Player player) {
+        // Dimensions
+        int width = 62;
+        String header = player.getName();
+
+        // Print Header
+        StringBuilder top = buildTop(width);
+        StringBuilder divider = buildDivider(width);
+        StringBuilder headerLine = buildBody(header, width);
+        StringBuilder bottom = buildBottom(width);
+
+        System.out.println(top);
+        System.out.println(headerLine);
+        System.out.println(divider);
+        System.out.println(buildBody("", width));
+
+        // Print Player
+        System.out.println(buildBody("PLAYER", width));
+
+        String[] attributesArr = player.attributesArr();
+        for (String attribute : attributesArr) {
+            System.out.println(buildBody(attribute, width));
+        }
+        System.out.println(buildBody("", width));
+
+        System.out.println(buildBody("", width));
         System.out.println(bottom);
     }
 

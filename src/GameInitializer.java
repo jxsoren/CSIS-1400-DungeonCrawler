@@ -17,7 +17,7 @@ public class GameInitializer {
 
             // Room Name
             int roomNumber = roomIndex + 1;
-            String roomName = String.format("Level %s", roomNumber);
+            String roomName = String.format("Room %s", roomNumber);
 
             // Room Enemy
             Enemy enemy = new Enemy("enemy", 50);

@@ -38,16 +38,13 @@ public class DungeonGame {
     }
 
     private void enterRoom(DungeonRoom room) {
-        System.out.printf("%nYou've entered %s%n", room.getName());
-        System.out.printf(room.toString());
-
         roomLoop(currentRoom);
     }
 
     public void roomLoop(DungeonRoom currentRoom) {
         while (this.currentRoom == currentRoom) {
             GameWindow.printRoom(getCurrentRoom());
-            System.out.println(player);
+            GameWindow.printPlayer(getPlayer());
 
             if (getCurrentRoom().isCompleted()) {
                 System.out.println("\nThe room is currently completed. What would you like to do next?\n");
@@ -89,7 +86,7 @@ public class DungeonGame {
     public void attackLoop() {
         Enemy enemy = currentEnemy();
 
-        while (!enemy.isDead() && !player.isDead()) {
+        do {
             int enemyAttackValue = enemy.attack();
             int playerAttackValue = player.attack();
 
@@ -102,11 +99,18 @@ public class DungeonGame {
             System.out.printf("%s attacked %s for %d damage!%n", enemy.getName(), player.getName(), enemyAttackValue);
 
             System.out.println();
+        } while (!enemy.isDead() && !player.isDead());
+
+        if (player.isDead()) {
+            System.out.println(AsciiArt.goblin());
+            System.err.println("YOU DIED");
+            System.err.println("HA HA");
+            System.exit(0);
         }
 
-        System.out.printf("%s has been defeated!!!", enemy.getName());
+        System.out.printf("%s has been defeated!!!%n", enemy.getName());
 
-        currentRoom.completeRoom();
+        getCurrentRoom().completeRoom();
     }
 
     public void lootChest() {
