@@ -54,6 +54,14 @@ public class Enemy {
         return isDead;
     }
 
+    public String[] attributesArr() {
+        return new String[]{
+                getName(),
+                String.format("HP: %d / %d", currentHealth, maxHealth),
+                weapon.toString()
+        };
+    }
+
     @Override
     public String toString() {
         String enemyName = String.format("Enemy Name: %s ", name);

@@ -137,40 +137,6 @@ public class Inventory {
         return pendingTotalWeight <= this.maxInventoryWeight;
     }
 
-    // Display
-
-    public void displayInventory() {
-        // Inventory Top
-
-        int lineWidth = 42;
-
-        System.out.println();
-
-        System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        System.out.println("┃                 INVENTORY                  ┃");
-        System.out.println("┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃");
-        System.out.println("┃                                            ┃");
-        System.out.println("┃                                            ┃");
-        System.out.println("┃                                            ┃");
-        System.out.println("┃                                            ┃");
-        System.out.println("┃                                            ┃");
-        System.out.println("┃                                            ┃");
-        System.out.println("┃                                            ┃");
-        System.out.println("┃                                            ┃");
-        System.out.println("┃                                            ┃");
-        System.out.println("┃                                            ┃");
-        System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-
-        System.out.println(getWeapons());
-
-        GameWindow.printInventory(this);
-
-        // Inventory Body
-
-        // Inventory Bottom
-
-    }
-
     public String inventoryStats() {
         return String.format("[%dlbs/%dlbs]", currentWeight(), maxInventoryWeight);
     }

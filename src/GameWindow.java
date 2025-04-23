@@ -38,10 +38,44 @@ public class GameWindow {
         printPadding(bottomPadding);
     }
 
+    public static void printRoom(DungeonRoom room) {
+        // Dimensions
+        final int width = 62;
+        String header = room.getName();
+
+        // Print Header
+        StringBuilder top = buildTop(width);
+        StringBuilder divider = buildDivider(width);
+        StringBuilder headerLine = buildBody(header, width);
+        StringBuilder bottom = buildBottom(width);
+
+        System.out.println(top);
+        System.out.println(headerLine);
+        System.out.println(divider);
+        System.out.println(buildBody("", width));
+
+        // Print Enemy
+        System.out.println(buildBody("ENEMY", width));
+        String[] enemyAttributes = room.getEnemy().attributesArr();
+        for (String attribute : enemyAttributes) {
+            System.out.println(buildBody(attribute, width));
+        }
+        System.out.println(buildBody("", width));
+
+        // Print Chest
+        System.out.println(buildBody("CHEST", width));
+        String[] attributesArr = room.getChest().attributesArr();
+        for (String attribute : attributesArr) {
+            System.out.println(buildBody(attribute, width));
+        }
+        System.out.println(buildBody("", width));
+
+        System.out.println(bottom);
+    }
+
     public static void printInventory(Inventory inventory) {
         // Dimensions
         final int width = 42;
-        final int height = 16;
 
         // Print Header
         String header = "INVENTORY";

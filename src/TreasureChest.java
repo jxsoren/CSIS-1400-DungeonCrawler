@@ -112,6 +112,13 @@ public class TreasureChest {
 
     // Helpers
 
+    public String[] attributesArr() {
+        return new String[]{
+                String.format("Weapons: %d / %d", weapons.size(), weaponCapacity),
+                String.format("Items: %d / %d", items.size(), itemCapacity),
+        };
+    }
+
     public void lootOptions() {
         // Weapons Options
         System.out.println("Chest Weapons");
@@ -139,7 +146,6 @@ public class TreasureChest {
                 System.out.printf("(%d) %s%n", normalizedIndex, getItems().get(i));
             }
         }
-
 
     }
 

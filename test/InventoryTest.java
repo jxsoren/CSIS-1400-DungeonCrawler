@@ -300,8 +300,6 @@ public class InventoryTest {
         inventory.addWeapon(sword4);
 
         assert inventory.getWeapons().contains(sword4) : "Inventory should contain sword4, but doesn't";
-
-        inventory.displayInventory();
     }
 
     public static void testDisplayInventory() {

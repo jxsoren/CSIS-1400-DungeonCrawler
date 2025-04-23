@@ -46,6 +46,7 @@ public class DungeonGame {
 
     public void roomLoop(DungeonRoom currentRoom) {
         while (this.currentRoom == currentRoom) {
+            GameWindow.printRoom(getCurrentRoom());
             System.out.println(player);
 
             if (getCurrentRoom().isCompleted()) {
