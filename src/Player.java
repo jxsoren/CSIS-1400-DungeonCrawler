@@ -47,6 +47,7 @@ public class Player {
     public void consumeItem(int itemIndex) {
         Consumable chosenItem = inventory.getItem(itemIndex);
         currentHealth += chosenItem.use();
+        inventory.dropItem(itemIndex);
     }
 
     // Getters
@@ -65,6 +66,10 @@ public class Player {
 
     public String getName() {
         return this.name;
+    }
+
+    public String[] attributesArr() {
+        return new String[]{getName(), String.format("HP: %d / %d", currentHealth, maxHealth), weapon.toString()};
     }
 
     @Override
