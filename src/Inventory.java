@@ -164,7 +164,7 @@ public class Inventory {
     }
 
     public void printFormattedInventory() {
-        GameWindow.printInventory(this);
+        System.out.println(GameWindow.inventoryBox(this));
     }
 
     @Override

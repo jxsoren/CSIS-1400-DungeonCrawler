@@ -18,6 +18,13 @@ public class DungeonRoom {
         this.treasureChest = treasureChest;
     }
 
+    public DungeonRoom() {
+        this.index = 0;
+        this.name = "Default Room Name";
+        this.enemy = new Enemy("Enemy", 10);
+        this.treasureChest = new TreasureChest();
+    }
+
     // Getters
 
     public boolean isCompleted() {
