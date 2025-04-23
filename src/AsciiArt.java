@@ -43,35 +43,122 @@ public class AsciiArt {
     public static void displayWindow() {
         System.out.printf("%s%n%n%n%n%n%n%n%n", "-".repeat(50));
 
-
         System.out.printf("%s%n%n", "-".repeat(50));
     }
 
     public static String chest() {
-        return "   __________\n" + "  /\\____;;___\\\n" + " | /         /\n" + "  .__________.\n" + "  |\\ ________\\\n" + "  | |---------|\n" + "  \\ |         |\n" + "   \\|_________|\n";
+        return """
+                   __________
+                  /\\____;;___\\
+                 | /         /
+                  .__________.
+                  |\\ ________\\
+                  | |---------|
+                  \\ |         |
+                   \\|_________|
+                """;
     }
 
     public static String goblin() {
-        return "      ,      ,\n" + "     /(.-\"\"-.)\\\n" + " |\\  \\/      \\/  /|\n" + " | \\ / =.  .= \\ / |\n" + " \\( \\   o\\/o   / )/\n" + "  \\_, '-/  \\-' ,_/\n" + "    /   \\__/   \\\n" + "    \\ \\__/\\__/ /\n" + "  ___\\ \\|--|/ /___\n" + " /`   \\      /    `\\\n" + "/      '----'       \\\n";
+        return """
+                      ,      ,
+                     /(.-""-.)\\
+                 |\\  \\/      \\/  /|
+                 | \\ / =.  .= \\ / |
+                 \\( \\   o\\/o   / )/
+                  \\_, '-/  \\-' ,_/
+                    /   \\__/   \\
+                    \\ \\__/\\__/ /
+                  ___\\ \\|--|/ /___
+                 /`   \\      /    `\\
+                /      '----'       \\
+                """;
     }
 
     public static String sword() {
-        return "        () \n" + "      __)(__\n" + "      '-<>-'\n" + "        )( \n" + "        || \n" + "        || \n" + "        || \n" + "        || \n" + "        || \n" + "        || \n" + "        || \n" + "        || \n" + "        \\/\n";
+        return """
+                        ()\s
+                      __)(__
+                      '-<>-'
+                        )(\s
+                        ||\s
+                        ||\s
+                        ||\s
+                        ||\s
+                        ||\s
+                        ||\s
+                        ||\s
+                        ||\s
+                        \\/
+                """;
     }
 
     public static String potion() {
-        return "      (------)\n" + "       [ 0  ]\n" + "       /0   \\\n" + "      /    o \\\n" + "     /  o   0 \\\n" + "    /----------\\\n" + "   /            \\\n" + "  /              \\\n" + " /                \\\n" + "/                  \\\n" + "[                  ]\n" + "\\__________________/\n";
+        return """
+                      (------)
+                       [ 0  ]
+                       /0   \\
+                      /    o \\
+                     /  o   0 \\
+                    /----------\\
+                   /            \\
+                  /              \\
+                 /                \\
+                /                  \\
+                [                  ]
+                \\__________________/
+                """;
     }
 
     public static String door() {
-        return "      ______\n" + "   ,-' ;  ! `-.\n" + "  / :  !  :  . \\\n" + " |_ ;   __:  ;  |\n" + " )| .  :)(.  !  |\n" + " |\"    (##)  _  |\n" + " |  :  ;`'  (_) (\n" + " |  :  :  .     |\n" + " )_ !  ,  ;  ;  |\n" + " || .  .  :  :  |\n" + " |\" .  |  :  .  |\n" + " |___.------.___|";
+        return """
+                      ______
+                   ,-' ;  ! `-.
+                  / :  !  :  . \\
+                 |_ ;   __:  ;  |
+                 )| .  :)(.  !  |
+                 |"    (##)  _  |
+                 |  :  ;`'  (_) (
+                 |  :  :  .     |
+                 )_ !  ,  ;  ;  |
+                 || .  .  :  :  |
+                 |" .  |  :  .  |
+                 |___.------.___|\
+                """;
     }
 
     public static String spider() {
-        return "         (\n" + "          )\n" + "         (\n" + "   /\\  .-\"\"\"-.  /\\\n" + "  //\\\\/  ,,,  \\//\\\\\n" + "  |/\\| ,;;;;;, |/\\|\n" + "  //\\\\\\;-\"\"\"-;///\\\\\n" + " //  \\/   .   \\/  \\\\\n" + "(| ,-_| \\ | / |_-, |)\n" + "  //`__\\.-.-./__`\\\\\n" + " // /.-(() ())-.\\ \\\\\n" + "(\\ |)   '---'   (| /)\n" + " ` (|           |) `\n" + "   \\)           (/";
+        return """
+                         (
+                          )
+                         (
+                   /\\  .-""\"-.  /\\
+                  //\\\\/  ,,,  \\//\\\\
+                  |/\\| ,;;;;;, |/\\|
+                  //\\\\\\;-""\"-;///\\\\
+                 //  \\/   .   \\/  \\\\
+                (| ,-_| \\ | / |_-, |)
+                  //`__\\.-.-./__`\\\\
+                 // /.-(() ())-.\\ \\\\
+                (\\ |)   '---'   (| /)
+                 ` (|           |) `
+                   \\)           (/""";
     }
 
     public static String entrance() {
-        return "______/TTTTTTTTTTTTT\\_______)__\n" + "     |MMMMMMMMMMMmmmm|      (\n" + "____/MMMMMMMMMMMmmmmmm\\____<>____\n" + "    |MMMMMMMMMMMmmmmmm|    ||\n" + "____|MMMMMMMMMMMmmmmmm|____||____\n" + "    |MMMMMMMMMMMmmmmmm|\n" + "____|MMMMMMMMMMMmmmmmm|_______\n" + "    |MMMMMMMMMMMmmmmmm|\n" + "____|MMMMMMMMMMMmmmmmm|____\n" + "    |MMMMMMMMMMMmmmmmm|\n" + "____|MMMMMMMMMMMmmmmmm|____\n" + "    |MMMMMMMMMmmmmmmmm|\n";
+        return """
+                ______/TTTTTTTTTTTTT\\_______)__
+                     |MMMMMMMMMMMmmmm|      (
+                ____/MMMMMMMMMMMmmmmmm\\____<>____
+                    |MMMMMMMMMMMmmmmmm|    ||
+                ____|MMMMMMMMMMMmmmmmm|____||____
+                    |MMMMMMMMMMMmmmmmm|
+                ____|MMMMMMMMMMMmmmmmm|_______
+                    |MMMMMMMMMMMmmmmmm|
+                ____|MMMMMMMMMMMmmmmmm|____
+                    |MMMMMMMMMMMmmmmmm|
+                ____|MMMMMMMMMMMmmmmmm|____
+                    |MMMMMMMMMmmmmmmmm|
+                """;
     }
 }
