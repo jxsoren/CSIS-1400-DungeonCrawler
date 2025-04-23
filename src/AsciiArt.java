@@ -11,7 +11,7 @@
 
 public class AsciiArt {
     public static String asciiArtFactory(String name) {
-        return switch(name){
+        return switch (name.toLowerCase()) {
             case "chest" -> chest();
             case "goblin" -> goblin();
             case "sword" -> sword();
@@ -38,6 +38,7 @@ public class AsciiArt {
         //System.out.printf("Your Health:%-21d Enemy Health:%d%n", Player.getCurrentHealth(), Enemy.getCurrentHealth());// will display player and enemy's health
         System.out.printf("%s%n%n", "-".repeat(50));
     }
+
     //this overflow method will display the screen if no String is given
     public static void displayWindow() {
         System.out.printf("%s%n%n%n%n%n%n%n%n", "-".repeat(50));
@@ -47,99 +48,30 @@ public class AsciiArt {
     }
 
     public static String chest() {
-        return  "   __________\n" +
-                "  /\\____;;___\\\n" +
-                " | /         /\n" +
-                "  .__________.\n" +
-                "  |\\ ________\\\n" +
-                "  | |---------|\n" +
-                "  \\ |         |\n" +
-                "   \\|_________|\n";
+        return "   __________\n" + "  /\\____;;___\\\n" + " | /         /\n" + "  .__________.\n" + "  |\\ ________\\\n" + "  | |---------|\n" + "  \\ |         |\n" + "   \\|_________|\n";
     }
-    public static String goblin(){
-        return  "      ,      ,\n" +
-                "     /(.-\"\"-.)\\\n" +
-                " |\\  \\/      \\/  /|\n" +
-                " | \\ / =.  .= \\ / |\n" +
-                " \\( \\   o\\/o   / )/\n" +
-                "  \\_, '-/  \\-' ,_/\n" +
-                "    /   \\__/   \\\n" +
-                "    \\ \\__/\\__/ /\n" +
-                "  ___\\ \\|--|/ /___\n" +
-                " /`   \\      /    `\\\n" +
-                "/      '----'       \\\n";
+
+    public static String goblin() {
+        return "      ,      ,\n" + "     /(.-\"\"-.)\\\n" + " |\\  \\/      \\/  /|\n" + " | \\ / =.  .= \\ / |\n" + " \\( \\   o\\/o   / )/\n" + "  \\_, '-/  \\-' ,_/\n" + "    /   \\__/   \\\n" + "    \\ \\__/\\__/ /\n" + "  ___\\ \\|--|/ /___\n" + " /`   \\      /    `\\\n" + "/      '----'       \\\n";
     }
-    public static String sword(){
-        return  "        () \n" +
-                "      __)(__\n" +
-                "      '-<>-'\n" +
-                "        )( \n" +
-                "        || \n" +
-                "        || \n" +
-                "        || \n" +
-                "        || \n" +
-                "        || \n" +
-                "        || \n" +
-                "        || \n" +
-                "        || \n" +
-                "        \\/\n" ;
+
+    public static String sword() {
+        return "        () \n" + "      __)(__\n" + "      '-<>-'\n" + "        )( \n" + "        || \n" + "        || \n" + "        || \n" + "        || \n" + "        || \n" + "        || \n" + "        || \n" + "        || \n" + "        \\/\n";
     }
-    public static String potion(){
-        return  "      (------)\n" +
-                "       [ 0  ]\n" +
-                "       /0   \\\n" +
-                "      /    o \\\n" +
-                "     /  o   0 \\\n" +
-                "    /----------\\\n" +
-                "   /            \\\n" +
-                "  /              \\\n" +
-                " /                \\\n" +
-                "/                  \\\n" +
-                "[                  ]\n" +
-                "\\__________________/\n";
+
+    public static String potion() {
+        return "      (------)\n" + "       [ 0  ]\n" + "       /0   \\\n" + "      /    o \\\n" + "     /  o   0 \\\n" + "    /----------\\\n" + "   /            \\\n" + "  /              \\\n" + " /                \\\n" + "/                  \\\n" + "[                  ]\n" + "\\__________________/\n";
     }
-    public static String door(){
-        return  "      ______\n" +
-                "   ,-' ;  ! `-.\n" +
-                "  / :  !  :  . \\\n" +
-                " |_ ;   __:  ;  |\n" +
-                " )| .  :)(.  !  |\n" +
-                " |\"    (##)  _  |\n" +
-                " |  :  ;`'  (_) (\n" +
-                " |  :  :  .     |\n" +
-                " )_ !  ,  ;  ;  |\n" +
-                " || .  .  :  :  |\n" +
-                " |\" .  |  :  .  |\n" +
-                " |___.------.___|";
+
+    public static String door() {
+        return "      ______\n" + "   ,-' ;  ! `-.\n" + "  / :  !  :  . \\\n" + " |_ ;   __:  ;  |\n" + " )| .  :)(.  !  |\n" + " |\"    (##)  _  |\n" + " |  :  ;`'  (_) (\n" + " |  :  :  .     |\n" + " )_ !  ,  ;  ;  |\n" + " || .  .  :  :  |\n" + " |\" .  |  :  .  |\n" + " |___.------.___|";
     }
-    public static String spider(){
-        return  "         (\n" +
-                "          )\n" +
-                "         (\n" +
-                "   /\\  .-\"\"\"-.  /\\\n" +
-                "  //\\\\/  ,,,  \\//\\\\\n" +
-                "  |/\\| ,;;;;;, |/\\|\n" +
-                "  //\\\\\\;-\"\"\"-;///\\\\\n" +
-                " //  \\/   .   \\/  \\\\\n" +
-                "(| ,-_| \\ | / |_-, |)\n" +
-                "  //`__\\.-.-./__`\\\\\n" +
-                " // /.-(() ())-.\\ \\\\\n" +
-                "(\\ |)   '---'   (| /)\n" +
-                " ` (|           |) `\n" +
-                "   \\)           (/";
+
+    public static String spider() {
+        return "         (\n" + "          )\n" + "         (\n" + "   /\\  .-\"\"\"-.  /\\\n" + "  //\\\\/  ,,,  \\//\\\\\n" + "  |/\\| ,;;;;;, |/\\|\n" + "  //\\\\\\;-\"\"\"-;///\\\\\n" + " //  \\/   .   \\/  \\\\\n" + "(| ,-_| \\ | / |_-, |)\n" + "  //`__\\.-.-./__`\\\\\n" + " // /.-(() ())-.\\ \\\\\n" + "(\\ |)   '---'   (| /)\n" + " ` (|           |) `\n" + "   \\)           (/";
     }
-    public static String entrance(){
-        return  "______/TTTTTTTTTTTTT\\_______)__\n" +
-                "     |MMMMMMMMMMMmmmm|      (\n" +
-                "____/MMMMMMMMMMMmmmmmm\\____<>____\n" +
-                "    |MMMMMMMMMMMmmmmmm|    ||\n" +
-                "____|MMMMMMMMMMMmmmmmm|____||____\n" +
-                "    |MMMMMMMMMMMmmmmmm|\n" +
-                "____|MMMMMMMMMMMmmmmmm|_______\n" +
-                "    |MMMMMMMMMMMmmmmmm|\n" +
-                "____|MMMMMMMMMMMmmmmmm|____\n" +
-                "    |MMMMMMMMMMMmmmmmm|\n" +
-                "____|MMMMMMMMMMMmmmmmm|____\n" +
-                "    |MMMMMMMMMmmmmmmmm|\n";
+
+    public static String entrance() {
+        return "______/TTTTTTTTTTTTT\\_______)__\n" + "     |MMMMMMMMMMMmmmm|      (\n" + "____/MMMMMMMMMMMmmmmmm\\____<>____\n" + "    |MMMMMMMMMMMmmmmmm|    ||\n" + "____|MMMMMMMMMMMmmmmmm|____||____\n" + "    |MMMMMMMMMMMmmmmmm|\n" + "____|MMMMMMMMMMMmmmmmm|_______\n" + "    |MMMMMMMMMMMmmmmmm|\n" + "____|MMMMMMMMMMMmmmmmm|____\n" + "    |MMMMMMMMMMMmmmmmm|\n" + "____|MMMMMMMMMMMmmmmmm|____\n" + "    |MMMMMMMMMmmmmmmmm|\n";
     }
 }
