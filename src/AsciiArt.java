@@ -12,7 +12,9 @@
 public class AsciiArt {
     public static String asciiArtFactory(String name) {
         return switch (name.toLowerCase()) {
-            case "chest" -> chest();
+            case "wooden_chest" -> chest();
+            case "silver_chest" -> chest();
+            case "golden_chest" -> chest();
             case "goblin" -> goblin();
             case "sword" -> sword();
             case "potion" -> potion();
