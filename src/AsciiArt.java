@@ -21,6 +21,7 @@ public class AsciiArt {
             case "door" -> door();
             case "spider" -> spider();
             case "entrance" -> entrance();
+            case "tombstone" -> tombstone();
             default -> name;
         };
     }
@@ -163,4 +164,42 @@ public class AsciiArt {
                     |MMMMMMMMMmmmmmmmm|
                 """;
     }
+    public static String tombstone() {
+        return """
+                      .
+                     -|-
+                      |
+                  .-'~~~`-.
+                .'         `.
+                |  R  I  P  |
+                |           |
+                |           |
+                |           |
+                """;
+    }
+    public static String mountain(){
+        return """
+                                    /   \\              /'\\       _
+                \\_..           /'.,/     \\_         .,'   \\     / \\_
+                    \\         /            \\      _/       \\_  /    \\     _
+                     \\__,.   /              \\    /           \\/.,   _|  _/ \\
+                          \\_/                \\  /',.,''\\      \\_ \\_/  \\/    \\
+                                              \\/   /    ',../',.\\    _/      \\
+                             /         ________ \\  /    |         \\  /.,/'\\   _\\
+                           _/         /MMMMMMMm\\\\_     |          \\/      \\_/  \\
+                          /      \\   |MMMMMMmm| |\\__   \\          \\_       \\   \\_
+                                  \\  |MMMMMMmm|      \\   \\           \\       \\    \\
+                                   \\ |MMMMMMmm|        \\___            \\_      \\_   \\
+                                    \\|MMMMMmmm|  ____.'  /\\_            \\       \\   \\_
+                                    /'.,___________...,,'   \\            \\   \\        \\
+                                   /       \\          |      \\    |__     \\   \\_       \\
+                                 _/        |           \\      \\_     \\     \\    \\       \\_
+                                /                               \\     \\     \\_   \\        \\
+                                                                 \\     \\      \\   \\__      \\
+                                                                  \\     \\_     \\     \\      \\
+                                                                   |      \\     \\     \\      \\
+                                                                    \\          |            \\
+                """;
+    }
+
 }
