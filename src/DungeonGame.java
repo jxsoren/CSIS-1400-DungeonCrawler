@@ -25,7 +25,7 @@ public class DungeonGame {
         enterRoom(currentRoom);
     }
 
-    public void movePlayer(String requestedDirection) {
+    private void movePlayer(String requestedDirection) {
         try {
             switch (requestedDirection) {
                 case "forwards" -> nextRoom(currentRoomIndex);
@@ -38,7 +38,8 @@ public class DungeonGame {
     }
 
     private void enterRoom(DungeonRoom room) {
-        roomLoop(currentRoom);
+        System.out.println("You've entered a new room!");
+        roomLoop(room);
     }
 
     public void roomLoop(DungeonRoom currentRoom) {
@@ -46,15 +47,10 @@ public class DungeonGame {
             GameWindow.printWindow(getCurrentRoom(), getPlayer());
 
             if (getCurrentRoom().isCompleted()) {
-                System.out.println("\nThe room is currently completed. What would you like to do next?\n");
+                String[] options = {"1. Go to Next Room ⇨", "2. Go to Previous Room ⇦", "3. Loot Chest 💰", "4. Open Inventory 🎒"};
 
-                System.out.println("1. Go to Next Room");
-                System.out.println("2. Go to Previous Room");
-                System.out.println("3. Loot Chest");
-                System.out.println("4. Open Inventory");
-
-                System.out.print("Your choice: ");
-                int playerChoice = input.nextInt();
+                System.out.println(GameWindow.optionsBox(options));
+                int playerChoice = GameWindow.printDialogBox();
 
                 switch (playerChoice) {
                     case 1 -> movePlayer("forwards");
@@ -64,13 +60,11 @@ public class DungeonGame {
                 }
 
             } else {
-                System.out.println("\nFight the enemy within this room to loot the chest and progress to the next level!\n");
-                System.out.println("1. Fight Enemy");
-                System.out.println("2. Go to Previous Room");
-                System.out.println("3. Open Inventory");
+                String[] options = {"1. Fight Enemy 🥊", "2. Go to Previous Room ⇦", "3. Open Inventory 🎒"};
 
-                System.out.print("Your choice: ");
-                int playerChoice = input.nextInt();
+                System.out.println(GameWindow.optionsBox(options));
+
+                int playerChoice = GameWindow.printDialogBox();
 
                 switch (playerChoice) {
                     case 1 -> attackLoop();
@@ -79,7 +73,6 @@ public class DungeonGame {
                 }
             }
         }
-
     }
 
     public void attackLoop() {
@@ -88,20 +81,17 @@ public class DungeonGame {
         do {
             GameWindow.printCombat(getCurrentRoom(), player);
 
-            int enemyAttackValue = enemy.attack();
-            player.takeDamage(enemy.attack());
-            System.out.printf("%s attacked %s for %d damage!%n", enemy.getName(), player.getName(), enemyAttackValue);
+            String[] options = {"1. Attack Enemy", "2. Open Inventory"};
 
-            System.out.println("What would you like to do next?");
-
-            System.out.println("1. Attack Enemy");
-            System.out.println("2. Open Inventory");
-
-            System.out.print("Your choice: ");
-            int playerInput = input.nextInt();
+            System.out.println(GameWindow.optionsBox(options));
+            int playerInput = GameWindow.printDialogBox();
 
             switch (playerInput) {
                 case 1 -> {
+                    int enemyAttackValue = enemy.attack();
+                    player.takeDamage(enemy.attack());
+                    System.out.printf("%s attacked %s for %d damage!%n", enemy.getName(), player.getName(), enemyAttackValue);
+
                     int playerAttackValue = player.attack();
                     enemy.takeDamage(player.attack());
                     System.out.printf("%s attacked %s for %d damage!%n", player.getName(), enemy.getName(), playerAttackValue);
@@ -134,15 +124,13 @@ public class DungeonGame {
         int continueLooting = 1;
 
         do {
-            chest.lootOptions();
+            System.out.println(GameWindow.chestLootingBox(chest));
 
-            // Instructions
-            System.out.println("\n" + "-".repeat(50));
-            System.out.println("Commands:");
-            System.out.println("  Enter number to take an item");
-            System.out.println("  Enter -1 to exit chest");
-            System.out.println("  Enter 0 to skip current choice");
-            System.out.println("-".repeat(50));
+            String[] options = {"-1. Exit", "0. Skip"};
+
+            System.out.println(GameWindow.optionsBox(options));
+
+            continueLooting = GameWindow.printDialogBox();
 
             if (!chest.getWeapons().isEmpty()) {
                 System.out.print("\nWeapon choice: ");
@@ -182,31 +170,28 @@ public class DungeonGame {
                 System.out.printf("You added %s to your inventory!\n", chosenItem.getName());
             }
 
-            System.out.print("\nContinue Looting? (1 for Yes, 0 for No): ");
-            continueLooting = input.nextInt();
+            // Print options to continue looting or not
+            String[] continueOptions = {"Continue Looting?", "0. No", "1. Yes"};
+
+            System.out.println(GameWindow.optionsBox(continueOptions));
+            continueLooting = GameWindow.printDialogBox();
+
         } while (continueLooting != 0);
 
     }
 
 
     public void openInventory() {
-        Scanner input = new Scanner(System.in);
         int playerInput;
 
         do {
             System.out.println(GameWindow.inventoryBox(player));
 
-            System.out.println();
-            System.out.println("What would you like to do with your inventory?\n");
+            String[] options = {"0. Exit Inventory", "1. Equip a Weapon", "2. Consume an Item"};
 
-            System.out.println("0. Exit Inventory");
-            System.out.println("1. Equip a Weapon");
-            System.out.println("2. Consume an Item");
+            System.out.println(GameWindow.optionsBox(options));
 
-            System.out.println();
-
-            System.out.print("Your choice: ");
-            playerInput = input.nextInt();
+            playerInput = GameWindow.printDialogBox();
 
             switch (playerInput) {
                 case 1 -> equipWeaponPrompt();
@@ -220,39 +205,35 @@ public class DungeonGame {
     }
 
     private void equipWeaponPrompt() {
-        playerInventory().listWeapons();
-
         if (playerInventory().getWeapons().isEmpty()) {
             System.out.println("You don't have any weapons in your inventory!");
             return;
         }
 
-        Scanner input = new Scanner(System.in);
-        System.out.print("What weapon would you like to equip? ");
+        System.out.println(GameWindow.weaponsBox(playerInventory()));
 
-        int playerInput = input.nextInt();
+        int playerInput = GameWindow.printDialogBox();
         int weaponIndex = playerInput - 1;
+
         player.equipWeapon(weaponIndex);
 
-        System.out.println("You've equipped a new weapon!");
+        System.out.printf("You've equipped %s!%n", playerInventory().getWeapon(weaponIndex).getName());
     }
 
     private void consumeItemPrompt() {
-        playerInventory().listItems();
-
         if (playerInventory().getItems().isEmpty()) {
-            System.out.println("You don't have any items in your inventory!");
+            System.out.println("You don't have any item in your inventory!");
             return;
         }
 
-        Scanner input = new Scanner(System.in);
-        System.out.println("What item would you like to consume?");
+        System.out.println(GameWindow.itemsBox(playerInventory()));
 
-        int playerInput = input.nextInt();
+        int playerInput = GameWindow.printDialogBox();
         int itemIndex = playerInput - 1;
-        player.consumeItem(itemIndex);
 
-        System.out.println("You've consumed an item!");
+        player.equipWeapon(itemIndex);
+
+        System.out.printf("You've consumed %s!%n", playerInventory().getItem(itemIndex).getName());
     }
 
     // Getters

@@ -126,34 +126,37 @@ public class TreasureChest {
         return new String[]{String.format("Weapons: %d / %d", weapons.size(), weaponCapacity), String.format("Items: %d / %d", items.size(), itemCapacity)};
     }
 
-    public void lootOptions() {
-        // Weapons Options
-        System.out.println("Chest Weapons");
+    public String[][] lootingAttributesArr() {
+
+        String[] weapons;
 
         if (getWeapons().isEmpty()) {
-            System.out.println("No Weapons left");
+            weapons = new String[1];
+            weapons[0] = "No Weapons Left";
         } else {
+            weapons = new String[getWeapons().size()];
             for (int i = 0; i < getWeapons().size(); i++) {
                 int normalizedIndex = i + 1;
-                System.out.printf("(%d) %s%n", normalizedIndex, getWeapons().get(i));
+                String weaponsString = String.format("(%d). %s", normalizedIndex, getWeapons().get(i));
+                weapons[i] = weaponsString;
             }
-
         }
 
-        System.out.println("---------");
+        String[] items;
 
-        // Consumable Options
-        System.out.println("Chest Items");
-
-        if (items.isEmpty()) {
-            System.out.println("No Items left");
+        if (getItems().isEmpty()) {
+            items = new String[1];
+            items[0] = "No Items Left";
         } else {
+            items = new String[getItems().size()];
             for (int i = 0; i < getItems().size(); i++) {
                 int normalizedIndex = i + 1;
-                System.out.printf("(%d) %s%n", normalizedIndex, getItems().get(i));
+                String itemsString = String.format("(%d). %s", normalizedIndex, getItems().get(i));
+                items[i] = itemsString;
             }
         }
 
+        return new String[][]{weapons, items};
     }
 
     public String asciiArt() {

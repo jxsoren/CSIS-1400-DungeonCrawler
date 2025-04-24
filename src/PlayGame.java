@@ -17,8 +17,9 @@ public class PlayGame {
     private static Player initPlayer() {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("What's your name? ");
-        String playerName = input.nextLine();
+        System.out.println("What's your name?");
+
+        String playerName = GameWindow.printStringDialogBox();
 
         return new Player(playerName);
     }

@@ -52,7 +52,7 @@ public class Consumable extends Item {
 
     @Override
     public String toString() {
-        return String.format("%s [Amount: %d]", getName(), getEffectPoints());
+        return String.format("%s [Val: %d]", getName(), getEffectPoints());
     }
 
 }
