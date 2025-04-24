@@ -19,6 +19,27 @@ public class GameWindow {
 
     public static void printWindow(DungeonRoom currentRoom, Player player) {
         // Dimensions
+        int width = 100;
+
+        String top = buildTop(width).toString();
+        String bottom = buildBottom(width).toString();
+
+        System.out.println(lineWithPadding(top));
+        printEmptyBody(width);
+
+        printEmptyBody(width);
+        printEmptyBody(width);
+
+        String roomBox = roomBox(currentRoom);
+        printBoxes(roomBox, width);
+
+        printEmptyBody(width);
+        printEmptyBody(width);
+        System.out.println(lineWithPadding(bottom));
+    }
+
+    public static void printCombat(DungeonRoom currentRoom, Player player) {
+        // Dimensions
         int width = 160;
 
         String top = buildTop(width).toString();
@@ -27,14 +48,8 @@ public class GameWindow {
         System.out.println(lineWithPadding(top));
         printEmptyBody(width);
 
-        String playerBox = playerBox(player);
-        printBoxes(playerBox, width);
-
-        printEmptyBody(width);
-        printEmptyBody(width);
-
-        String roomBox = roomBox(currentRoom);
-        printBoxes(roomBox, width);
+        String enemyBox = enemyBox(currentRoom.getEnemy());
+        printBoxes(enemyBox, width);
 
         printEmptyBody(width);
         printEmptyBody(width);
@@ -56,7 +71,7 @@ public class GameWindow {
     }
 
     private static String lineWithPadding(String lineBody) {
-        int paddingAmount = 10;
+        int paddingAmount = 0;
         StringBuilder line = new StringBuilder(lineBody);
 
         // Prepend empty space chars at beginning of line
@@ -108,49 +123,15 @@ public class GameWindow {
     }
 
     public static String playerBox(Player player) {
-        int width = 62;
+        int width = 22;
         String[] playerAttributes = player.attributesArr();
-        String[] inventoryAttributes = inventoryBox(player.getInventory()).split("\n");
 
-        String[][] finalAttributes = {playerAttributes, inventoryAttributes};
+        String[][] finalAttributes = {playerAttributes};
 
         return buildBox(width, "Player", finalAttributes).toString();
     }
 
-    public static StringBuilder buildBox(int width, String header, String[] attributes) {
-        StringBuilder line = new StringBuilder();
-
-        // Print Header
-        StringBuilder top = buildTop(width);
-        StringBuilder divider = buildDivider(width);
-        StringBuilder headerLine = buildBody(header, width);
-        StringBuilder emptySpace = buildBody("", width);
-        StringBuilder bottom = buildBottom(width);
-
-        line.append(top);
-        line.append("\n");
-        line.append(headerLine);
-        line.append("\n");
-        line.append(divider);
-        line.append("\n");
-        line.append(emptySpace);
-        line.append("\n");
-
-        for (String attribute : attributes) {
-            line.append(buildBody(attribute, width));
-            line.append("\n");
-        }
-
-        line.append(emptySpace);
-        line.append("\n");
-
-        line.append(bottom);
-        line.append("\n");
-
-        return line;
-    }
-
-    public static StringBuilder buildBox(int width, String header, String[][] attributes) {
+    private static StringBuilder buildBox(int width, String header, String[][] attributes) {
         StringBuilder line = new StringBuilder();
 
         // Print Header
@@ -185,7 +166,7 @@ public class GameWindow {
         return line;
     }
 
-    public static StringBuilder buildInnerBox(int width, String header, String[] attributes, String asciiArt) {
+    private static StringBuilder buildInnerBox(int width, String header, String[] attributes, String asciiArt) {
         StringBuilder line = new StringBuilder();
 
         // Print Header
@@ -226,59 +207,37 @@ public class GameWindow {
         return line;
     }
 
+    public static String weaponsBox(Inventory inventory) {
+        int width = 30;
 
-    public static String inventoryBox(Inventory inventory) {
-        // Dimensions
-        final int width = 42;
-        StringBuilder line = new StringBuilder();
-        String header = "Inventory";
+        String header = "WEAPONS";
 
-        // Print Header
-        StringBuilder top = buildTop(width);
-        StringBuilder divider = buildDivider(width);
-        StringBuilder headerLine = buildBody(header, width);
-        StringBuilder emptySpace = buildBody("", width);
-        StringBuilder bottom = buildBottom(width);
+        String[][] attributes = new String[][]{inventory.weaponStrings()};
 
-        line.append(top);
-        line.append("\n");
-        line.append(headerLine);
-        line.append("\n");
-        line.append(divider);
-        line.append("\n");
-        line.append(emptySpace);
-        line.append("\n");
+        return buildBox(width, header, attributes).toString();
+    }
 
-        // Print Weapons
-        String weaponsString = inventory.weaponsString().toString();
-        String[] splitWeapons = weaponsString.split("\n");
-        line.append(buildBody("WEAPONS", width));
-        line.append("\n");
-        for (String itemString : splitWeapons) {
-            line.append(buildBody(itemString, width));
-            line.append("\n");
-        }
+    public static String itemsBox(Inventory inventory) {
+        int width = 30;
 
-        line.append(emptySpace);
-        line.append("\n");
+        String header = "ITEMS";
 
-        // Print Items
-        String itemsString = inventory.itemsString().toString();
-        String[] splitItems = itemsString.split("\n");
-        line.append(buildBody("ITEMS", width));
-        line.append("\n");
-        for (String itemString : splitItems) {
-            line.append(buildBody(itemString, width));
-            line.append("\n");
-        }
+        String[][] attributes = new String[][]{inventory.itemStrings()};
 
-        line.append(emptySpace);
-        line.append("\n");
+        return buildBox(width, header, attributes).toString();
+    }
 
-        line.append(bottom);
-        line.append("\n");
+    public static String inventoryBox(Player player) {
+        int width = 42;
 
-        return line.toString();
+        String[] playerAttributes = playerBox(player).split("\n");
+        String[] weaponsAttributes = weaponsBox(player.getInventory()).split("\n");
+        String[] itemsAttributes = itemsBox(player.getInventory()).split("\n");
+        String[] inventoryAttributes = player.getInventory().inventoryStats().split("\n");
+
+        String[][] finalAttributes = {playerAttributes, inventoryAttributes, weaponsAttributes, itemsAttributes};
+
+        return buildBox(width, "Player Stats & Inventory", finalAttributes).toString();
     }
 
     private static StringBuilder buildTop(int width) {
@@ -322,6 +281,10 @@ public class GameWindow {
         int paddingAmount = calculatePadding(totalLineWidth, content.length());
 
         line.append(verticalLine);
+        if (paddingAmount < 0) {
+            System.out.println("hi");
+        }
+
         line.append(" ".repeat(paddingAmount));
         // correct spacing if content is odd num of characters
         if (content.length() % 2 != 0) line.append(" ");
@@ -334,10 +297,6 @@ public class GameWindow {
 
     private static int calculatePadding(int width, int contentLength) {
         return ((width - contentLength) / 2) + 1;
-    }
-
-    private static void printPadding(int paddingAmount) {
-        System.out.println("\n".repeat(paddingAmount));
     }
 
 }

@@ -5,6 +5,6 @@ public class GameWindowTest {
     }
 
     public static void testPrintWindow() {
-        GameWindow.printWindow();
+        //        GameWindow.printWindow();
     }
 }

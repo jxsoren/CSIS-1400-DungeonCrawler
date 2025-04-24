@@ -141,30 +141,28 @@ public class Inventory {
         return String.format("[%dlbs/%dlbs]", currentWeight(), maxInventoryWeight);
     }
 
-    public StringBuilder weaponsString() {
-        StringBuilder line = new StringBuilder();
+    public String[] weaponStrings() {
+        int sizeOfWeapons = getWeapons().size();
+        String[] weaponStrings = new String[sizeOfWeapons];
 
-        for (int i = 0; i < getWeapons().size(); i++) {
-            String weapon = String.format("(%d) %s%n", i + 1, getWeapon(i));
-            line.append(weapon);
+        for (int i = 0; i < sizeOfWeapons; i++) {
+            String weaponString = String.format("(%d) %s", i + 1, getWeapon(i));
+            weaponStrings[i] = weaponString;
         }
 
-        return line;
+        return weaponStrings;
     }
 
-    public StringBuilder itemsString() {
-        StringBuilder line = new StringBuilder();
+    public String[] itemStrings() {
+        int sizeOfItems = getItems().size();
+        String[] itemStrings = new String[sizeOfItems];
 
-        for (int i = 0; i < getItems().size(); i++) {
-            String item = String.format("(%d) %s%n", i + 1, getItem(i));
-            line.append(item);
+        for (int i = 0; i < sizeOfItems; i++) {
+            String itemString = String.format("(%d) %s", i + 1, getItem(i));
+            itemStrings[i] = itemString;
         }
 
-        return line;
-    }
-
-    public void printFormattedInventory() {
-        System.out.println(GameWindow.inventoryBox(this));
+        return itemStrings;
     }
 
     @Override

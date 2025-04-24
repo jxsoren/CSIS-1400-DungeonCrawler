@@ -86,16 +86,29 @@ public class DungeonGame {
         Enemy enemy = currentEnemy();
 
         do {
+            GameWindow.printCombat(getCurrentRoom(), player);
+
             int enemyAttackValue = enemy.attack();
-            int playerAttackValue = player.attack();
-
-            System.out.println();
-
             player.takeDamage(enemy.attack());
-            System.out.printf("%s attacked %s for %d damage!%n", player.getName(), enemy.getName(), playerAttackValue);
-
-            enemy.takeDamage(player.attack());
             System.out.printf("%s attacked %s for %d damage!%n", enemy.getName(), player.getName(), enemyAttackValue);
+
+            System.out.println("What would you like to do next?");
+
+            System.out.println("1. Attack Enemy");
+            System.out.println("2. Open Inventory");
+
+            System.out.print("Your choice: ");
+            int playerInput = input.nextInt();
+
+            switch (playerInput) {
+                case 1 -> {
+                    int playerAttackValue = player.attack();
+                    enemy.takeDamage(player.attack());
+                    System.out.printf("%s attacked %s for %d damage!%n", player.getName(), enemy.getName(), playerAttackValue);
+                }
+                case 2 -> openInventory();
+                default -> System.err.println("Cannot do that.");
+            }
 
             System.out.println();
         } while (!enemy.isDead() && !player.isDead());
@@ -181,7 +194,7 @@ public class DungeonGame {
         int playerInput;
 
         do {
-            playerInventory().printFormattedInventory();
+            System.out.println(GameWindow.inventoryBox(player));
 
             System.out.println();
             System.out.println("What would you like to do with your inventory?\n");
@@ -199,7 +212,6 @@ public class DungeonGame {
                 case 1 -> equipWeaponPrompt();
                 case 2 -> consumeItemPrompt();
                 default -> {
-                    continue;
                 }
             }
 
