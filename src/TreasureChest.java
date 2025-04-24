@@ -7,9 +7,14 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+enum ChestType {
+    WOODEN_CHEST, SILVER_CHEST, GOLDEN_CHEST
+}
+
 public class TreasureChest {
     private ArrayList<Weapon> weapons = new ArrayList<>();
     private ArrayList<Consumable> items = new ArrayList<>();
+    private ChestType type;
 
     // Constants
     private final int weaponCapacity = 1;
@@ -56,6 +61,11 @@ public class TreasureChest {
 
         ArrayList<Consumable> randomItems = randomItems(3);
         items.addAll(randomItems);
+
+        // Randomize Chest Type
+        for (int i = 0; i < ChestType.values().length; i++) {
+            this.type = ChestType.values()[i];
+        }
     }
 
     private ArrayList<Weapon> randomWeapons(int numOfWeapons) {
@@ -113,10 +123,7 @@ public class TreasureChest {
     // Helpers
 
     public String[] attributesArr() {
-        return new String[]{
-                String.format("Weapons: %d / %d", weapons.size(), weaponCapacity),
-                String.format("Items: %d / %d", items.size(), itemCapacity),
-        };
+        return new String[]{String.format("Weapons: %d / %d", weapons.size(), weaponCapacity), String.format("Items: %d / %d", items.size(), itemCapacity),};
     }
 
     public void lootOptions() {
@@ -147,6 +154,10 @@ public class TreasureChest {
             }
         }
 
+    }
+
+    public String asciiArt() {
+        return AsciiArt.asciiArtFactory(this.type.toString());
     }
 
     @Override

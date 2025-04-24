@@ -56,6 +56,24 @@ public class DungeonRoom {
         }
     }
 
+    public String[] attributesArr() {
+        return new String[]{
+                roomCompletedString()
+        };
+    }
+
+    public String roomLevelString() {
+        return String.format("(%d / %d)", getIndex() + 1, 10);
+    }
+
+    public String roomCompletedString() {
+        if (completed) {
+            return "LEVEL COMPLETED!!!";
+        } else {
+            return "LEVEL NOT COMPLETED";
+        }
+    }
+
     @Override
     public String toString() {
         String roomName = String.format("Room Name: %s", getName());

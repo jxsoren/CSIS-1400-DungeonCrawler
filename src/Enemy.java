@@ -4,17 +4,32 @@
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
+enum EnemyType {
+    GOBLIN, SPIDER, DRAGON
+}
+
 public class Enemy {
     private final String name;
     private final int maxHealth;
     private final Weapon weapon;
     private int currentHealth;
     private boolean isDead;
+    private EnemyType type;
+
+    public Enemy() {
+        this.name = "Default Enemy";
+        this.maxHealth = 200;
+        this.weapon = new Weapon();
+        this.type = EnemyType.GOBLIN;
+
+        currentHealth = maxHealth; // Initialize current health to the max health (full health)
+    }
 
     public Enemy(String name, int maxHealth, Weapon weapon) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.weapon = weapon;
+        this.type = EnemyType.GOBLIN;
 
         currentHealth = maxHealth; // Initialize current health to the max health (full health)
     }
@@ -23,6 +38,7 @@ public class Enemy {
         this.name = name;
         this.maxHealth = maxHealth;
         this.weapon = new Weapon();
+        this.type = EnemyType.GOBLIN;
 
         currentHealth = maxHealth; // Initialize current health to the max health (full health)
     }
@@ -60,6 +76,10 @@ public class Enemy {
                 String.format("HP: %d / %d", currentHealth, maxHealth),
                 weapon.toString()
         };
+    }
+
+    public String asciiArt() {
+        return AsciiArt.asciiArtFactory(this.type.toString());
     }
 
     @Override

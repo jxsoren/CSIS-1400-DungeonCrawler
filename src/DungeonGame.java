@@ -43,8 +43,8 @@ public class DungeonGame {
 
     public void roomLoop(DungeonRoom currentRoom) {
         while (this.currentRoom == currentRoom) {
-            GameWindow.printRoom(getCurrentRoom());
-            GameWindow.printPlayer(getPlayer());
+//            GameWindow.printRoom(getCurrentRoom());
+//            GameWindow.printPlayer(getPlayer());
 
             if (getCurrentRoom().isCompleted()) {
                 System.out.println("\nThe room is currently completed. What would you like to do next?\n");
