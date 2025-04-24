@@ -4,7 +4,7 @@ public class AsciiArtTest {
     }
     private static void testArt(){
         System.out.println("Testing Art");
-        String[] art = {"goblin", "chest", "sword", "potion", "door", "spider", "entrance", "tombstone"};
+        String[] art = {"goblin", "chest", "sword", "potion", "door", "spider", "entrance", "tombstone", "mountain", "dragon", "largetombstone", "skeleton"};
         for(String s : art){
             System.out.println("\n" + AsciiArt.asciiArtFactory(s) + "\n");
         }
