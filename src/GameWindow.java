@@ -17,7 +17,7 @@ public class GameWindow {
     private static final String horizontalLine = "━";
     private static final String verticalLine = "┃";
 
-    public static void printWindow() {
+    public static void printWindow(DungeonRoom currentRoom, Player player) {
         // Dimensions
         int width = 160;
 
@@ -27,13 +27,13 @@ public class GameWindow {
         System.out.println(lineWithPadding(top));
         printEmptyBody(width);
 
-        String playerBox = playerBox(new Player("Josh"));
+        String playerBox = playerBox(player);
         printBoxes(playerBox, width);
 
         printEmptyBody(width);
         printEmptyBody(width);
 
-        String roomBox = roomBox(new DungeonRoom());
+        String roomBox = roomBox(currentRoom);
         printBoxes(roomBox, width);
 
         printEmptyBody(width);
@@ -79,7 +79,7 @@ public class GameWindow {
     public static String chestBox(TreasureChest chest) {
         int width = 32;
 
-        String header = "Treasure Chest";
+        String header = chest.chestTypeString();
         String asciiArt = chest.asciiArt();
         String[] attributes = chest.attributesArr();
 

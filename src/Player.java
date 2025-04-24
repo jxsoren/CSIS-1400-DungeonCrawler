@@ -1,5 +1,4 @@
-import java.util.Scanner;
-import java.util.function.Consumer;
+import java.util.Random;
 
 /**********************************************
  * Author(s): Josh Sorensen & Bowen Berthelson
@@ -36,9 +35,8 @@ public class Player {
     }
 
     public int attack() {
-        return weapon.use();
+        return (int) (weapon.use() * randomDamageMultiplier());
     }
-
 
     public void equipWeapon(int weaponIndex) {
         this.weapon = inventory.getWeapon(weaponIndex);
@@ -85,5 +83,10 @@ public class Player {
     private void killPlayer() {
         currentHealth = 0;
         isDead = true;
+    }
+
+    private double randomDamageMultiplier() {
+        Random random = new Random();
+        return random.nextDouble(1, 1.4);
     }
 }

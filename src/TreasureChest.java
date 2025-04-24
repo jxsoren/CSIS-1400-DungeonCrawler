@@ -123,7 +123,7 @@ public class TreasureChest {
     // Helpers
 
     public String[] attributesArr() {
-        return new String[]{String.format("Weapons: %d / %d", weapons.size(), weaponCapacity), String.format("Items: %d / %d", items.size(), itemCapacity),};
+        return new String[]{String.format("Weapons: %d / %d", weapons.size(), weaponCapacity), String.format("Items: %d / %d", items.size(), itemCapacity)};
     }
 
     public void lootOptions() {
@@ -158,6 +158,10 @@ public class TreasureChest {
 
     public String asciiArt() {
         return AsciiArt.asciiArtFactory(this.type.toString());
+    }
+
+    public String chestTypeString() {
+        return this.type.toString().replaceFirst("_", " ");
     }
 
     @Override
