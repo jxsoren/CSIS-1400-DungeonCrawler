@@ -27,6 +27,7 @@ public class AsciiArt {
             case "largetombstone" -> largeTombstone();
             case "skeleton" -> skeleton();
             case "title" -> title();
+            case "player" -> player();
             default -> name;
         };
     }
@@ -312,7 +313,35 @@ public class AsciiArt {
                 / /__| | | (_| |\\ V  V /| |  __/ |
                 \\____/_|  \\__,_| \\_/\\_/ |_|\\___|_|
                 
-                A game by Josh Sorensen & Bowen Berthelsonjos
+                A game by Josh Sorensen & Bowen Berthelson
+                """;
+    }
+
+
+    public static String player() {
+        return """
+                
+                                   _.--.    .--._
+                                 ."  ."      ".  ".
+                                ;  ."    /\\    ".  ;
+                                ;  '._,-/  \\-,_.`  ;
+                                \\  ,`  / /\\ \\  `,  /
+                                 \\/    \\/  \\/    \\/
+                                 ,=_    \\/\\/    _=,
+                                 |  "_   \\/   _"  |
+                                 |_   '"-..-"'   _|
+                                 | "-.        .-" |
+                                 |    "\\    /"    |
+                                 |      |  |      |
+                         ___     |      |  |      |     ___
+                     _,-",  ",   '_     |  |     _'   ,"  ,"-,_
+                   _(  \\  \\   \\"=--"-.  |  |  .-"--="/   /  /  )_
+                 ,"  \\  \\  \\   \\      "-'--'-"      /   /  /  /  ".
+                !     \\  \\  \\   \\                  /   /  /  /     !
+                :      \\  \\  \\   \\                /   /  /  /      :
+                
+                
+                
                 """;
     }
 
