@@ -1,15 +1,15 @@
-import Enums.WeaponType;
-
 /**********************************************
  * Author(s): Josh Sorensen & Bowen Berthelson
  *
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
+import Enums.WeaponType;
+
 public class Weapon extends Item {
     private final WeaponType type;
 
-    // Factory for creating weapons
+    // Factory for creating Weapons
     public static Weapon createWeapon(WeaponType type) {
         return switch (type) {
             // Player Weapons
@@ -28,18 +28,24 @@ public class Weapon extends Item {
 
     // Default weapon
     public Weapon() {
-        super("Wooden Sword", "A small wooden sword", 25, 10);
-        this.type = WeaponType.WOODEN_SWORD;
+        type = WeaponType.WOODEN_SWORD;
+        createWeapon(type);
     }
 
-    public Weapon(String name, String description, int effectPoints, int weight, WeaponType type) {
-        super(name, description, effectPoints, weight);
-        this.type = type;
+    // Getters
+    public WeaponType getType() {
+        return type;
     }
 
     @Override
     public String toString() {
         return String.format("%s [ATK: %d]", super.getName(), super.getEffectPoints());
+    }
+
+    // Hide parameterized constructor to force curated weapons
+    private Weapon(String name, String description, int effectPoints, int weight, WeaponType type) {
+        super(name, description, effectPoints, weight);
+        this.type = type;
     }
 
 }
