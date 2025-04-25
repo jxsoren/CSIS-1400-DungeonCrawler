@@ -242,10 +242,10 @@ public class GameWindow {
     }
 
     public static String playerBox(Player player) {
-        int width = 30;
+        int width = 54;
         String[] playerAttributes = player.attributesArr();
 
-        String asciiArt = AsciiArt.asciiArtFactory("goblin");
+        String asciiArt = AsciiArt.asciiArtFactory("player");
 
         return buildBox(width, "Player", asciiArt, playerAttributes);
     }
@@ -418,7 +418,7 @@ public class GameWindow {
     }
 
     public static String inventoryBox(Player player) {
-        int width = 42;
+        int width = 72;
 
         String[] playerAttributes = playerBox(player).split("\n");
         String[] weaponsAttributes = weaponsBox(player.getInventory()).split("\n");
