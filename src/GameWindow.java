@@ -110,6 +110,25 @@ public class GameWindow {
         System.out.println(lineWithPadding(bottom));
     }
 
+
+    public static void printCombatHorizontal(DungeonRoom currentRoom, Player player) {
+        // Dimensions
+        int width = 180;
+
+        String top = buildTop(width).toString();
+        String bottom = buildBottom(width).toString();
+
+        System.out.println(lineWithPadding(top));
+        printEmptyBody(width);
+
+        String combatBox = combatBox(player, currentRoom.getEnemy());
+        printInnerBoxes(combatBox, width);
+
+        printEmptyBody(width);
+        System.out.println(lineWithPadding(bottom));
+    }
+
+
     public static int printDialogBox() {
         Scanner input = new Scanner(System.in);
         System.out.print(lineWithPadding("❯ "));
@@ -250,6 +269,15 @@ public class GameWindow {
         return buildBox(width, "Player", asciiArt, playerAttributes);
     }
 
+    public static String combatBox(Player player, Enemy enemy) {
+        int width = 160;
+
+        String[] content1 = playerBox(player).split("\n");
+        String[] content2 = enemyBox(enemy).split("\n");
+
+        return buildBox(width, "Combat", content1, content2);
+    }
+
     private static String buildBox(int width, String header, String asciiArt, String[]... attributes) {
         StringBuilder line = new StringBuilder();
 
@@ -257,7 +285,6 @@ public class GameWindow {
         StringBuilder top = buildTop(width);
         StringBuilder divider = buildDivider(width);
         StringBuilder headerLine = buildBody(header, width);
-        //        StringBuilder emptySpace = buildBody("", width);
         StringBuilder bottom = buildBottom(width);
 
         line.append(top);
@@ -279,6 +306,52 @@ public class GameWindow {
         for (String enemyLine : artLines) {
             String strippedLine = enemyLine.strip();
             line.append(buildBody(strippedLine, width));
+            line.append("\n");
+        }
+
+        line.append(bottom);
+        line.append("\n");
+
+        return line.toString();
+    }
+
+    private static String buildBox(int width, String header, String[] attributes1, String[] attributes2) {
+        StringBuilder line = new StringBuilder();
+
+        // Print Header
+        StringBuilder top = buildTop(width);
+        StringBuilder divider = buildDivider(width);
+        StringBuilder headerLine = buildBody(header, width);
+        StringBuilder bottom = buildBottom(width);
+
+        line.append(top);
+        line.append("\n");
+        line.append(headerLine);
+        line.append("\n");
+        line.append(divider);
+        line.append("\n");
+
+        // Choose the length of the larger array
+        int largestLength = Math.max(attributes1.length, attributes2.length);
+
+        for (int i = 0; i < largestLength; i++) {
+            String content1;
+            String content2;
+
+            if (i >= attributes1.length) {
+                content1 = " ".repeat(attributes1[0].length()); // preserve original spacing to properly space other element
+            } else {
+                content1 = attributes1[i];
+            }
+
+            if (i >= attributes2.length) {
+                content2 = " ".repeat(attributes2[0].length()); // preserve original spacing to properly space other element
+            } else {
+                content2 = attributes2[i];
+            }
+
+            line.append(buildBody(content1, content2, width));
+
             line.append("\n");
         }
 
@@ -417,18 +490,29 @@ public class GameWindow {
         return buildBox(width, header, items);
     }
 
-    public static String inventoryBox(Player player) {
+    public static String playerStatsAndInventoryBox(Player player) {
         int width = 72;
 
         String[] playerAttributes = playerBox(player).split("\n");
-        String[] weaponsAttributes = weaponsBox(player.getInventory()).split("\n");
-        String[] itemsAttributes = itemsBox(player.getInventory()).split("\n");
-        String[] inventoryAttributes = player.getInventory().inventoryStats().split("\n");
+        String[] inv = inventoryBoxInner(player).split("\n");
 
-        String[][] finalAttributes = {playerAttributes, inventoryAttributes, weaponsAttributes, itemsAttributes};
+        String[][] finalAttributes = {playerAttributes, inv};
 
         return buildBox(width, "Player Stats & Inventory", finalAttributes);
     }
+
+    public static String inventoryBoxInner(Player player) {
+        int width = 54;
+
+        String[] weaponsAttributes = weaponsBox(player.getInventory()).split("\n");
+        String[] itemsAttributes = itemsBox(player.getInventory()).split("\n");
+        String[] inventoryStats = new String[]{String.format("[%dlbs/%dlbs]", player.getInventory().currentWeight(), player.getInventory().getMaxInventoryWeight())};
+
+        String[][] finalAttributes = {inventoryStats, weaponsAttributes, itemsAttributes};
+
+        return buildBox(width, "Inventory", finalAttributes);
+    }
+
 
     public static String chestLootingBox(TreasureChest chest) {
         int width = 42;
@@ -484,13 +568,16 @@ public class GameWindow {
 
     private static StringBuilder buildBody(String content, int totalLineWidth) {
         StringBuilder line = new StringBuilder();
-        int paddingAmount = calculatePadding(totalLineWidth, content.length());
+        int paddingAmount = calculateCenteredPadding(totalLineWidth, content.length());
 
         line.append(verticalLine);
 
+        // Padding amount should be in halves
         line.append(" ".repeat(paddingAmount));
+
         // correct spacing if content is odd num of characters
         if (content.length() % 2 != 0) line.append(" ");
+
         line.append(content);
         line.append(" ".repeat(paddingAmount));
         line.append(verticalLine);
@@ -498,8 +585,46 @@ public class GameWindow {
         return line;
     }
 
-    private static int calculatePadding(int width, int contentLength) {
-        return ((width - contentLength) / 2) + 1;
+    private static StringBuilder buildBody(String content1, String content2, int totalLineWidth) {
+        StringBuilder line = new StringBuilder();
+        int paddingAmount = calculateCenteredPadding(totalLineWidth, content1.length(), content2.length());
+
+        // Add opening wall
+        line.append(verticalLine);
+
+        // Padding amount should be in thirds
+
+        // Add first third of padding
+        line.append(" ".repeat(paddingAmount));
+
+        // correct spacing if content is odd num of characters
+        //        if (content1.length() % 2 != 0) line.append(" ");
+        //        if (content2.length() % 2 != 0) line.append(" ");
+
+        // Add content1
+        line.append(content1);
+
+        // Add second third of padding
+        line.append(" ".repeat(paddingAmount));
+
+        // Add content2
+        line.append(content2);
+
+        // Add final bit of padding
+        line.append(" ".repeat(paddingAmount - 1));
+
+        // Add closing wall
+        line.append(verticalLine);
+
+        return line;
+    }
+
+    private static int calculateCenteredPadding(int totalWidth, int contentLength) {
+        return ((totalWidth - contentLength) / 2) + 1;
+    }
+
+    private static int calculateCenteredPadding(int totalWidth, int contentLength1, int contentLength2) {
+        return ((totalWidth - (contentLength1 + contentLength2)) / 3) + 1;
     }
 
 }
