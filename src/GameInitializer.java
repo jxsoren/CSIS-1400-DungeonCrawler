@@ -1,31 +1,19 @@
-import java.util.ArrayList;
-
 /**********************************************
  * Author(s): Josh Sorensen & Bowen Berthelson
  *
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
-public class GameInitializer {
+import java.util.ArrayList;
 
-    public static ArrayList<DungeonRoom> dungeonRooms(int numberOfRooms) {
+public class GameInitializer {
+    static final int numberOfRooms = 5;
+
+    public static ArrayList<DungeonRoom> initDungeonRooms() {
         ArrayList<DungeonRoom> rooms = new ArrayList<>();
 
         for (int i = 0; i < numberOfRooms; i++) {
-            // Room Index
-            int roomIndex = i;
-
-            // Room Name
-            int roomNumber = roomIndex + 1;
-            String roomName = String.format("Room %s", roomNumber);
-
-            // Room Enemy
-            Enemy enemy = new Enemy("enemy", 50);
-
-            // Room Chest
-            TreasureChest treasureChest = new TreasureChest();
-
-            DungeonRoom room = new DungeonRoom(roomIndex, roomName, enemy, treasureChest);
+            DungeonRoom room = DungeonRoom.createDungeonRoom(i + 1);
             rooms.add(room);
         }
 
