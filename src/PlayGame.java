@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class PlayGame {
     public static void main(String[] args) {
+        openingCutScene();
+
         Player player = initPlayer();
         DungeonGame game = new DungeonGame(player);
 
@@ -15,12 +17,21 @@ public class PlayGame {
     }
 
     private static Player initPlayer() {
-        Scanner input = new Scanner(System.in);
-
         System.out.println("What's your name?");
 
         String playerName = GameWindow.printStringDialogBox();
 
         return new Player(playerName);
+    }
+
+    private static void openingCutScene() {
+        String[] asciiArtCutScenes = AsciiArt.openingCutscenes();
+        for (String scenes : asciiArtCutScenes) {
+            try {
+                GameWindow.printWindow(scenes);
+                Thread.sleep(3500);
+            } catch (Exception _) {
+            }
+        }
     }
 }

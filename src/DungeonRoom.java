@@ -63,7 +63,7 @@ public class DungeonRoom {
     }
 
     public String roomLevelString() {
-        return String.format("(%d / %d)", getIndex() + 1, 10);
+        return String.format("(%d / %d)", getIndex() + 1, 5);
     }
 
     public String roomCompletedString() {

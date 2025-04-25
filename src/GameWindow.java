@@ -17,6 +17,28 @@ public class GameWindow {
     private static final String horizontalLine = "━";
     private static final String verticalLine = "┃";
 
+    public static void printWindow(String cutsceneArt) {
+        // Dimensions
+        int width = 140;
+
+        String top = buildTop(width).toString();
+        String bottom = buildBottom(width).toString();
+
+        System.out.println(lineWithPadding(top));
+        printEmptyBody(width);
+
+        // Sanitize ASCII art lines
+        String[] artLines = cutsceneArt.split("\n");
+        for (String enemyLine : artLines) {
+            String strippedLine = enemyLine.strip();
+            System.out.println(lineWithPadding(buildBody(strippedLine, width).toString()));
+        }
+
+        printEmptyBody(width);
+        printEmptyBody(width);
+        System.out.println(lineWithPadding(bottom));
+    }
+
     public static void printWindow(DungeonRoom currentRoom, Player player) {
         // Dimensions
         int width = 100;

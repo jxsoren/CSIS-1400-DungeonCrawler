@@ -45,6 +45,13 @@ public class Player {
     public void consumeItem(int itemIndex) {
         Consumable chosenItem = inventory.getItem(itemIndex);
         currentHealth += chosenItem.use();
+
+        // Ensure player can't get more health than the cap
+        if (currentHealth > maxHealth) {
+            currentHealth = maxHealth;
+        }
+
+        // Drop item from inventory after consumption
         inventory.dropItem(itemIndex);
     }
 

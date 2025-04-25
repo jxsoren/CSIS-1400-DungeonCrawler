@@ -231,7 +231,7 @@ public class DungeonGame {
         int playerInput = GameWindow.printDialogBox();
         int itemIndex = playerInput - 1;
 
-        player.equipWeapon(itemIndex);
+        player.consumeItem(itemIndex);
 
         System.out.printf("You've consumed %s!%n", playerInventory().getItem(itemIndex).getName());
     }
@@ -257,7 +257,7 @@ public class DungeonGame {
     // Setters
 
     private void initRooms() {
-        dungeonRooms = GameInitializer.dungeonRooms(10);
+        dungeonRooms = GameInitializer.dungeonRooms(5);
     }
 
     private void setCurrentRoom(int currentRoomIndex) {
