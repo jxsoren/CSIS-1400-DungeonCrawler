@@ -33,7 +33,7 @@ public class DungeonGame {
                 default -> throw new Exception("Cannot move that direction");
             }
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            GameWindow.printErrorBox(e.getMessage());
         }
     }
 
@@ -63,7 +63,6 @@ public class DungeonGame {
                 String[] options = {"1. Fight Enemy 🥊", "2. Go to Previous Room ⇦", "3. Open Inventory 🎒"};
 
                 System.out.println(GameWindow.optionsBox(options));
-
                 int playerChoice = GameWindow.printDialogBox();
 
                 switch (playerChoice) {
@@ -90,11 +89,16 @@ public class DungeonGame {
                 case 1 -> {
                     int enemyAttackValue = enemy.attack();
                     player.takeDamage(enemy.attack());
-                    System.out.printf("%s attacked %s for %d damage!%n", enemy.getName(), player.getName(), enemyAttackValue);
 
                     int playerAttackValue = player.attack();
                     enemy.takeDamage(player.attack());
-                    System.out.printf("%s attacked %s for %d damage!%n", player.getName(), enemy.getName(), playerAttackValue);
+
+                    String enemyAttacksPlayer = String.format("%s attacked %s for %d damage!", enemy.getName(), player.getName(), enemyAttackValue);
+                    String playerAttacksEnemy = String.format("%s attacked %s for %d damage!", player.getName(), enemy.getName(), playerAttackValue);
+
+                    String[] attackLog = {enemyAttacksPlayer, playerAttacksEnemy};
+
+                    GameWindow.printAttackLog(attackLog);
                 }
                 case 2 -> openInventory();
                 default -> System.err.println("Cannot do that.");
@@ -110,7 +114,8 @@ public class DungeonGame {
             System.exit(0);
         }
 
-        System.out.printf("%s has been defeated!!!%n", enemy.getName());
+        String message = String.format("%s has been defeated!!!", enemy.getName());
+        GameWindow.printSuccessBox(message);
 
         getCurrentRoom().completeRoom();
     }
@@ -174,7 +179,6 @@ public class DungeonGame {
 
             System.out.println(GameWindow.optionsBox(continueOptions));
             continueLooting = GameWindow.printDialogBox();
-
         }
 
     }
@@ -215,14 +219,11 @@ public class DungeonGame {
         int playerInput = GameWindow.printDialogBox();
         int weaponIndex = playerInput - 1;
 
-        int numOfWeapons = player.getInventory().getWeapons().size();
-
-        if (weaponIndex >= numOfWeapons || weaponIndex < 0) {
+        if (weaponIndex >= player.getInventory().getWeapons().size() || weaponIndex < 0) {
             GameWindow.printErrorBox("Weapon selection invalid. Try again.");
         } else {
             player.equipWeapon(weaponIndex);
             String message = String.format("You've equipped %s!", playerInventory().getWeapon(weaponIndex).getName());
-
             GameWindow.printSuccessBox(message);
         }
 
@@ -242,11 +243,10 @@ public class DungeonGame {
         if (itemIndex >= player.getInventory().getItems().size() || itemIndex < 0) {
             GameWindow.printErrorBox("Item selection invalid. Try again.");
         } else {
-            String chosenItemName = playerInventory().getItem(itemIndex).getName();
-            player.consumeItem(itemIndex);
-            System.out.printf("You've consumed %s!%n", chosenItemName);
+            player.equipWeapon(itemIndex);
+            String message = String.format("You've consumed %s!", playerInventory().getItem(itemIndex).getName());
+            GameWindow.printSuccessBox(message);
         }
-
     }
 
     // Getters
