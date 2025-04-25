@@ -123,18 +123,12 @@ public class DungeonGame {
 
         int continueLooting = 1;
 
-        do {
+        while (continueLooting != 0) {
             System.out.println(GameWindow.chestLootingBox(chest));
 
-            String[] options = {"-1. Exit", "0. Skip"};
-
-            System.out.println(GameWindow.optionsBox(options));
-
-            continueLooting = GameWindow.printDialogBox();
-
             if (!chest.getWeapons().isEmpty()) {
-                System.out.print("\nWeapon choice: ");
-                weaponChoice = input.nextInt();
+                System.out.println("Which weapon?");
+                weaponChoice = GameWindow.printDialogBox();
 
                 if (weaponChoice == 0) {
                     continue;
@@ -148,12 +142,14 @@ public class DungeonGame {
                 Weapon chosenWeapon = chest.takeWeapon(weaponChoiceIndex);
 
                 playerInventory().addWeapon(chosenWeapon);
-                System.out.printf("You added %s to your inventory!\n", chosenWeapon.getName());
+
+                String message = String.format("You added %s to your inventory!", chosenWeapon.getName());
+                GameWindow.printSuccessBox(message);
             }
 
             if (!chest.getItems().isEmpty()) {
-                System.out.print("\nItem choice: ");
-                itemChoice = input.nextInt();
+                System.out.println("Which Item?");
+                itemChoice = GameWindow.printDialogBox();
 
                 if (itemChoice == 0) {
                     continue;
@@ -167,16 +163,20 @@ public class DungeonGame {
                 Consumable chosenItem = chest.takeItem(itemChoiceIndex);
 
                 playerInventory().addItem(chosenItem);
-                System.out.printf("You added %s to your inventory!\n", chosenItem.getName());
+
+                String message = String.format("You added %s to your inventory!", chosenItem.getName());
+                GameWindow.printSuccessBox(message);
             }
 
             // Print options to continue looting or not
-            String[] continueOptions = {"Continue Looting?", "0. No", "1. Yes"};
+            System.out.println("Continue Looting Chest?");
+            String[] continueOptions = {"0. Exit Chest ", "1. Keep Looting"};
 
             System.out.println(GameWindow.optionsBox(continueOptions));
             continueLooting = GameWindow.printDialogBox();
 
-        } while (continueLooting != 0);
+        }
+        ;
 
     }
 
