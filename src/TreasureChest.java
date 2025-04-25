@@ -4,12 +4,12 @@
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
+import Enums.ChestType;
+import Enums.ConsumableType;
+import Enums.WeaponType;
+
 import java.util.ArrayList;
 import java.util.Random;
-
-enum ChestType {
-    WOODEN_CHEST, SILVER_CHEST, GOLDEN_CHEST
-}
 
 public class TreasureChest {
     private ArrayList<Weapon> weapons = new ArrayList<>();

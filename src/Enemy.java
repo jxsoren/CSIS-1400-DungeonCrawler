@@ -1,12 +1,4 @@
-/**********************************************
- * Author(s): Josh Sorensen & Bowen Berthelson
- *
- * Assignment: CSIS 1400 Final Project
- ***********************************************/
-
-enum EnemyType {
-    GOBLIN, SPIDER, DRAGON
-}
+import Enums.EnemyType;
 
 public class Enemy {
     private final String name;
@@ -14,7 +6,16 @@ public class Enemy {
     private final Weapon weapon;
     private int currentHealth;
     private boolean isDead;
-    private EnemyType type;
+    private final EnemyType type;
+
+    public static Enemy createEnemy(EnemyType type) {
+        return switch (type) {
+            case SPIDER -> new Enemy();
+            case GOBLIN -> new Enemy();
+            case SKELETON -> new Enemy();
+            case DRAGON -> new Enemy();
+        };
+    }
 
     public Enemy() {
         this.name = "Default Enemy";

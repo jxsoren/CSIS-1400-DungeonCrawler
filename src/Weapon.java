@@ -1,12 +1,10 @@
+import Enums.WeaponType;
+
 /**********************************************
  * Author(s): Josh Sorensen & Bowen Berthelson
  *
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
-
-enum WeaponType {
-    WOODEN_SWORD, STEEL_SWORD, IRON_AXE, EXCALIBUR
-}
 
 public class Weapon extends Item {
     private final WeaponType type;

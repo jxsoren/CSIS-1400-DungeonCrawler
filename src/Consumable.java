@@ -4,9 +4,7 @@
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
-enum ConsumableType {
-    HEALING_POTION, BREAD, APPLE
-}
+import Enums.ConsumableType;
 
 public class Consumable extends Item {
     private boolean consumed;
