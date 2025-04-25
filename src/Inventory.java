@@ -4,6 +4,8 @@
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
+import Enums.WeaponType;
+
 import java.util.ArrayList;
 
 public class Inventory {
@@ -17,7 +19,9 @@ public class Inventory {
     public Inventory() {
         // Initialize Items and Weapons
         weapons = new ArrayList<>();
-        weapons.add(new Weapon());
+        // Start w/ default weapon
+        weapons.add(Weapon.createWeapon(WeaponType.WOODEN_SWORD));
+
         items = new ArrayList<>();
     }
 
