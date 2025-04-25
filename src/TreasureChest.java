@@ -4,40 +4,32 @@
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
-import Enums.ChestType;
-import Enums.ConsumableType;
-import Enums.EnemyType;
-import Enums.WeaponType;
-
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TreasureChest {
-    private ArrayList<Weapon> weapons = new ArrayList<>();
-    private ArrayList<Consumable> items = new ArrayList<>();
-    private ChestType type;
+import Enums.ChestType;
+import Enums.ConsumableType;
+import Enums.WeaponType;
 
-    // Constants
+public class TreasureChest {
     private final int weaponCapacity = 1;
     private final int itemCapacity = 3;
 
-    public static Enemy createChest(EnemyType type) {
+    private final ArrayList<Weapon> weapons = new ArrayList<>(weaponCapacity);
+    private final ArrayList<Consumable> items = new ArrayList<>(itemCapacity);
+    private final ChestType type;
+
+    // Factory for creating curated chests
+    public static TreasureChest createChest(ChestType type) {
         return switch (type) {
-            case WOODEN_CHEST -> new TreasureChest();
-            case SILVER_CHEST -> new TreasureChest();
-            case GOLDEN_CHEST -> new TreasureChest();
+            case WOODEN_CHEST, GOLDEN_CHEST, SILVER_CHEST -> new TreasureChest(type);
         };
     }
 
-    // Parameterless constructor
-    public TreasureChest() {
-        randomizeChest();
-    }
-
-    // Parameterized constructor
-    public TreasureChest(ArrayList<Weapon> weapons, ArrayList<Consumable> items) {
-        this.weapons = weapons;
-        this.items = items;
+    // Default chest
+    public TreasureChest(ChestType type) {
+        this.type = type;
+        randomizeChest(type);
     }
 
     public Weapon takeWeapon(int weaponIndex) {
@@ -64,59 +56,94 @@ public class TreasureChest {
 
     // Helper Methods
 
-    private void randomizeChest() {
-        ArrayList<Weapon> randomWeapons = randomWeapons(1);
+    private void randomizeChest(ChestType type) {
+        // Randomize chest based on chest type
+
+        ArrayList<Weapon> randomWeapons = randomWeapons(type);
         weapons.addAll(randomWeapons);
 
-        ArrayList<Consumable> randomItems = randomItems(3);
+        ArrayList<Consumable> randomItems = randomItems(type);
         items.addAll(randomItems);
-
-        // Randomize Chest Type
-        for (int i = 0; i < ChestType.values().length; i++) {
-            this.type = ChestType.values()[i];
-        }
     }
 
-    private ArrayList<Weapon> randomWeapons(int numOfWeapons) {
-        if (numOfWeapons > weaponCapacity) {
-            numOfWeapons = weaponCapacity;
-        }
-
+    private ArrayList<Weapon> randomWeapons(ChestType type) {
+        ArrayList<Weapon> randomWeapons = new ArrayList<>(weaponCapacity);
         Random random = new Random();
 
-        ArrayList<Weapon> randomWeaponList = new ArrayList<>();
+        for (int i = 0; i < weaponCapacity; i++) {
+            switch (type) {
+                case WOODEN_CHEST -> {
+                    Weapon[] possibleWeapons = {
+                            Weapon.createWeapon(WeaponType.WOODEN_SWORD),
+                            Weapon.createWeapon(WeaponType.STEEL_SWORD),
+                    };
 
-        for (int i = 0; i < numOfWeapons; i++) {
-            // Generate a random weapon type
-            WeaponType[] weaponTypes = WeaponType.values();
-            int randomIndex = random.nextInt(0, weaponTypes.length);
+                    int randomIndex = random.nextInt(0, possibleWeapons.length);
+                    randomWeapons.add(possibleWeapons[randomIndex]);
+                }
+                case SILVER_CHEST -> {
+                    Weapon[] possibleWeapons = {
+                            Weapon.createWeapon(WeaponType.STEEL_SWORD),
+                            Weapon.createWeapon(WeaponType.BATTLE_AXE)
+                    };
 
-            Weapon weapon = Weapon.createWeapon(weaponTypes[randomIndex]);
-            randomWeaponList.add(weapon);
+                    int randomIndex = random.nextInt(0, possibleWeapons.length);
+                    randomWeapons.add(possibleWeapons[randomIndex]);
+                }
+                case GOLDEN_CHEST -> {
+                    Weapon[] possibleWeapons = {
+                            Weapon.createWeapon(WeaponType.BATTLE_AXE),
+                            Weapon.createWeapon(WeaponType.EXCALIBUR)
+                    };
+
+                    int randomIndex = random.nextInt(0, possibleWeapons.length);
+                    randomWeapons.add(possibleWeapons[randomIndex]);
+                }
+            }
         }
 
-        return randomWeaponList;
+        return randomWeapons;
     }
 
-    private ArrayList<Consumable> randomItems(int numOfItems) {
-        if (numOfItems > itemCapacity) {
-            numOfItems = itemCapacity;
-        }
-
+    private ArrayList<Consumable> randomItems(ChestType type) {
+        ArrayList<Consumable> randomItems = new ArrayList<>(itemCapacity);
         Random random = new Random();
 
-        ArrayList<Consumable> randomItemList = new ArrayList<>();
+        for (int i = 0; i < itemCapacity; i++) {
+            switch (type) {
+                case WOODEN_CHEST -> {
+                    Consumable[] possibleItems = {
+                            Consumable.createConsumable(ConsumableType.BREAD),
+                            Consumable.createConsumable(ConsumableType.APPLE),
+                    };
 
-        for (int i = 0; i < numOfItems; i++) {
-            // Generate a random weapon type
-            ConsumableType[] consumableTypes = ConsumableType.values();
-            int randomIndex = random.nextInt(0, consumableTypes.length);
+                    int randomIndex = random.nextInt(0, possibleItems.length);
+                    randomItems.add(possibleItems[randomIndex]);
+                }
+                case SILVER_CHEST -> {
+                    Consumable[] possibleItems = {
+                            Consumable.createConsumable(ConsumableType.APPLE),
+                            Consumable.createConsumable(ConsumableType.BANDAGES),
+                            Consumable.createConsumable(ConsumableType.HEALING_POTION),
+                    };
 
-            Consumable consumable = Consumable.createConsumable(consumableTypes[randomIndex]);
-            randomItemList.add(consumable);
+                    int randomIndex = random.nextInt(0, possibleItems.length);
+                    randomItems.add(possibleItems[randomIndex]);
+                }
+                case GOLDEN_CHEST -> {
+                    Consumable[] possibleItems = {
+                            Consumable.createConsumable(ConsumableType.BREAD),
+                            Consumable.createConsumable(ConsumableType.HEALING_POTION),
+                            Consumable.createConsumable(ConsumableType.HEALTH_ELIXIR),
+                    };
+
+                    int randomIndex = random.nextInt(0, possibleItems.length);
+                    randomItems.add(possibleItems[randomIndex]);
+                }
+            }
         }
 
-        return randomItemList;
+        return randomItems;
     }
 
     // Getters
