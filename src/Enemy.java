@@ -18,26 +18,9 @@ public class Enemy {
         };
     }
 
-    public Enemy() {
-        this.name = "Default Enemy";
-        this.maxHealth = 200;
-        this.weapon = new Weapon();
-        this.type = null;
-        currentHealth = maxHealth;
-    }
-
-    public Enemy(String name, int maxHealth, Weapon weapon, EnemyType type) {
-        this.name = name;
-        this.maxHealth = maxHealth;
-        this.weapon = weapon;
-        this.type = type;
-        currentHealth = maxHealth;
-    }
-
     public void takeDamage(int incomingDamageAmount) {
         currentHealth -= incomingDamageAmount;
 
-        // Check if damage caused puts currentHealth less than 0
         if (currentHealth <= 0) {
             killEnemy();
         }
@@ -84,4 +67,14 @@ public class Enemy {
         currentHealth = 0;
         isDead = true;
     }
+
+    // Hide parameterized constructor to force curated enemies
+    private Enemy(String name, int maxHealth, Weapon weapon, EnemyType type) {
+        this.name = name;
+        this.maxHealth = maxHealth;
+        this.weapon = weapon;
+        this.type = type;
+        currentHealth = maxHealth;
+    }
+
 }
