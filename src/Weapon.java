@@ -35,13 +35,6 @@ public class Weapon extends Item {
         };
     }
 
-    // Default weapon
-    public Weapon(ItemRarityType rarityType) {
-        type = WeaponType.WOODEN_SWORD;
-        this.rarityType = rarityType;
-        createWeapon(type);
-    }
-
     // Getters
     public WeaponType getType() {
         return type;
