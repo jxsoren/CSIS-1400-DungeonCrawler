@@ -270,7 +270,7 @@ public class DungeonGame {
     // Setters
 
     private void initRooms() {
-        dungeonRooms = GameInitializer.dungeonRooms(5);
+        dungeonRooms = GameInitializer.initDungeonRooms();
     }
 
     private void setCurrentRoom(int currentRoomIndex) {
