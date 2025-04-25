@@ -1,5 +1,5 @@
 package Enums;
 
 public enum ConsumableType {
-    HEALING_POTION, BREAD, APPLE
+    BREAD, APPLE, BANDAGES, HEALING_POTION, HEALTH_ELIXIR
 }

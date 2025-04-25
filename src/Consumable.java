@@ -11,21 +11,17 @@ public class Consumable extends Item {
 
     public static Consumable createConsumable(ConsumableType type) {
         return switch (type) {
-            case HEALING_POTION -> new Consumable("Healing Potion", "A healing potion", 50, 10);
-            case BREAD -> new Consumable("Bread", "A piece of break", 15, 5);
-            case APPLE -> new Consumable("Apple", "A single apple", 10, 2);
-            default -> new Consumable();
+            case BREAD -> new Consumable("Bread", "A freshly baked loaf of bread", 15, 5);
+            case APPLE -> new Consumable("Apple", "A crisp, juicy apple", 10, 2);
+            case BANDAGES -> new Consumable("Bandages", "Clean cloth bandages for treating wounds", 20, 4);
+            case HEALING_POTION -> new Consumable("Healing Potion", "A magical red liquid that heals wounds", 50, 10);
+            case HEALTH_ELIXIR -> new Consumable("Health Elixir", "Fully restores HP", 999, 25);
         };
     }
 
     // Default Constructor
     public Consumable() {
-        super("Default Potion", "A healing potion", 20, 10);
-    }
-
-    // Parameterized Constructor
-    public Consumable(String name, String description, int effectPoint, int weight) {
-        super(name, description, effectPoint, weight);
+        createConsumable(ConsumableType.BREAD);
     }
 
     @Override
@@ -39,9 +35,6 @@ public class Consumable extends Item {
         return this.getEffectPoints();
     }
 
-    // Setters
-
-
     // Getters
 
     public boolean isConsumed() {
@@ -51,6 +44,12 @@ public class Consumable extends Item {
     @Override
     public String toString() {
         return String.format("%s [Val: %d]", getName(), getEffectPoints());
+    }
+
+    // Hide parameterized constructor to force curated consumables
+    private Consumable(String name, String description, int effectPoint, int weight) {
+        super(name, description, effectPoint, weight);
+        this.consumed = false;
     }
 
 }
