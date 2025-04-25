@@ -1,4 +1,5 @@
 import Enums.EnemyType;
+import Enums.WeaponType;
 
 public class Enemy {
     private final String name;
@@ -10,10 +11,10 @@ public class Enemy {
 
     public static Enemy createEnemy(EnemyType type) {
         return switch (type) {
-            case SPIDER -> new Enemy();
-            case GOBLIN -> new Enemy();
-            case SKELETON -> new Enemy();
-            case DRAGON -> new Enemy();
+            case SPIDER -> new Enemy("Spider", 75, Weapon.createWeapon(WeaponType.SPIDER_FANG), type);
+            case GOBLIN -> new Enemy("Goblin", 100, Weapon.createWeapon(WeaponType.RUSTY_DAGGER), type);
+            case SKELETON -> new Enemy("Skeleton", 150, Weapon.createWeapon(WeaponType.ANCIENT_SWORD), type);
+            case DRAGON -> new Enemy("Dragon", 300, Weapon.createWeapon(WeaponType.FIRE_BREATH), type);
         };
     }
 
@@ -21,27 +22,16 @@ public class Enemy {
         this.name = "Default Enemy";
         this.maxHealth = 200;
         this.weapon = new Weapon();
-        this.type = EnemyType.GOBLIN;
-
-        currentHealth = maxHealth; // Initialize current health to the max health (full health)
+        this.type = null;
+        currentHealth = maxHealth;
     }
 
-    public Enemy(String name, int maxHealth, Weapon weapon) {
+    public Enemy(String name, int maxHealth, Weapon weapon, EnemyType type) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.weapon = weapon;
-        this.type = EnemyType.GOBLIN;
-
-        currentHealth = maxHealth; // Initialize current health to the max health (full health)
-    }
-
-    public Enemy(String name, int maxHealth) {
-        this.name = name;
-        this.maxHealth = maxHealth;
-        this.weapon = new Weapon();
-        this.type = EnemyType.GOBLIN;
-
-        currentHealth = maxHealth; // Initialize current health to the max health (full health)
+        this.type = type;
+        currentHealth = maxHealth;
     }
 
     public void takeDamage(int incomingDamageAmount) {
@@ -72,11 +62,7 @@ public class Enemy {
     }
 
     public String[] attributesArr() {
-        return new String[]{
-                getName(),
-                String.format("HP: %d / %d", currentHealth, maxHealth),
-                weapon.toString()
-        };
+        return new String[]{getName(), String.format("HP: %d / %d", currentHealth, maxHealth), weapon.toString()};
     }
 
     public String asciiArt() {

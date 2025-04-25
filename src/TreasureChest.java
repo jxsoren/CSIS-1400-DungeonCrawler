@@ -6,6 +6,7 @@
 
 import Enums.ChestType;
 import Enums.ConsumableType;
+import Enums.EnemyType;
 import Enums.WeaponType;
 
 import java.util.ArrayList;
@@ -19,6 +20,14 @@ public class TreasureChest {
     // Constants
     private final int weaponCapacity = 1;
     private final int itemCapacity = 3;
+
+    public static Enemy createChest(EnemyType type) {
+        return switch (type) {
+            case WOODEN_CHEST -> new TreasureChest();
+            case SILVER_CHEST -> new TreasureChest();
+            case GOLDEN_CHEST -> new TreasureChest();
+        };
+    }
 
     // Parameterless constructor
     public TreasureChest() {
