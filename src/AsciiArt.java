@@ -12,47 +12,37 @@
 public class AsciiArt {
     public static String asciiArtFactory(String name) {
         return switch (name.toLowerCase()) {
+            // Chests
             case "wooden_chest" -> chest();
             case "silver_chest" -> chest();
             case "golden_chest" -> chest();
-            case "goblin" -> goblin();
+
+            // Weapons
+            case "battle_axe" -> battleAxe();
             case "sword" -> sword();
+
+            // Items
             case "potion" -> potion();
-            case "door" -> door();
+
+            // Enemies
             case "spider" -> spider();
-            case "entrance" -> entrance();
-            case "tombstone" -> tombstone();
-            case "mountain" -> mountain();
-            case "dragon" -> dragon();
-            case "largetombstone" -> largeTombstone();
+            case "goblin" -> goblin();
             case "skeleton" -> skeleton();
+            case "dragon" -> dragon();
+
+            // Scenery
+            case "mountain" -> mountain();
+            case "large_tombstone" -> largeTombstone();
+            case "door" -> door();
+            case "entrance" -> entrance();
+
+            // Misc
             case "title" -> title();
             case "player" -> player();
+            case "tombstone" -> tombstone();
+
             default -> name;
         };
-    }
-
-    public static void main(String[] args) {
-        displayWindow(chest());
-    }
-
-    //this method takes in a String from the methods at the bottom of the page
-    public static void displayWindow(String thing) {
-        System.out.printf("%s%n", "-".repeat(50));
-        // Split the string into lines and add 25 spaces to each line
-        String[] lines = thing.split("\n");
-        for (String line : lines) {
-            System.out.printf("%15s%s%n", "", line); // 25 spaces + line content
-        }
-        //System.out.printf("Your Health:%-21d Enemy Health:%d%n", Player.getCurrentHealth(), Enemy.getCurrentHealth());// will display player and enemy's health
-        System.out.printf("%s%n%n", "-".repeat(50));
-    }
-
-    //this overflow method will display the screen if no String is given
-    public static void displayWindow() {
-        System.out.printf("%s%n%n%n%n%n%n%n%n", "-".repeat(50));
-
-        System.out.printf("%s%n%n", "-".repeat(50));
     }
 
     public static String chest() {
@@ -83,7 +73,7 @@ public class AsciiArt {
                 /      '----'       \\
                 """;
     }
-
+    
     public static String sword() {
         return """
                         ()\s
@@ -101,6 +91,24 @@ public class AsciiArt {
                         \\/
                 """;
     }
+
+
+    public static String battleAxe() {
+        return """
+                  ,  /\\  . \s
+                 //`-||-'\\\\\s
+                (| -=||=- |)
+                 \\\\,-||-.//\s
+                  `  ||  ' \s
+                     ||    \s
+                     ||    \s
+                     ||    \s
+                     ||    \s
+                     ||    \s
+                     ()
+                """;
+    }
+
 
     public static String potion() {
         return """
