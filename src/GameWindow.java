@@ -44,6 +44,7 @@ public class GameWindow {
 
         switch (color) {
             case "green" -> System.out.println(ANSI_GREEN_BOLD + baseMessage);
+            case "red" -> System.out.println(ANSI_RED_BOLD + baseMessage);
         }
 
     }
@@ -140,13 +141,17 @@ public class GameWindow {
     }
 
 
-    public static String printErrorBox(String errorMessage) {
+    public static void printErrorBox(String errorMessage) {
         int width = 60;
 
         String header = "Error Message";
         String[] messages = {errorMessage};
 
-        return buildInnerBox(width, header, messages);
+        String box = buildInnerBox(width, header, messages);
+
+        System.out.println();
+        colorizedPrint("red", box);
+        System.out.println();
     }
 
     public static void printSuccessBox(String message) {
