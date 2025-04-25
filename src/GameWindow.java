@@ -45,8 +45,8 @@ public class GameWindow {
         switch (color) {
             case "green" -> System.out.println(ANSI_GREEN_BOLD + baseMessage);
             case "red" -> System.out.println(ANSI_RED_BOLD + baseMessage);
+            case "yellow" -> System.out.println(ANSI_YELLOW_BOLD + baseMessage);
         }
-
     }
 
     public static void printWindow(String cutsceneArt) {
@@ -165,6 +165,16 @@ public class GameWindow {
         colorizedPrint("green", box);
     }
 
+    public static void printAttackLog(String[] attackLogs) {
+        int width = 60;
+
+        String header = "Attack Log 👊";
+
+        String box = buildInnerBox(width, header, attackLogs);
+
+        colorizedPrint("yellow", box);
+    }
+
     private static void printEmptyBody(int width) {
         String emptyBody = buildBody("", width).toString();
         System.out.println(lineWithPadding(emptyBody));
@@ -232,12 +242,50 @@ public class GameWindow {
     }
 
     public static String playerBox(Player player) {
-        int width = 22;
+        int width = 30;
         String[] playerAttributes = player.attributesArr();
 
-        String[][] finalAttributes = {playerAttributes};
+        String asciiArt = AsciiArt.asciiArtFactory("goblin");
 
-        return buildBox(width, "Player", finalAttributes);
+        return buildBox(width, "Player", asciiArt, playerAttributes);
+    }
+
+    private static String buildBox(int width, String header, String asciiArt, String[]... attributes) {
+        StringBuilder line = new StringBuilder();
+
+        // Print Header
+        StringBuilder top = buildTop(width);
+        StringBuilder divider = buildDivider(width);
+        StringBuilder headerLine = buildBody(header, width);
+        //        StringBuilder emptySpace = buildBody("", width);
+        StringBuilder bottom = buildBottom(width);
+
+        line.append(top);
+        line.append("\n");
+        line.append(headerLine);
+        line.append("\n");
+        line.append(divider);
+        line.append("\n");
+
+        for (String[] attribute : attributes) {
+            for (String s : attribute) {
+                line.append(buildBody(s, width));
+                line.append("\n");
+            }
+        }
+
+        // Sanitize ASCII art lines
+        String[] artLines = asciiArt.split("\n");
+        for (String enemyLine : artLines) {
+            String strippedLine = enemyLine.strip();
+            line.append(buildBody(strippedLine, width));
+            line.append("\n");
+        }
+
+        line.append(bottom);
+        line.append("\n");
+
+        return line.toString();
     }
 
     private static String buildBox(int width, String header, String[]... attributes) {
