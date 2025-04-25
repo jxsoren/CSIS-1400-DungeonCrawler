@@ -176,7 +176,6 @@ public class DungeonGame {
             continueLooting = GameWindow.printDialogBox();
 
         }
-        ;
 
     }
 
@@ -240,13 +239,12 @@ public class DungeonGame {
         int playerInput = GameWindow.printDialogBox();
         int itemIndex = playerInput - 1;
 
-        int numOfItems = player.getInventory().getItems().size();
-
-        if (itemIndex >= numOfItems || itemIndex < 0) {
+        if (itemIndex >= player.getInventory().getItems().size() || itemIndex < 0) {
             GameWindow.printErrorBox("Item selection invalid. Try again.");
         } else {
+            String chosenItemName = playerInventory().getItem(itemIndex).getName();
             player.consumeItem(itemIndex);
-            System.out.printf("You've consumed %s!%n", playerInventory().getItem(itemIndex).getName());
+            System.out.printf("You've consumed %s!%n", chosenItemName);
         }
 
     }
