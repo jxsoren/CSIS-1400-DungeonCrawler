@@ -47,7 +47,7 @@ public class DungeonGame {
             GameWindow.printWindow(getCurrentRoom(), getPlayer());
 
             if (getCurrentRoom().isCompleted()) {
-                String[] options = {"1. Go to Next Room ⇨", "2. Go to Previous Room ⇦", "3. Loot Chest 💰", "4. Open Inventory 🎒"};
+                String[] options = {"1. Go to Next Room ⇨", "2. Go to Previous Room ⇦", "3. Loot Chest 💰", "4. Player Stats & Inventory 📊🎒"};
 
                 System.out.println(GameWindow.optionsBox(options));
                 int playerChoice = GameWindow.printDialogBox();
@@ -56,11 +56,12 @@ public class DungeonGame {
                     case 1 -> movePlayer("forwards");
                     case 2 -> movePlayer("backwards");
                     case 3 -> lootChest();
-                    case 4 -> openInventory();
+                    case 4 -> openPlayerStatsAndInventory();
                 }
 
             } else {
-                String[] options = {"1. Fight Enemy 🥊", "2. Go to Previous Room ⇦", "3. Open Inventory 🎒"};
+
+                String[] options = {"1. Fight Enemy 🥊", "2. Go to Previous Room ⇦", "3. Player Stats & Inventory 📊🎒"};
 
                 System.out.println(GameWindow.optionsBox(options));
                 int playerChoice = GameWindow.printDialogBox();
@@ -68,7 +69,7 @@ public class DungeonGame {
                 switch (playerChoice) {
                     case 1 -> attackLoop();
                     case 2 -> movePlayer("backwards");
-                    case 3 -> openInventory();
+                    case 3 -> openPlayerStatsAndInventory();
                 }
             }
         }
@@ -78,9 +79,9 @@ public class DungeonGame {
         Enemy enemy = currentEnemy();
 
         do {
-            GameWindow.printCombat(getCurrentRoom(), player);
+            GameWindow.printCombatHorizontal(getCurrentRoom(), player);
 
-            String[] options = {"1. Attack Enemy", "2. Open Inventory"};
+            String[] options = {"1. Attack Enemy ⚔️", "2. Player Stats & Inventory 📊🎒"};
 
             System.out.println(GameWindow.optionsBox(options));
             int playerInput = GameWindow.printDialogBox();
@@ -100,7 +101,7 @@ public class DungeonGame {
 
                     GameWindow.printAttackLog(attackLog);
                 }
-                case 2 -> openInventory();
+                case 2 -> openPlayerStatsAndInventory();
                 default -> System.err.println("Cannot do that.");
             }
 
@@ -184,11 +185,11 @@ public class DungeonGame {
     }
 
 
-    public void openInventory() {
+    public void openPlayerStatsAndInventory() {
         int playerInput;
 
         do {
-            System.out.println(GameWindow.inventoryBox(player));
+            System.out.println(GameWindow.playerStatsAndInventoryBox(player));
 
             String[] options = {"0. Exit Inventory", "1. Equip a Weapon", "2. Consume an Item"};
 
@@ -294,11 +295,11 @@ public class DungeonGame {
     private void nextRoom(int currentRoomIndex) throws Exception {
         int finalRoomIndex = dungeonRooms.size() - 1;
         if (currentRoomIndex == finalRoomIndex) {
-            throw new Exception("Cannot advance to next Room. You're already at the final room.\n");
+            throw new Exception("Cannot advance to next Room. You're already at the final room.");
         }
 
         if (!getCurrentRoom().isCompleted()) {
-            throw new Exception("Cannot advanced to next room. Defeat enemy before you can move on.\n");
+            throw new Exception("Cannot advanced to next room. Defeat enemy before you can move on.");
         }
 
         // Set attributes to point to next room
@@ -312,7 +313,7 @@ public class DungeonGame {
     private void previousRoom(int currentRoomIndex) throws Exception {
         // If player tries to go back when they're in the first room
         if (currentRoomIndex == 0) {
-            throw new Exception("Cannot move to the previous room. You're at the first room.\n");
+            throw new Exception("Cannot move to the previous room. You're at the first room.");
         }
 
         // Set attributes to point to previous room
