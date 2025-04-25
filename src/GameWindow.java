@@ -7,6 +7,28 @@ import java.util.Scanner;
  ***********************************************/
 
 public class GameWindow {
+    // ANSI Color Sequences
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    // Regular colors
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
+    // Bold colors
+    public static final String ANSI_BLACK_BOLD = "\u001B[1;30m";
+    public static final String ANSI_RED_BOLD = "\u001B[1;31m";
+    public static final String ANSI_GREEN_BOLD = "\u001B[1;32m";
+    public static final String ANSI_YELLOW_BOLD = "\u001B[1;33m";
+    public static final String ANSI_BLUE_BOLD = "\u001B[1;34m";
+    public static final String ANSI_PURPLE_BOLD = "\u001B[1;35m";
+    public static final String ANSI_CYAN_BOLD = "\u001B[1;36m";
+    public static final String ANSI_WHITE_BOLD = "\u001B[1;37m";
+
     // Corners
     private static final String topLeftCorner = "┏";
     private static final String topRightCorner = "┓";
@@ -16,6 +38,15 @@ public class GameWindow {
     // Lines
     private static final String horizontalLine = "━";
     private static final String verticalLine = "┃";
+
+    public static void colorizedPrint(String color, String message) {
+        String baseMessage = message + ANSI_RESET;
+
+        switch (color) {
+            case "green" -> System.out.println(ANSI_GREEN_BOLD + baseMessage);
+        }
+
+    }
 
     public static void printWindow(String cutsceneArt) {
         // Dimensions
@@ -108,6 +139,27 @@ public class GameWindow {
         return buildInnerBox(width, header, questions);
     }
 
+
+    public static String printErrorBox(String errorMessage) {
+        int width = 60;
+
+        String header = "Error Message";
+        String[] messages = {errorMessage};
+
+        return buildInnerBox(width, header, messages);
+    }
+
+    public static void printSuccessBox(String message) {
+        int width = 60;
+
+        String header = "Success!!!";
+        String[] messages = {message};
+
+        String box = buildInnerBox(width, header, messages);
+
+        colorizedPrint("green", box);
+    }
+
     private static void printEmptyBody(int width) {
         String emptyBody = buildBody("", width).toString();
         System.out.println(lineWithPadding(emptyBody));
@@ -190,7 +242,7 @@ public class GameWindow {
         StringBuilder top = buildTop(width);
         StringBuilder divider = buildDivider(width);
         StringBuilder headerLine = buildBody(header, width);
-        StringBuilder emptySpace = buildBody("", width);
+        //        StringBuilder emptySpace = buildBody("", width);
         StringBuilder bottom = buildBottom(width);
 
         line.append(top);
@@ -198,8 +250,6 @@ public class GameWindow {
         line.append(headerLine);
         line.append("\n");
         line.append(divider);
-        line.append("\n");
-        line.append(emptySpace);
         line.append("\n");
 
         for (String[] attribute : attributes) {
@@ -209,14 +259,12 @@ public class GameWindow {
             }
         }
 
-        line.append(emptySpace);
-        line.append("\n");
-
         line.append(bottom);
         line.append("\n");
 
         return line.toString();
     }
+
 
     private static String buildInnerBox(int width, String header, String[] attributes, String asciiArt) {
         StringBuilder line = new StringBuilder();
@@ -225,7 +273,7 @@ public class GameWindow {
         StringBuilder top = buildTop(width);
         StringBuilder divider = buildDivider(width);
         StringBuilder headerLine = buildBody(header, width);
-        StringBuilder emptySpace = buildBody("", width);
+        //        StringBuilder emptySpace = buildBody("", width);
         StringBuilder bottom = buildBottom(width);
 
         line.append(top);
@@ -234,16 +282,11 @@ public class GameWindow {
         line.append("\n");
         line.append(divider);
         line.append("\n");
-        line.append(emptySpace);
-        line.append("\n");
 
         for (String attribute : attributes) {
             line.append(buildBody(attribute, width));
             line.append("\n");
         }
-
-        line.append(emptySpace);
-        line.append("\n");
 
         // Sanitize ASCII art lines
         String[] artLines = asciiArt.split("\n");
@@ -266,7 +309,7 @@ public class GameWindow {
         StringBuilder top = buildTop(width);
         StringBuilder divider = buildDivider(width);
         StringBuilder headerLine = buildBody(header, width);
-        StringBuilder emptySpace = buildBody("", width);
+        //        StringBuilder emptySpace = buildBody("", width);
         StringBuilder bottom = buildBottom(width);
 
         line.append(top);
@@ -275,8 +318,6 @@ public class GameWindow {
         line.append("\n");
         line.append(divider);
         line.append("\n");
-        line.append(emptySpace);
-        line.append("\n");
 
         for (String[] attribute : attributes) {
             for (String s : attribute) {
@@ -284,9 +325,6 @@ public class GameWindow {
                 line.append("\n");
             }
         }
-
-        line.append(emptySpace);
-        line.append("\n");
 
         line.append(bottom);
         line.append("\n");

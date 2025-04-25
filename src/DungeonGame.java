@@ -211,13 +211,24 @@ public class DungeonGame {
         }
 
         System.out.println(GameWindow.weaponsBox(playerInventory()));
+        System.out.println("Which weapon would you like to equip?");
 
         int playerInput = GameWindow.printDialogBox();
         int weaponIndex = playerInput - 1;
 
-        player.equipWeapon(weaponIndex);
+        int numOfWeapons = player.getInventory().getWeapons().size();
 
-        System.out.printf("You've equipped %s!%n", playerInventory().getWeapon(weaponIndex).getName());
+        if (weaponIndex >= numOfWeapons || weaponIndex < 0) {
+            System.err.println();
+            System.err.println(GameWindow.printErrorBox("Weapon selection invalid. Try again."));
+            System.out.println();
+        } else {
+            player.equipWeapon(weaponIndex);
+            String message = String.format("You've equipped %s!", playerInventory().getWeapon(weaponIndex).getName());
+
+            GameWindow.printSuccessBox(message);
+        }
+
     }
 
     private void consumeItemPrompt() {
@@ -231,9 +242,19 @@ public class DungeonGame {
         int playerInput = GameWindow.printDialogBox();
         int itemIndex = playerInput - 1;
 
-        player.consumeItem(itemIndex);
+        int numOfItems = player.getInventory().getItems().size();
 
-        System.out.printf("You've consumed %s!%n", playerInventory().getItem(itemIndex).getName());
+        if (itemIndex >= numOfItems || itemIndex < 0) {
+            System.out.println();
+            System.err.println();
+            System.err.println(GameWindow.printErrorBox("Item selection invalid. Try again."));
+            System.out.println();
+            System.err.println();
+        } else {
+            player.consumeItem(itemIndex);
+            System.out.printf("You've consumed %s!%n", playerInventory().getItem(itemIndex).getName());
+        }
+
     }
 
     // Getters

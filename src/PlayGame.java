@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class PlayGame {
     public static void main(String[] args) {
-        openingCutScene();
+//        openingCutScene();
 
         Player player = initPlayer();
         DungeonGame game = new DungeonGame(player);
