@@ -47,7 +47,7 @@ public class DungeonGame {
             GameWindow.printWindow(getCurrentRoom(), getPlayer());
 
             if (getCurrentRoom().isCompleted()) {
-                String[] options = {"1. Go to Next Room ⇨", "2. Go to Previous Room ⇦", "3. Loot Chest 💰", "4. Player Stats & Inventory 📊🎒"};
+                String[] options = {"1. Go to Next Room [>]", "2. Go to Previous Room [<]", "3. Loot Chest [$]", "4. Player Stats & Inventory [#]"};
 
                 System.out.println(GameWindow.optionsBox(options));
                 int playerChoice = GameWindow.printDialogBox();
@@ -61,7 +61,7 @@ public class DungeonGame {
 
             } else {
 
-                String[] options = {"1. Fight Enemy 🥊", "2. Go to Previous Room ⇦", "3. Player Stats & Inventory 📊🎒"};
+                String[] options = {"1. Fight Enemy [!]", "2. Go to Previous Room [<]", "3. Player Stats & Inventory [#]"};
 
                 System.out.println(GameWindow.optionsBox(options));
                 int playerChoice = GameWindow.printDialogBox();
@@ -80,9 +80,9 @@ public class DungeonGame {
         ArrayList<String> attackLogs = new ArrayList<>();
 
         do {
-            GameWindow.printCombatHorizontal(getCurrentRoom(), player, attackLogs.toArray(new String[0]));
+            GameWindow.printCombatHorizontal(getCurrentRoom(), player, attackLogs.toArray(new String[attackLogs.size()]));
 
-            String[] options = {"1. Attack Enemy ⚔️", "2. Player Stats & Inventory 📊🎒"};
+            String[] options = {"1. Attack Enemy [!]", "2. Player Stats & Inventory [#]"};
 
             System.out.println(GameWindow.optionsBox(options));
             int playerInput = GameWindow.printDialogBox();
@@ -99,6 +99,9 @@ public class DungeonGame {
                     String playerAttacksEnemy = String.format("%s attacked %s for %d damage!", player.getName(), enemy.getName(), playerAttackValue);
 
                     String[] attackLog = {enemyAttacksPlayer, playerAttacksEnemy};
+
+                    attackLogs.add(enemyAttacksPlayer);
+                    attackLogs.add(playerAttacksEnemy);
 
                     GameWindow.printAttackLog(attackLog);
                 }
