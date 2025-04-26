@@ -44,7 +44,7 @@ public class DungeonGame {
 
     public void roomLoop(DungeonRoom currentRoom) {
         while (this.currentRoom == currentRoom) {
-            GameWindow.printWindow(getCurrentRoom(), getPlayer());
+            GameWindow.printRoomWindow(getCurrentRoom());
 
             if (getCurrentRoom().isCompleted()) {
                 String[] options = {"1. Go to Next Room [>]", "2. Go to Previous Room [<]", "3. Loot Chest [$]", "4. Player Stats & Inventory [#]"};

@@ -4,8 +4,6 @@
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
 
-import java.util.Scanner;
-
 public class PlayGame {
     public static void main(String[] args) {
         //        openingCutScene();
@@ -28,7 +26,7 @@ public class PlayGame {
         String[] asciiArtCutScenes = AsciiArt.openingCutscenes();
         for (String scenes : asciiArtCutScenes) {
             try {
-                GameWindow.printWindow(scenes);
+                GameWindow.printCutsceneWindow(scenes);
                 Thread.sleep(3500);
             } catch (Exception _) {
             }
