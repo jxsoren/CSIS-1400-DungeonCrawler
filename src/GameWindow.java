@@ -1,10 +1,10 @@
-import java.util.Scanner;
-
 /**********************************************
  * Author(s): Josh Sorensen & Bowen Berthelson
  *
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
+
+import java.util.Scanner;
 
 public class GameWindow {
     // ANSI Color Sequences
@@ -39,7 +39,16 @@ public class GameWindow {
     private static final String horizontalLine = "━";
     private static final String verticalLine = "┃";
 
-    public static void colorizedPrint(String color, String message) {
+    public static String colorize(String message, String color) {
+        String baseMessage = message + ANSI_RESET;
+
+        return switch (color) {
+            case "green" -> ANSI_GREEN_BOLD + baseMessage;
+            default -> throw new IllegalStateException("Unexpected value: " + color);
+        };
+    }
+
+    public static void colorizedPrint(String message, String color) {
         String baseMessage = message + ANSI_RESET;
 
         switch (color) {
@@ -111,7 +120,7 @@ public class GameWindow {
     }
 
 
-    public static void printCombatHorizontal(DungeonRoom currentRoom, Player player) {
+    public static void printCombatHorizontal(DungeonRoom currentRoom, Player player, String[] attackLogs) {
         // Dimensions
         int width = 180;
 
@@ -125,9 +134,32 @@ public class GameWindow {
         printInnerBoxes(combatBox, width);
 
         printEmptyBody(width);
+        printInnerBoxes(attackLog(attackLogs), width);
+        //        colorizePrintInnerBoxes(attackLog(attackLogs), width, "yellow");
+
+        printEmptyBody(width);
+        printEmptyBody(width);
+        printEmptyBody(width);
         System.out.println(lineWithPadding(bottom));
     }
 
+    public static String attackLog(String[] attackLogs) {
+        int width = 60;
+
+        String header = "Attack Log";
+
+        return buildInnerBox(width, header, attackLogs);
+    }
+
+    public static void printAttackLog(String[] attackLogs) {
+        int width = 60;
+
+        String header = "Attack Log ⚔";
+
+        String box = buildInnerBox(width, header, attackLogs);
+
+        colorizedPrint(box, "yellow");
+    }
 
     public static int printDialogBox() {
         Scanner input = new Scanner(System.in);
@@ -159,7 +191,6 @@ public class GameWindow {
         return buildInnerBox(width, header, questions);
     }
 
-
     public static void printErrorBox(String errorMessage) {
         int width = 60;
 
@@ -169,7 +200,7 @@ public class GameWindow {
         String box = buildInnerBox(width, header, messages);
 
         System.out.println();
-        colorizedPrint("red", box);
+        colorizedPrint(box, "red");
         System.out.println();
     }
 
@@ -181,17 +212,7 @@ public class GameWindow {
 
         String box = buildInnerBox(width, header, messages);
 
-        colorizedPrint("green", box);
-    }
-
-    public static void printAttackLog(String[] attackLogs) {
-        int width = 60;
-
-        String header = "Attack Log 👊";
-
-        String box = buildInnerBox(width, header, attackLogs);
-
-        colorizedPrint("yellow", box);
+        colorizedPrint(box, "green");
     }
 
     private static void printEmptyBody(int width) {
@@ -205,6 +226,16 @@ public class GameWindow {
         for (String line : lines) {
             String lineBody = buildBody(line, width).toString();
             System.out.println(lineWithPadding(lineBody));
+        }
+    }
+
+    public static void colorizePrintInnerBoxes(String box, int width, String color) {
+        String[] lines = box.split("\n");
+
+        for (String line : lines) {
+
+            String lineBody = buildBody(line, width).toString();
+            colorizedPrint(lineWithPadding(lineBody), color);
         }
     }
 
