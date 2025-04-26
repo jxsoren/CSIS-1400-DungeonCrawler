@@ -44,6 +44,14 @@ public class DungeonGame {
 
     public void roomLoop(DungeonRoom currentRoom) {
         while (this.currentRoom == currentRoom) {
+
+            // End game if you've beaten the last level
+            if (this.currentRoom == dungeonRooms.getLast() && getCurrentRoom().isCompleted()) {
+                String endCredits = AsciiArt.credits();
+                GameWindow.printCutsceneWindow(endCredits);
+                break;
+            }
+
             GameWindow.printRoomWindow(getCurrentRoom());
 
             if (getCurrentRoom().isCompleted()) {

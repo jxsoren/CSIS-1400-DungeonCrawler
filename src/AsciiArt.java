@@ -308,6 +308,35 @@ public class AsciiArt {
                 """;
     }
 
+    public static String credits() {
+        return """
+                Thank your for playing!
+                
+                Made with lots of love ❤️
+                (100+ commits to the Github Repository)
+                
+                             _   _ _   _          _
+                 /\\ /\\ _ __ | |_(_) |_| | ___  __| |
+                / / \\ \\ '_ \\| __| | __| |/ _ \\/ _` |
+                \\ \\_/ / | | | |_| | |_| |  __/ (_| |
+                 \\___/|_| |_|\\__|_|\\__|_|\\___|\\__,_|
+                
+                    ___
+                   /   \\_   _ _ __   __ _  ___  ___  _ __
+                  / /\\ / | | | '_ \\ / _` |/ _ \\/ _ \\| '_ \\
+                 / /_//| |_| | | | | (_| |  __/ (_) | | | |
+                /___,'  \\__,_|_| |_|\\__, |\\___|\\___/|_| |_|
+                                    |___/
+                   ___                   _
+                  / __\\ __ __ ___      _| | ___ _ __
+                 / / | '__/ _` \\ \\ /\\ / / |/ _ \\ '__|
+                / /__| | | (_| |\\ V  V /| |  __/ |
+                \\____/_|  \\__,_| \\_/\\_/ |_|\\___|_|
+                
+                A game by Josh Sorensen & Bowen Berthelson
+                """;
+    }
+
 
     public static String player() {
         return """
@@ -336,14 +365,9 @@ public class AsciiArt {
 
     public static String[] openingCutscenes() {
 
-        String credits = """
-                
-                """;
-
         String scene1 = """
                 
                 You come across a giant castle... but can't find a way in.
-                
                 
                                      .
                                      |~~
@@ -384,7 +408,7 @@ public class AsciiArt {
 
         String scene2 = """
                 
-                You wander until you find a gate
+                After wandering for hours, you find an ancient gate...
                 
                          A                                                                                            A
                         / \\                                                                                          / \\
@@ -426,10 +450,11 @@ public class AsciiArt {
 
         String scene3 = """
                 
-                   You come across a dungeon...
+                  The gate leads to a dark, "Untitled dungeon"...
+                
                    _________________________________________________________
                  /|     -_-                                             _-  |\\
-                / |_-_- _                                         -_- _-   -| \\  \s
+                / |_-_- _              *UNTITLED DUNGEON*         -_- _-   -| \\  \s
                   |                            _-  _--                      |\s
                   |                            ,                            |
                   |      .-'````````'.        '(`        .-'```````'-.      |
@@ -448,7 +473,34 @@ public class AsciiArt {
                 /   -_- _ -             _- _---                       -_-  -_ \\
                 """;
 
-        return new String[]{title(), scene1, scene2, scene3};
+        String scene4 = """
+                As you descend into the first chamber, you hear a strange skittering sound...
+                *Something lurks in the darkness ahead*
+                
+                                             /\\  /\\
+                                           _/  \\/  \\_
+                                          /  BEWARE!  \\
+                                          \\__________/
+                
+                                             (
+                                              )
+                                             (
+                                   /\\  .-""\"-.  /\\
+                                  //\\\\/  ,,,  \\//\\\\
+                                  |/\\| ,;;;;;, |/\\|
+                                  //\\\\\\;-""\"-;///\\\\
+                                 //  \\/   .   \\/  \\\\
+                                (| ,-_| \\ | / |_-, |)
+                                  //`__\\.-.-./__`\\\\
+                                 // /.-(() ())-.\\ \\\\
+                                (\\ |)   '---'   (| /)
+                                 ` (|           |) `
+                                   \\)           (/
+                
+                *Your journey begins... prepare for battle!*
+                """;
+
+        return new String[]{title(), scene1, scene2, scene3, scene4};
     }
 
 }
