@@ -304,7 +304,7 @@ public class DungeonGame {
 
         // Set attributes to point to next room
         this.currentRoomIndex++;
-        setCurrentRoom(currentRoomIndex);
+        setCurrentRoom(this.currentRoomIndex);
 
         // Enter the next room
         enterRoom(getCurrentRoom());
