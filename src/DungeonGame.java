@@ -77,9 +77,10 @@ public class DungeonGame {
 
     public void attackLoop() {
         Enemy enemy = currentEnemy();
+        ArrayList<String> attackLogs = new ArrayList<>();
 
         do {
-            GameWindow.printCombatHorizontal(getCurrentRoom(), player);
+            GameWindow.printCombatHorizontal(getCurrentRoom(), player, attackLogs.toArray(new String[0]));
 
             String[] options = {"1. Attack Enemy ⚔️", "2. Player Stats & Inventory 📊🎒"};
 

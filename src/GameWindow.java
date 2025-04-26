@@ -1,10 +1,10 @@
-import java.util.Scanner;
-
 /**********************************************
  * Author(s): Josh Sorensen & Bowen Berthelson
  *
  * Assignment: CSIS 1400 Final Project
  ***********************************************/
+
+import java.util.Scanner;
 
 public class GameWindow {
     // ANSI Color Sequences
@@ -111,7 +111,7 @@ public class GameWindow {
     }
 
 
-    public static void printCombatHorizontal(DungeonRoom currentRoom, Player player) {
+    public static void printCombatHorizontal(DungeonRoom currentRoom, Player player, String[] attackLogs) {
         // Dimensions
         int width = 180;
 
@@ -125,9 +125,21 @@ public class GameWindow {
         printInnerBoxes(combatBox, width);
 
         printEmptyBody(width);
+        printAttackLog(attackLogs);
+
+        printEmptyBody(width);
         System.out.println(lineWithPadding(bottom));
     }
 
+    public static void printAttackLog(String[] attackLogs) {
+        int width = 60;
+
+        String header = "Attack Log 👊";
+
+        String box = buildInnerBox(width, header, attackLogs);
+
+        colorizedPrint("yellow", box);
+    }
 
     public static int printDialogBox() {
         Scanner input = new Scanner(System.in);
@@ -159,7 +171,6 @@ public class GameWindow {
         return buildInnerBox(width, header, questions);
     }
 
-
     public static void printErrorBox(String errorMessage) {
         int width = 60;
 
@@ -182,16 +193,6 @@ public class GameWindow {
         String box = buildInnerBox(width, header, messages);
 
         colorizedPrint("green", box);
-    }
-
-    public static void printAttackLog(String[] attackLogs) {
-        int width = 60;
-
-        String header = "Attack Log 👊";
-
-        String box = buildInnerBox(width, header, attackLogs);
-
-        colorizedPrint("yellow", box);
     }
 
     private static void printEmptyBody(int width) {
