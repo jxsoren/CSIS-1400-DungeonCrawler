@@ -184,7 +184,6 @@ public class DungeonGame {
 
     }
 
-
     public void openPlayerStatsAndInventory() {
         int playerInput;
 
@@ -244,8 +243,9 @@ public class DungeonGame {
         if (itemIndex >= player.getInventory().getItems().size() || itemIndex < 0) {
             GameWindow.printErrorBox("Item selection invalid. Try again.");
         } else {
-            player.equipWeapon(itemIndex);
-            String message = String.format("You've consumed %s!", playerInventory().getItem(itemIndex).getName());
+            String chosenItemName = playerInventory().getItem(itemIndex).getName();
+            player.consumeItem(itemIndex);
+            String message = String.format("You've consumed %s!", chosenItemName);
             GameWindow.printSuccessBox(message);
         }
     }
