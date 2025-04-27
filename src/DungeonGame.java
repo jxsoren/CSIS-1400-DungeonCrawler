@@ -117,7 +117,7 @@ public class DungeonGame {
         } while (!enemy.isDead() && !player.isDead());
 
         if (player.isDead()) {
-            System.out.println(AsciiArt.goblin());
+            System.err.println(AsciiArt.largeTombstone());
             System.err.println("YOU DIED");
             System.err.println("HA HA");
             System.exit(0);

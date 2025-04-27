@@ -9,7 +9,7 @@ import Enums.WeaponType;
 import java.util.ArrayList;
 
 public class Inventory {
-    private int maxWeaponSize = 2;
+    private int maxWeaponSize = 6;
     private int maxItemsSize = 10;
     private int maxInventoryWeight = 200;
 

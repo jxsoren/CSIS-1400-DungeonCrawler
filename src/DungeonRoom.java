@@ -19,13 +19,11 @@ public class DungeonRoom {
             case 1 ->
                     new DungeonRoom(0, "Webbed Entrance", Enemy.createEnemy(EnemyType.SPIDER), TreasureChest.createChest(ChestType.WOODEN_CHEST));
             case 2 ->
-                    new DungeonRoom(1, "Abandoned Silk Cavern", Enemy.createEnemy(EnemyType.SPIDER), TreasureChest.createChest(ChestType.SILVER_CHEST));
+                    new DungeonRoom(1, "Goblin's Hideout", Enemy.createEnemy(EnemyType.GOBLIN), TreasureChest.createChest(ChestType.SILVER_CHEST));
             case 3 ->
-                    new DungeonRoom(2, "Goblin's Hideout", Enemy.createEnemy(EnemyType.GOBLIN), TreasureChest.createChest(ChestType.SILVER_CHEST));
+                    new DungeonRoom(2, "Ancient Burial Chamber", Enemy.createEnemy(EnemyType.SKELETON), TreasureChest.createChest(ChestType.GOLDEN_CHEST));
             case 4 ->
-                    new DungeonRoom(3, "Ancient Burial Chamber", Enemy.createEnemy(EnemyType.SKELETON), TreasureChest.createChest(ChestType.GOLDEN_CHEST));
-            case 5 ->
-                    new DungeonRoom(4, "Dragon's Lair", Enemy.createEnemy(EnemyType.DRAGON), TreasureChest.createChest(ChestType.GOLDEN_CHEST));
+                    new DungeonRoom(3, "Dragon's Lair", Enemy.createEnemy(EnemyType.DRAGON), TreasureChest.createChest(ChestType.GOLDEN_CHEST));
             default -> new DungeonRoom();
         };
     }
@@ -37,7 +35,6 @@ public class DungeonRoom {
         this.enemy = Enemy.createEnemy(EnemyType.SPIDER);
         this.treasureChest = TreasureChest.createChest(ChestType.WOODEN_CHEST);
     }
-
 
     // Getters
 
@@ -71,13 +68,11 @@ public class DungeonRoom {
     }
 
     public String[] attributesArr() {
-        return new String[]{
-                roomCompletedString()
-        };
+        return new String[]{roomCompletedString()};
     }
 
     public String roomLevelString() {
-        return String.format("(%d / %d)", getIndex() + 1, 5);
+        return String.format("(%d / %d)", getIndex() + 1, 4);
     }
 
     public String roomCompletedString() {

@@ -7,7 +7,7 @@
 import java.util.ArrayList;
 
 public class GameInitializer {
-    static final int numberOfRooms = 2;
+    static final int numberOfRooms = 4;
 
     public static ArrayList<DungeonRoom> initDungeonRooms() {
         ArrayList<DungeonRoom> rooms = new ArrayList<>();
