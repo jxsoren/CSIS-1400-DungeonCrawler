@@ -39,6 +39,7 @@ public class GameWindow {
     private static final String horizontalLine = "━";
     private static final String verticalLine = "┃";
 
+    // Box Width
     private static final int optionsWidth = 42;
     private static final int messageBoxWidth = 60;
     private static final int smallBoxWidth = 32;
@@ -47,9 +48,11 @@ public class GameWindow {
         String baseMessage = message + ANSI_RESET;
 
         switch (color) {
-            case "green" -> System.out.println(ANSI_GREEN_BOLD + baseMessage);
             case "red" -> System.out.println(ANSI_RED_BOLD + baseMessage);
+            case "green" -> System.out.println(ANSI_GREEN_BOLD + baseMessage);
+            case "blue" -> System.out.println(ANSI_BLUE_BOLD + baseMessage);
             case "yellow" -> System.out.println(ANSI_YELLOW_BOLD + baseMessage);
+            case "cyan" -> System.out.println(ANSI_CYAN_BOLD + baseMessage);
         }
     }
 
@@ -132,7 +135,7 @@ public class GameWindow {
     public static String optionsBox(String[] options) {
         String header = "Options";
 
-        return buildInnerBox(optionsWidth, header, "", options);
+        return buildInnerBox(optionsWidth, header, null, options);
     }
 
     private static void printEmptyBody(int width) {
@@ -181,7 +184,7 @@ public class GameWindow {
         String header = "Success!!!";
         String[] messages = {message};
 
-        String box = buildInnerBox(messageBoxWidth, header, "", messages);
+        String box = buildInnerBox(messageBoxWidth, header, null, messages);
 
         colorizedPrintLn(box, "green");
     }
@@ -190,24 +193,17 @@ public class GameWindow {
         String header = "Error Message";
         String[] messages = {errorMessage};
 
-        String box = buildInnerBox(messageBoxWidth, header, "", messages);
+        String box = buildInnerBox(messageBoxWidth, header, null, messages);
 
         System.out.println();
         colorizedPrintLn(box, "red");
         System.out.println();
     }
 
-    public static void printAttackLog(String[] attackLogs) {
-        String header = "Attack Log ⚔";
-        String box = buildInnerBox(messageBoxWidth, header, "", attackLogs);
-
-        colorizedPrintLn(box, "yellow");
-    }
-
     public static String attackLog(String[] attackLogs) {
         String header = "Attack Log";
 
-        return buildInnerBox(messageBoxWidth, header, "", attackLogs);
+        return buildInnerBox(messageBoxWidth, header, null, attackLogs);
     }
 
     // Dialog Boxes
@@ -463,16 +459,24 @@ public class GameWindow {
         StringBuilder line = new StringBuilder();
         int paddingAmount = calculateCenteredPadding(totalLineWidth, content.length());
 
+        // Left Wall
         line.append(verticalLine);
 
         // Padding amount should be in halves
+
+        // Left half padding
         line.append(" ".repeat(paddingAmount));
 
-        // correct spacing if content is odd num of characters
+        // Correct spacing if content is odd num of characters
         if (content.length() % 2 != 0) line.append(" ");
 
+        // Add content in
         line.append(content);
+
+        // Right half padding
         line.append(" ".repeat(paddingAmount));
+
+        // Right Wall
         line.append(verticalLine);
 
         return line;

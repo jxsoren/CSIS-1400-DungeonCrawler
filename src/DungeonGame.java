@@ -88,7 +88,7 @@ public class DungeonGame {
         ArrayList<String> attackLogs = new ArrayList<>();
 
         do {
-            GameWindow.printCombatHorizontal(getCurrentRoom(), player, attackLogs.toArray(new String[attackLogs.size()]));
+            GameWindow.printCombatHorizontal(getCurrentRoom(), player, attackLogs.toArray(new String[0]));
 
             String[] options = {"1. Attack Enemy [!]", "2. Player Stats & Inventory [#]"};
 
@@ -106,12 +106,8 @@ public class DungeonGame {
                     String enemyAttacksPlayer = String.format("%s attacked %s for %d damage!", enemy.getName(), player.getName(), enemyAttackValue);
                     String playerAttacksEnemy = String.format("%s attacked %s for %d damage!", player.getName(), enemy.getName(), playerAttackValue);
 
-                    String[] attackLog = {enemyAttacksPlayer, playerAttacksEnemy};
-
                     attackLogs.add(enemyAttacksPlayer);
                     attackLogs.add(playerAttacksEnemy);
-
-                    GameWindow.printAttackLog(attackLog);
                 }
                 case 2 -> openPlayerStatsAndInventory();
                 default -> System.err.println("Cannot do that.");
